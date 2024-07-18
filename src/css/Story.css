@@ -24,7 +24,8 @@
     text-wrap: wrap;
     cursor: pointer;
     user-select: none;
-    transition: all 0.2s ease
+    transition: all 0.2s ease;
+    position: relative
 }
 
 .storySentence:hover {
@@ -33,6 +34,6 @@
 }
 
 .storyVertical {
-    font-size: 0.7rem;
+    font-size: 0.5rem;
     vertical-align: top;
 }

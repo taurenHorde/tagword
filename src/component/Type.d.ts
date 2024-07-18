@@ -11,6 +11,6 @@ export interface SentenceType {
 }
 
 export type VerticalEleFc = (premier: string) => JSX.IntrinsicElements.span
-
+export type SentenceClickFc = (no: number, event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void
 
 

@@ -1,6 +1,6 @@
-
 import './../css/Story.css'
-import { SentenceType, VerticalEleFc } from './Type';
+import { SentenceType, VerticalEleFc, SentenceClickFc } from './Type';
+import { useState } from 'react';
 
 
 
@@ -8,7 +8,7 @@ const test: SentenceType[] = [
     {
         no: 1,
         content: '어느날 투명드래곤이 울부 짖었다. 오아아아아아왕 화난다!',
-        premier: '투명드래곤은 크기가 컸다.',
+        premier: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint similique neque aut dolorem qui voluptates esse ipsam iste! Magni, repellendus. Perferendis dolore omnis odio ipsam eum atque quo modi necessitatibus.',
         expression: [0, 0, 0, 0],
         nickname: '아이디1',
         password: '비밀번호',
@@ -67,36 +67,46 @@ const test: SentenceType[] = [
         nickname: '아이디3',
         password: '비밀번호',
         sentence: 3
-    },
+    }
 ]
 
 function StoryPage(): JSX.Element {
+    const [modal, setModal] = useState<boolean>(false)
+    const sentenceClick: SentenceClickFc = function (no, event) {
+        console.log(event.screenY)
+
+    }
     return (
         <div className="StoryPageWrap">
             <div className='storyBox'>
                 <p className='storyParagraph'>
-
-                    {test.map((val, idx) =>
-                        <StorySentence
-                            key={idx}
-                            sentenceData={val}
-                        />)}
+                    {test.map((val, idx) => <StorySentence key={idx} sentenceClick={sentenceClick} sentenceData={val} />)}
                 </p>
             </div>
+            <div className='storyModal'>
 
+            </div>
         </div>
     )
 }
 
 
-function StorySentence(props: { sentenceData: SentenceType }): JSX.Element {
-    const { no, content, premier, expression, nickname, password, sentence } = props.sentenceData;
+function StorySentence(props: { sentenceData: SentenceType, sentenceClick: SentenceClickFc }): JSX.Element {
+    const { no, content, premier } = props.sentenceData;
+    const sentenceClick = props.sentenceClick
     const verticalElement: VerticalEleFc = (premier) => premier && (<span className='storyVertical'>[+]</span>)
-
-    return <span className='storySentence'>
+    return <span
+        className='storySentence'
+        onClick={(event) => sentenceClick(no, event)}>
         {content}
         {verticalElement(premier)}
     </span>
+}
+
+function StorySentenceModal() {
+    return (
+        <></>
+    )
 }
 
 
