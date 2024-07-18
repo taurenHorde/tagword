@@ -8,6 +8,7 @@ function App() {
       <header className="App-header">
         <p>1번추가</p>
         <p>2번추가</p>
+        <p>3번추가</p>
       </header>
     </div>
   );
