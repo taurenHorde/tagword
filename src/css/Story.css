@@ -1,0 +1,38 @@
+.StoryPageWrap {
+    width: 100%;
+    min-height: 50px;
+    margin-top: 15px;
+}
+
+.storyBox {
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+
+.storyParagraph>span:nth-of-type(odd) {
+    color: rgb(0, 0, 0);
+}
+
+.storyParagraph>span:nth-of-type(even) {
+    color: rgb(112, 112, 112);
+}
+
+.storySentence {
+    font-size: 1rem;
+    margin-right: 5px;
+    text-wrap: wrap;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.2s ease
+}
+
+.storySentence:hover {
+    background: rgb(83, 83, 255);
+    color: white !important;
+}
+
+.storyVertical {
+    font-size: 0.7rem;
+    vertical-align: top;
+}

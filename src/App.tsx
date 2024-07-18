@@ -1,16 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './css/App.css';
+import { Routes, Route } from 'react-router-dom'
+import Nav from './component/Nav';
+import MainPage from './component/Main';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>1번추가</p>
-        <p>2번추가</p>
-        <p>3번추가</p>
-        <p>4번추가</p>
-      </header>
+    <div className="App flex jc-center ai-center">
+      <div className='containWrap flex column jc-start ai-start'>
+        <Nav />
+        <Routes>
+          <Route path='/' element={<MainPage />} />
+
+        </Routes>
+
+      </div>
     </div>
   );
 }

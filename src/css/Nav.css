@@ -1,0 +1,28 @@
+.navWrap {
+    width: 100%;
+    height: 50px;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.418);
+}
+
+.navHead {
+    max-width: 120px;
+    flex: 1 0;
+}
+
+.navHead h6 {
+    font-size: 1.5rem;
+}
+
+.navBody {
+    flex: 1 1;
+}
+
+.navMenu {
+    width: 100px;
+}
+
+.navMenu p {
+    font-size: 1rem;
+    user-select: none;
+    cursor: pointer;
+}

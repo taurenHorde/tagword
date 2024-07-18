@@ -1,0 +1,59 @@
+.InputPageWrap {
+    width: 100%;
+    min-height: 50px;
+    padding: 10px 0px;
+    box-sizing: border-box;
+    background: rgba(128, 128, 128, 0.103);
+}
+
+.inputBox {
+    width: 100%;
+}
+
+.inputBox>input {
+    width: 98%;
+    min-height: 30px;
+    padding: 0px 10px;
+    box-sizing: border-box;
+    border: none;
+    font-size: 1.2rem;
+}
+
+.inputOption {
+    width: 100%;
+    padding: 0px 10px;
+    box-sizing: border-box;
+    margin-top: 15px;
+}
+
+.inputOption>* {
+    margin: 0px 5px;
+}
+
+.inputCheckbox label {
+    margin: 1px 0px;
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: center;
+}
+
+.inputCheckbox label input {
+    margin-right: 2px;
+}
+
+.inputInfo>input {
+    width: 100px;
+    margin: 0px 5px;
+    padding: 0px 2px;
+    font-size: 0.8rem;
+}
+
+.inputButton>button {
+    width: 80px;
+    padding: 4px 0px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    border: none;
+    background: rgb(20, 168, 226);
+    color: white;
+}

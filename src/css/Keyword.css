@@ -1,0 +1,25 @@
+.KeywordPageWrap {
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.KeywordPageWrap>div {
+    margin: 4px 0px;
+}
+
+.keywordPageHead h6 {
+    font-size: 1rem;
+    color: red;
+}
+
+.keywordPageBody p {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.keywordPageFooter p {
+    font-size: 0.9rem;
+    color: red;
+}
