@@ -60,7 +60,8 @@
 }
 
 .storyModalExpression,
-.storyModalInfo {
+.storyModalInfo,
+.storyModalButton {
     justify-content: space-around;
 }
 
@@ -74,10 +75,17 @@
     user-select: none;
 }
 
+.storyModalButton>div,
 .storyModalInfo>div {
-    margin: 2px 5px 0px;
+    margin: 3px 5px 0px;
 }
 
+.storyModalButton>div p,
 .storyModalInfo>div p {
     font-size: 0.9rem;
+}
+
+.storyModalButton>div p {
+    cursor: pointer;
+    user-select: none;
 }

@@ -1,18 +1,17 @@
 import './../css/Story.css'
 import { SentenceType, VerticalEleFc, SentenceClickFc, StoryModalEleFc } from './Type';
-import { useState, useRef, Children } from 'react';
-
-
+import { useState } from 'react';
 
 
 function StoryPage(): JSX.Element {
     const [modal, setModal] = useState<boolean>(false);
     const [modalData, setModalData] = useState<SentenceType>();
+    const [test, setTest] = useState<SentenceType[]>([])
+
     const sentenceClick: SentenceClickFc = function (no, event) {
         setModal(true);
         setModalData(no)
     }
-
     const storyModalElement: StoryModalEleFc = () => <div
         className='storyModalBox flex column jc-center ai-center'>
         <div className='storyModalExpression flex row ai-center'>
@@ -40,6 +39,16 @@ function StoryPage(): JSX.Element {
                 <p>등록일 : {modalData?.writeDate}</p>
             </div>
         </div>
+        <div className='storyModalButton flex row ai-center'>
+            <div>
+                <p>기록(댓글) 보기</p>
+            </div>
+            <div>
+                <p onClick={() => {
+                    setModal(false)
+                }}>나가기</p>
+            </div>
+        </div>
     </div>
 
     return (
@@ -56,7 +65,7 @@ function StoryPage(): JSX.Element {
 
 
 function StorySentence(props: { sentenceData: SentenceType, sentenceClick: SentenceClickFc }): JSX.Element {
-    const {content, premier } = props.sentenceData;
+    const { content, premier } = props.sentenceData;
     const sentenceClick = props.sentenceClick
     const verticalElement: VerticalEleFc = (premier) => premier && (<span className='storyVertical'>[+]</span>)
     return <span
@@ -69,21 +78,6 @@ function StorySentence(props: { sentenceData: SentenceType, sentenceClick: Sente
 
 
 
-
-
-const test: SentenceType[] = [
-    {
-        no: 1,
-        content: '어느날 투명드래곤이 울부 짖었다. 오아아아아아왕 화난다!',
-        premier: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint similique neque aut dolorem qui voluptates esse ipsam iste! Magni, repellendus. Perferendis dolore omnis odio ipsam eum atque quo modi necessitatibus.',
-        expression: [1, 5, 2, 6],
-        nickname: '아이디1',
-        password: '비밀번호',
-        sentence: 1,
-        comments: 1,
-        writeDate: '2024-02-03'
-    },
-]
 
 
 export default StoryPage 
