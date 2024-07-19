@@ -13,7 +13,9 @@ export interface SentenceType {
     expression: [number, number, number, number],
     nickname: string,
     password: string,
-    sentence: number
+    sentence: number,
+    comments : number,
+    writeDate : string
 }
 
 
