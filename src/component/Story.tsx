@@ -1,6 +1,89 @@
 import './../css/Story.css'
-import { SentenceType, VerticalEleFc, SentenceClickFc } from './Type';
-import { useState } from 'react';
+import { SentenceType, VerticalEleFc, SentenceClickFc, StoryModalEleFc } from './Type';
+import { useState, useRef, Children } from 'react';
+
+
+
+
+function StoryPage(): JSX.Element {
+    const [modal, setModal] = useState<boolean>(false);
+    const [modalData, setModalData] = useState<SentenceType>();
+    const sentenceClick: SentenceClickFc = function (no, event) {
+        const childEle: HTMLSpanElement = event.currentTarget // 클릭한 문장 
+        const parentEle: HTMLSpanElement | null = event.currentTarget.parentElement // 부모인 문단
+        const grandParentEld: HTMLElement | null | undefined = parentEle?.parentElement // 조부모인 storyBox
+        if (parentEle && grandParentEld) {
+            setModal(true)
+            setModalData(no)
+            const childPostion: DOMRect = childEle.getBoundingClientRect();
+            const parentPostion: DOMRect = parentEle.getBoundingClientRect();
+            const grandParentPostion: DOMRect = grandParentEld.getBoundingClientRect();
+            const spanXFromTheParentLeft: number = parentPostion.x - childPostion.x // 부모로 부터의 left 부터의 값
+            const spanYFromTheGrandParentTop: number = grandParentPostion.y - childPostion.y // 조부모로 부터의 Top 값
+            const spanYFromTheWindowTop: number = event.clientY // window 으로부터 top 값
+
+            // Modal ->  child : 클릭한 문장(span)  /  parent : 부모인 문단(p)  / grandParent  :  조부모인 StoryBox(div)
+            // Modal의 위치  -> 조부모 relative를 주어 Modal의 위치를 클릭한 문장 위에 뜨게 할 예정(기본)
+            // Modal의 크기  -> height 는 고정   /  width는 주석에 따라 변경 예정
+
+            console.log(`부모로부터 left : ${spanXFromTheParentLeft}`)
+            console.log(`조부모로부터 높이 : ${spanYFromTheGrandParentTop}`)
+            console.log(`윈도우로부터 높이 : ${spanYFromTheWindowTop}`)
+        }
+    }
+
+    const storyModalElement: StoryModalEleFc = () => <div
+        className='storyModal flex column jc-center ai-center'
+        style={{}}
+    >
+        <div className='storyModalPremier'>
+            <p>{modalData?.premier}</p>
+        </div>
+        <div className='storyModalSentence flex row ai-center'>
+            <div>
+                🤣 | 0
+            </div>
+            <div>
+                🥹 | 0
+            </div>
+            <div>
+                👍 | 0
+            </div>
+            <div>
+                ❤️ | 0
+            </div>
+            <div>
+                💬 | 0
+            </div>
+        </div>
+    </div>
+
+    return (
+        <div className="StoryPageWrap">
+            <div className='storyBox'>
+                <p className='storyParagraph'>
+                    {test.map((val, idx) => <StorySentence key={idx} sentenceClick={sentenceClick} sentenceData={val} />)}
+                </p>
+                {modal && (storyModalElement())}
+            </div>
+        </div>
+    )
+}
+
+
+function StorySentence(props: { sentenceData: SentenceType, sentenceClick: SentenceClickFc }): JSX.Element {
+    const { no, content, premier } = props.sentenceData;
+    const sentenceClick = props.sentenceClick
+    const verticalElement: VerticalEleFc = (premier) => premier && (<span className='storyVertical'>[+]</span>)
+    return <span
+        className='storySentence'
+        onClick={(event) => sentenceClick(props.sentenceData, event)}>
+        {content}
+        {verticalElement(premier)}
+    </span>
+}
+
+
 
 
 
@@ -69,45 +152,6 @@ const test: SentenceType[] = [
         sentence: 3
     }
 ]
-
-function StoryPage(): JSX.Element {
-    const [modal, setModal] = useState<boolean>(false)
-    const sentenceClick: SentenceClickFc = function (no, event) {
-        console.log(event.screenY)
-
-    }
-    return (
-        <div className="StoryPageWrap">
-            <div className='storyBox'>
-                <p className='storyParagraph'>
-                    {test.map((val, idx) => <StorySentence key={idx} sentenceClick={sentenceClick} sentenceData={val} />)}
-                </p>
-            </div>
-            <div className='storyModal'>
-
-            </div>
-        </div>
-    )
-}
-
-
-function StorySentence(props: { sentenceData: SentenceType, sentenceClick: SentenceClickFc }): JSX.Element {
-    const { no, content, premier } = props.sentenceData;
-    const sentenceClick = props.sentenceClick
-    const verticalElement: VerticalEleFc = (premier) => premier && (<span className='storyVertical'>[+]</span>)
-    return <span
-        className='storySentence'
-        onClick={(event) => sentenceClick(no, event)}>
-        {content}
-        {verticalElement(premier)}
-    </span>
-}
-
-function StorySentenceModal() {
-    return (
-        <></>
-    )
-}
 
 
 export default StoryPage 

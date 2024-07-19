@@ -1,5 +1,11 @@
 
 
+
+/////  Story.tsx ---------------------------------
+
+export type VerticalEleFc = (premier: string) => JSX.IntrinsicElements.span
+export type SentenceClickFc = (no: SentenceType, event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void
+export type StoryModalEleFc = () => JSX.IntrinsicElements.div
 export interface SentenceType {
     no: number,
     content: string,
@@ -10,7 +16,5 @@ export interface SentenceType {
     sentence: number
 }
 
-export type VerticalEleFc = (premier: string) => JSX.IntrinsicElements.span
-export type SentenceClickFc = (no: number, event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void
 
 
