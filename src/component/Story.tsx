@@ -1,12 +1,14 @@
 import './../css/Story.css'
-import { SentenceType, VerticalEleFc, SentenceClickFc, StoryModalEleFc } from './Type';
+import { SentenceType, VerticalEleFc, SentenceClickFc, StoryModalEleFc, ReduxAllType } from './Type';
 import { useState } from 'react';
+import { useAppSelector } from '../app/store';
 
 
 function StoryPage(): JSX.Element {
+
+    const {sentenceStoreSlice, sentenceActionSlice} = useAppSelector((state: ReduxAllType) => state)
     const [modal, setModal] = useState<boolean>(false);
     const [modalData, setModalData] = useState<SentenceType>();
-    const [test, setTest] = useState<SentenceType[]>([])
 
     const sentenceClick: SentenceClickFc = function (no, event) {
         setModal(true);
@@ -55,7 +57,7 @@ function StoryPage(): JSX.Element {
         <div className="StoryPageWrap">
             <div className='storyBox'>
                 <p className='storyParagraph'>
-                    {test.map((val, idx) => <StorySentence key={idx} sentenceClick={sentenceClick} sentenceData={val} />)}
+                    {sentenceActionSlice.map((val: SentenceType, idx: number) => <StorySentence key={idx} sentenceClick={sentenceClick} sentenceData={val} />)}
                 </p>
                 {modal && (<div className='storyModalWrap'>{storyModalElement()}</div>)}
             </div>
@@ -64,14 +66,14 @@ function StoryPage(): JSX.Element {
 }
 
 function StorySentence(props: { sentenceData: SentenceType, sentenceClick: SentenceClickFc }): JSX.Element {
-    const { content, premier } = props.sentenceData;
+    const { content, footnote } = props.sentenceData;
     const sentenceClick = props.sentenceClick
     const verticalElement: VerticalEleFc = (premier) => premier && (<span className='storyVertical'>[+]</span>)
     return <span
         className='storySentence'
         onClick={(event) => sentenceClick(props.sentenceData, event)}>
         {content}
-        {verticalElement(premier)}
+        {verticalElement(footnote)}
     </span>
 }
 

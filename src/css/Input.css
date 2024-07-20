@@ -12,11 +12,12 @@
 
 .inputBox>input {
     width: 98%;
-    min-height: 30px;
+    min-height: 25px;
     padding: 0px 10px;
     box-sizing: border-box;
     border: none;
-    font-size: 1rem;
+    font-size: 0.8rem;
+    margin-top: 5px;
 }
 
 .inputOption {
