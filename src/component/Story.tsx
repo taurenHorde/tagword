@@ -63,7 +63,6 @@ function StoryPage(): JSX.Element {
     )
 }
 
-
 function StorySentence(props: { sentenceData: SentenceType, sentenceClick: SentenceClickFc }): JSX.Element {
     const { content, premier } = props.sentenceData;
     const sentenceClick = props.sentenceClick
