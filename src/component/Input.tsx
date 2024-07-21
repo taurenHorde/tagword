@@ -1,13 +1,12 @@
 import './../css/Input.css'
-import { useAppSelector, useAppDispatch } from '../app/store';
-import { ReduxAllType } from './Type';
 import { useState } from 'react';
+import { useAppSelector } from '../app/store';
+import { sentenceUserInputDataTotal, SentenceSubmitFcType, ReduxAllType } from '../type/Type';
+import { validationTotal } from './../function/validation'
 
 function InputPage(): JSX.Element {
 
-    const { sentenceStoreSlice, sentenceActionSlice } = useAppSelector((state: ReduxAllType) => state)
-    const dispatch = useAppDispatch();
-
+    const { sentenceStoreSlice, sentenceCounterSlice } = useAppSelector((state: ReduxAllType) => state)
     const [inputSentence, setInputSentece] = useState<string>("")
     const [inputNickname, setInputNickname] = useState<string>("")
     const [inputPassword, setInputPassword] = useState<string>("")
@@ -15,22 +14,25 @@ function InputPage(): JSX.Element {
     const [inputFootNote, setInputFootNote] = useState<string>("")
     const [changeParagraph, setChangeParagraph] = useState<boolean>(false)
 
-    const sentenceSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const sentenceSubmit: SentenceSubmitFcType = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // validation 작업 - 넣을예정
-        const { sentenceCount, pageCount, paragraphCount } = sentenceStoreSlice
-        const submitData = {
-            no: sentenceCount + 1,
+        const userInputData: sentenceUserInputDataTotal = await {
             content: inputSentence,
-            footnote: footNoteCheckBox ? inputFootNote : "",
-            expression: [0, 0, 0, 0],
+            footnote: inputFootNote,
             nickname: inputNickname,
             password: inputPassword,
-            sentence: changeParagraph ? paragraphCount + 1 : paragraphCount,
-            comments: 0,
-            writeDate: '2024-07-20',
-            paragraph: 1
+            footNoteCheckBox: footNoteCheckBox,
+            changeParagraph: changeParagraph,
+        } // 사용자 입력데이터 Obj 정리
+        const validationResult = await validationTotal(userInputData) // 검증절차 실행 
+        if (validationResult.error) {
+            alert(validationResult.error)
+        } else {
+            console.log(sentenceStoreSlice)
+            console.log(sentenceCounterSlice)
+
         }
+
     }
 
 
@@ -46,7 +48,7 @@ function InputPage(): JSX.Element {
                     <input
                         type="text"
                         placeholder='주석을 입력하시려면 주석 달기 체크박스를 클릭해주세요.'
-                        onChange={(e) => setInputSentece(e.target.value)}
+                        onChange={(e) => setInputFootNote(e.target.value)}
                         disabled={!footNoteCheckBox}
                     />
                 </div>
