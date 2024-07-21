@@ -19,29 +19,19 @@ function StoryPage(): JSX.Element {
     const storyModalElement: StoryModalEleFcType = () => <div
         className='storyModalBox flex column jc-center ai-center'>
         <div className='storyModalExpression flex row ai-center'>
-            <div>
-                🤣 | {modalData?.expression[0]}
+            {['🤣', '🥹', '👍', '❤️'].map((val, idx) => <div key={idx}>
+                {val} | {modalData?.expression[idx]}
             </div>
+            )}
             <div>
-                🥹 | {modalData?.expression[1]}
-            </div>
-            <div>
-                👍 | {modalData?.expression[2]}
-            </div>
-            <div>
-                ❤️ | {modalData?.expression[3]}
-            </div>
-            <div>
-                💬 | {modalData?.expression[0]}
+                💬 | {modalData?.comments}
             </div>
         </div>
         <div className='storyModalInfo flex row ai-center'>
-            <div>
-                <p>닉네임 : {modalData?.nickname}</p>
-            </div>
-            <div>
-                <p>등록일 : {modalData?.writeDate}</p>
-            </div>
+            {['닉네임', '등록일'].map((val, idx) => {
+                const dataValue = [modalData?.nickname, modalData?.writeDate]
+                return <div key={idx}><p>{val} : {dataValue[idx]}</p></div>
+            })}
         </div>
         <div className='storyModalButton flex row ai-center'>
             <div>
@@ -69,7 +59,7 @@ function StoryPage(): JSX.Element {
 
 function StorySentence(props: { sentenceData: SentenceType, sentenceClick: SentenceClickFcType }): JSX.Element {
     const { content, footnote } = props.sentenceData;
-    const sentenceClick:SentenceClickFcType = props.sentenceClick
+    const sentenceClick: SentenceClickFcType = props.sentenceClick
     const verticalElement: VerticalEleFcType = (premier) => premier && (<span className='storyVertical'>[+]</span>)
     return <span
         className='storySentence'
@@ -78,9 +68,6 @@ function StorySentence(props: { sentenceData: SentenceType, sentenceClick: Sente
         {footnote && (verticalElement(footnote))}
     </span>
 }
-
-
-
 
 
 export default StoryPage 

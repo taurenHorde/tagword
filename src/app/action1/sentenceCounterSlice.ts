@@ -3,11 +3,12 @@ import { SentenceCounterSliceType } from '../../type/Type';
 
 const initialState: SentenceCounterSliceType =
 {
-    sentenceCount: 1,
+    sentenceCount: 4,
     paragraphCount: 1,
     pageCount: 1,
-    lastWords: ['짖', '었', '다'],
+    lastWords: ['가', '어', '야'],
     newStart: false
+    // 기본데이터
 }
 
 const sentenceCounterSlice = createSlice({

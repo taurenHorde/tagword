@@ -1,8 +1,6 @@
 import { sentenceUserInputDataTotal, ValidationTotalFucRetrunType, CustomValidationType } from './../type/Type';
 const Joi = require('joi')
 
-
-
 const customValidation: CustomValidationType = (value, helpers) => {
     const regex = /[가-힣]+/g
     const afterMatch = value.match(regex);
