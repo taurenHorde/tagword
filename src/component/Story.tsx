@@ -6,7 +6,9 @@ import { useAppSelector } from '../app/store';
 
 function StoryPage(): JSX.Element {
 
-    const { sentenceStoreSlice } = useAppSelector((state: ReduxAllType) => state)
+    const sentenceStoreSlice = useAppSelector((state: ReduxAllType) => state.sentenceStoreSlice)
+    const sentenceCounterSlice = useAppSelector((state: ReduxAllType) => state.sentenceCounterSlice)
+
     const [modal, setModal] = useState<boolean>(false);
     const [modalData, setModalData] = useState<SentenceType>();
 

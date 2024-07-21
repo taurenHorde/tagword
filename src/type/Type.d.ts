@@ -1,3 +1,4 @@
+import { CustomHelpers } from "joi";
 
 
 
@@ -32,7 +33,7 @@ export interface ValidationTotalFucRetrunType { // validate retrun type
     error: string | null,
     value: SentenceUserInputType | null
 }
-
+export type CustomValidationType = (value: string, helpers: CustomHelpers) => string | Joi.ValidationError;
 
 // store.ts  initialState 용 type interface
 
@@ -40,7 +41,9 @@ export interface SentenceStoreSliceType extends SentenceType { }  // SentenceTyp
 export interface SentenceCounterSliceType {
     sentenceCount: number,
     paragraphCount: number,
-    pageCount: number
+    pageCount: number,
+    lastWords: string[],
+    newStart: boolean
 }
 
 export interface ReduxAllType { // 모든 reducer 타입모음 // 각 component에서 useAppSelector 로 불러올 때 사용

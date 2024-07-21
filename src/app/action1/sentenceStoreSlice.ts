@@ -3,7 +3,7 @@ import { SentenceStoreSliceType } from '../../type/Type';
 
 const initialState: SentenceStoreSliceType[] = [
     {
-        no: 0,
+        no: 1,
         content: '우와아아아앙 투명드래곤이 울부 짖었다.',
         footnote: '투명드래곤은 크기가 2000미터가 넘었다!',
         expression: [10, 6, 3, 20],
@@ -19,7 +19,7 @@ const sentenceStoreSlice = createSlice({
     name: 'sentenceSlice',
     initialState,
     reducers: {
-        addSentence: (state, PayloadAction) => {
+        addSentence: (state, PayloadAction: PayloadAction<SentenceStoreSliceType>) => {
             state.push(PayloadAction.payload)
         }
     },
