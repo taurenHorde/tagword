@@ -25,6 +25,7 @@
     padding: 0px 10px;
     box-sizing: border-box;
     margin-top: 15px;
+    flex-wrap: wrap;
 }
 
 .inputOption>* {
