@@ -30,8 +30,8 @@ export interface SentenceType extends SentenceUserInputType { // 사용자 입�
     paragraph: number
 }
 export interface ValidationTotalFucRetrunType { // validate retrun type
-    error: string | null,
-    value: SentenceUserInputType | null
+    error: string | undefined,
+    value: SentenceUserInputType ,
 }
 export type CustomValidationType = (value: string, helpers: CustomHelpers) => string | Joi.ValidationError;
 

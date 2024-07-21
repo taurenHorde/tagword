@@ -69,7 +69,7 @@ function StoryPage(): JSX.Element {
 
 function StorySentence(props: { sentenceData: SentenceType, sentenceClick: SentenceClickFcType }): JSX.Element {
     const { content, footnote } = props.sentenceData;
-    const sentenceClick = props.sentenceClick
+    const sentenceClick:SentenceClickFcType = props.sentenceClick
     const verticalElement: VerticalEleFcType = (premier) => premier && (<span className='storyVertical'>[+]</span>)
     return <span
         className='storySentence'

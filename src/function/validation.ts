@@ -12,8 +12,6 @@ const customValidation: CustomValidationType = (value, helpers) => {
     }
     return value;
 }
-
-
 const inputCheckKoreanPattern = /^[가-힣][가-힣0-9!?.\s]*$/;
 const inputSentenceValidation = Joi.object({
 
