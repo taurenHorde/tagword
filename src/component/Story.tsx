@@ -1,5 +1,5 @@
 import './../css/Story.css'
-import { SentenceType, VerticalEleFcType, SentenceClickFcType, StoryModalEleFcType, ReduxAllType, SentenceFootnoteMouseOverFcType, FootnoteEleFcType } from './../type/Type';
+import { SentenceType, VerticalEleFcType, SentenceClickFcType, StoryModalEleFcType, ReduxAllType, SentenceFootnoteMouseOverFcType, FootnoteEleFcType, FootnoteExtractFcReturnType } from './../type/Type';
 import { useState } from 'react';
 import { useAppSelector, useAppDispatch } from '../app/store';
 import { addExpression } from '../app/action1/sentenceStoreSlice';
@@ -10,6 +10,7 @@ function StoryPage(): JSX.Element {
 
     const sentenceStoreSlice = useAppSelector((state: ReduxAllType) => state.sentenceStoreSlice)
     const sentenceCounterSlice = useAppSelector((state: ReduxAllType) => state.sentenceCounterSlice)
+    const footnoteConversionData = useAppSelector((state: ReduxAllType) => state.footnoteConversionStoreSlice)
 
     const [modal, setModal] = useState<boolean>(false);
     const [modalDataIndex, setModalDataIndex] = useState<number>(-1)
@@ -70,6 +71,7 @@ function StoryPage(): JSX.Element {
                                 key={idx}
                                 sentenceClickFc={sentenceClickFc}
                                 sentenceFootnoteMouseOverFc={sentenceFootnoteMouseOverFc}
+                                footnoteConversionData={footnoteConversionData}  // -------------
                                 sentenceData={val}
                                 sentenceIndex={idx}
                             />
@@ -89,7 +91,8 @@ function StorySentence(
         sentenceData: SentenceType,
         sentenceClickFc: SentenceClickFcType,
         sentenceIndex: number,
-        sentenceFootnoteMouseOverFc: SentenceFootnoteMouseOverFcType
+        sentenceFootnoteMouseOverFc: SentenceFootnoteMouseOverFcType,
+        footnoteConversionData: FootnoteExtractFcReturnType[]  // 오늘은 여기까지 
     }): JSX.Element {
 
     const { content, footnote } = props.sentenceData;

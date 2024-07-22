@@ -1,23 +1,23 @@
 import './../css/Footnote.css'
-import { ReduxAllType } from './../type/Type';
+import { ReduxAllType} from './../type/Type';
 import { useAppSelector } from '../app/store';
 
 
-
 function FootnotePage(): JSX.Element {
-    
-    const sentenceStoreSlice = useAppSelector((state: ReduxAllType) => state.sentenceStoreSlice)
+
+    const footnoteConversionData = useAppSelector((state: ReduxAllType) => state.footnoteConversionStoreSlice)
 
     return (
         <div className='FootnotePageWrap flex column jc-start ai-start'>
             <div className='footnoteHead' />
             <div className='footnoteBody flex column jc-start'>
-                <div className='flex row jc-start ai-center'>
-                    <span>[1]</span>
-                    <p>투명드래곤의 크기는 2미터였다.</p>
+                {footnoteConversionData.map((val, idx) => <div className='flex row jc-start ai-center' key={idx}>
+                    <span>[{val.no}]</span>
+                    <p>{val.footnote}</p>
                 </div>
+                )}
             </div>
-        </div>
+        </div >
     )
 }
 

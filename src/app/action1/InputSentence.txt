@@ -1,6 +1,0 @@
-
-
- - action1 = Input.tsx 와 Story.tsx 에 대한 관련
-
- - sentenceActionSlice - 사용자가 입력하는 데이터를 저장 하는 곳
- - sentenceStoreSlice - 관련 데이터 저장 센터 (현재 문장 갯수, 문단 구분 등등)

@@ -2,11 +2,13 @@ import { configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import sentenceStoreSliceReducer from './action1/sentenceStoreSlice';
 import sentenceCounterSliceReducer from './action1/sentenceCounterSlice';
+import footnoteConversionStoreSliceReducer from './action1/footnoteConversionStoreSlice';
 
 export const store = configureStore({
     reducer: {
         sentenceStoreSlice: sentenceStoreSliceReducer,
-        sentenceCounterSlice: sentenceCounterSliceReducer
+        sentenceCounterSlice: sentenceCounterSliceReducer,
+        footnoteConversionStoreSlice: footnoteConversionStoreSliceReducer
     }
 });
 
