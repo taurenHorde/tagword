@@ -4,7 +4,7 @@ import { CustomHelpers } from "joi";
 
 
 export type VerticalEleFcType = (premier: string) => JSX.IntrinsicElements.span
-export type SentenceClickFcType = (no: SentenceType, event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void
+export type SentenceClickFcType = (idx: number) => void
 export type StoryModalEleFcType = () => JSX.IntrinsicElements.div
 export type SentenceSubmitFcType = (e: React.FormEvent<HTMLFormElement>) => void;
 
@@ -31,7 +31,7 @@ export interface SentenceType extends SentenceUserInputType { // 사용자 입�
 }
 export interface ValidationTotalFucRetrunType { // validate retrun type
     error: string | undefined,
-    value: SentenceUserInputType ,
+    value: SentenceUserInputType,
 }
 export type CustomValidationType = (value: string, helpers: CustomHelpers) => string | Joi.ValidationError;
 

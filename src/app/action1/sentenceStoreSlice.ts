@@ -10,7 +10,7 @@ const initialState: SentenceStoreSliceType[] = [
         nickname: '드래곤아빠',
         password: 'pass',
         comments: 10,
-        writeDate: '2024-07-20',
+        writeDate: '2024-7-20 14:24:02',
         paragraph: 1
     },
     {
@@ -21,7 +21,7 @@ const initialState: SentenceStoreSliceType[] = [
         nickname: '타우렌',
         password: 'pass',
         comments: 120,
-        writeDate: '2024-07-22',
+        writeDate: '2024-7-22 14:50:02',
         paragraph: 1
     },
     {
@@ -32,7 +32,7 @@ const initialState: SentenceStoreSliceType[] = [
         nickname: '타우렌짱',
         password: 'pass',
         comments: 1200,
-        writeDate: '2024-07-23',
+        writeDate: '2024-7-23 19:20:02',
         paragraph: 1
     },
     {
@@ -43,7 +43,7 @@ const initialState: SentenceStoreSliceType[] = [
         nickname: '타우렌짱',
         password: 'pass',
         comments: 12002,
-        writeDate: '2024-07-24',
+        writeDate: '2024-7-24 23:24:02',
         paragraph: 1
     }
 ];
@@ -54,9 +54,15 @@ const sentenceStoreSlice = createSlice({
     reducers: {
         addSentence: (state, PayloadAction: PayloadAction<SentenceStoreSliceType>) => {
             state.push(PayloadAction.payload)
-        }
+        },
+        addExpression: (state, PayloadAction: PayloadAction<[number, number]>) => {
+            // ['🤣', '🥹', '👍', '❤️'] expressionIdx
+            const expressionIdx = PayloadAction.payload[0];
+            const sentenceIdx = PayloadAction.payload[1];
+            state[sentenceIdx].expression[expressionIdx]++
+        },
     },
 });
 
-export const { addSentence } = sentenceStoreSlice.actions;
+export const { addSentence, addExpression } = sentenceStoreSlice.actions;
 export default sentenceStoreSlice.reducer;

@@ -1,13 +1,16 @@
 import './../css/Input.css'
+import moment from 'moment';
 import { useState } from 'react';
 import { useAppSelector, useAppDispatch } from '../app/store';
-import { sentenceUserInputDataTotal, SentenceSubmitFcType, ReduxAllType, SentenceStoreSliceType,SentenceUserInputType,ValidationTotalFucRetrunType } from '../type/Type';
+import { sentenceUserInputDataTotal, SentenceSubmitFcType, ReduxAllType, SentenceStoreSliceType, SentenceUserInputType, ValidationTotalFucRetrunType } from '../type/Type';
 import { validationTotal } from './../function/validation'
 import { addSentence } from '../app/action1/sentenceStoreSlice';
 import { plusParagraphCount, plusSentenceCount, lastWordsChange, lastWordsReset } from '../app/action1/sentenceCounterSlice';
 
 
 function InputPage(): JSX.Element {
+
+    const currentDate = moment(new Date()).format('YYYY-M-D H:m:ss')
 
     const sentenceStoreSlice = useAppSelector((state: ReduxAllType) => state.sentenceStoreSlice)
     const sentenceCounterSlice = useAppSelector((state: ReduxAllType) => state.sentenceCounterSlice)
@@ -32,13 +35,13 @@ function InputPage(): JSX.Element {
             footNoteCheckBox: footNoteCheckBox,
             changeParagraph: changeParagraph,
         } // 사용자 입력데이터 Obj 정리
-        const validationResult:ValidationTotalFucRetrunType = await validationTotal(userInputData) // 검증절차 실행 
+        const validationResult: ValidationTotalFucRetrunType = await validationTotal(userInputData) // 검증절차 실행 
         if (validationResult.error) {
             alert(validationResult.error)
         } else { // 검증 문제 없을 시
-            const afterValidationDate:SentenceUserInputType = validationResult.value
+            const afterValidationDate: SentenceUserInputType = validationResult.value
             const { lastWords } = sentenceCounterSlice;
-            const inputFirstWord:string = inputSentence[0]
+            const inputFirstWord: string = inputSentence[0]
             if (!lastWords.includes(inputFirstWord) && !sentenceCounterSlice.newStart) { // 첫 글자 틀렸을 때
                 alert(`반드시 ${lastWords} 중 한 글자로 시작하셔야합니다.`)
             } else { // 첫 글자 맞으면 dispatch 작업
@@ -49,8 +52,8 @@ function InputPage(): JSX.Element {
                         no: lastSentence.no + 1,
                         expression: [0, 0, 0, 0],
                         comments: 0,
-                        writeDate: '2024-07-20',
-                        paragraph: 1
+                        writeDate: currentDate,
+                        paragraph: sentenceCounterSlice.paragraphCount
                     }))
                 dispatch(plusSentenceCount());
                 if (changeParagraph) { // 문단 끝내기 희망시 
@@ -65,8 +68,6 @@ function InputPage(): JSX.Element {
                 setFootNoteCheckBox(false)
                 setChangeParagraph(false)
                 setInputAble(true)
-                console.log(sentenceCounterSlice)
-                console.log(sentenceStoreSlice)
             }
         }
 
