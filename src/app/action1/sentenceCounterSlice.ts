@@ -4,9 +4,9 @@ import { SentenceCounterSliceType } from '../../type/Type';
 const initialState: SentenceCounterSliceType =
 {
     sentenceCount: 4,
-    paragraphCount: 1,
+    paragraphCount: 2,
     pageCount: 1,
-    lastWords: ['가', '어', '야'],
+    lastWords: ['잡', '혔', '다'],
     newStart: false
     // 기본데이터
 }

@@ -1,4 +1,4 @@
-import { sentenceUserInputDataTotal, ValidationTotalFucRetrunType, CustomValidationType } from './../type/Type';
+import { SentenceUserInputDataTotal, ValidationTotalFucRetrunType, CustomValidationType } from './../type/Type';
 const Joi = require('joi')
 
 const customValidation: CustomValidationType = (value, helpers) => {
@@ -43,7 +43,7 @@ const inputSentenceValidation = Joi.object({
 })
 
 
-export async function validationTotal(validationData: sentenceUserInputDataTotal): Promise<ValidationTotalFucRetrunType> {
+export async function validationTotal(validationData: SentenceUserInputDataTotal): Promise<ValidationTotalFucRetrunType> {
     // validationFucNum - 필요 Joi 검증 번호 / validationData - Joi 검증 대상 데이터
     const { footNoteCheckBox, changeParagraph, ...needValidate } = await validationData
     if (!footNoteCheckBox) await delete needValidate.footnote

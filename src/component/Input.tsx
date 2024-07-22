@@ -2,7 +2,7 @@ import './../css/Input.css'
 import moment from 'moment';
 import { useState } from 'react';
 import { useAppSelector, useAppDispatch } from '../app/store';
-import { sentenceUserInputDataTotal, SentenceSubmitFcType, ReduxAllType, SentenceStoreSliceType, SentenceUserInputType, ValidationTotalFucRetrunType } from '../type/Type';
+import { SentenceUserInputDataTotal, SentenceSubmitFcType, ReduxAllType, SentenceStoreSliceType, SentenceUserInputType, ValidationTotalFucRetrunType } from '../type/Type';
 import { validationTotal } from './../function/validation'
 import { addSentence } from '../app/action1/sentenceStoreSlice';
 import { plusParagraphCount, plusSentenceCount, lastWordsChange, lastWordsReset } from '../app/action1/sentenceCounterSlice';
@@ -27,7 +27,7 @@ function InputPage(): JSX.Element {
     const sentenceSubmit: SentenceSubmitFcType = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setInputAble(false)
-        const userInputData: sentenceUserInputDataTotal = await {
+        const userInputData: SentenceUserInputDataTotal = await {
             content: inputSentence,
             footnote: inputFootNote,
             nickname: inputNickname,

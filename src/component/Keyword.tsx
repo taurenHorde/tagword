@@ -10,7 +10,7 @@ function KeywordPage(): JSX.Element {
     const lastSentence = sentenceStoreSlice.slice(-1)[0]
     const lastWords = sentenceCounterSlice.newStart
         ? '새로운 문단의 시작입니다. 자유롭게 시작해보세요. 처음에 재밌게 시작해야 끝까지 재밌습니다.'
-        : `${sentenceCounterSlice.lastWords.join(' 또는 ')}로 시작되는 문장을 자유롭게 적어주세요.`
+        : `[${sentenceCounterSlice.lastWords.join(' | ')}] 로 시작되는 문장을 자유롭게 적어주세요.`
 
     const infoText = sentenceCounterSlice.newStart
         ? "이전 문단과 자연스럽게 연결이 되도록 적어주세요."

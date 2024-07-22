@@ -1,17 +1,16 @@
 * {
-  font-family: "Do Hyeon", sans-serif;
-  font-weight: 400;
+  font-family: "Gothic A1", sans-serif;
   font-style: normal;
-  font-size: 16px;
+  font-size: 14px;
   margin: 0;
   padding: 0;
 }
 
-@media (max-width:600px) {
+/* @media (max-width:600px) {
   * {
     font-size: 12px;
   }
-}
+} */
 
 .App {
   width: 100%;
@@ -22,7 +21,7 @@
   max-width: 1300px;
   width: 100%;
   min-height: 970px;
-  padding: 0px 10px;
+  padding: 0px 10px 20px;
   box-sizing: border-box;
   background: white;
 }
@@ -59,4 +58,8 @@
 
 .ai-center {
   align-items: center;
+}
+
+.flex11 {
+  flex: 1 1
 }

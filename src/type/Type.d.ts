@@ -6,8 +6,9 @@ import { CustomHelpers } from "joi";
 export type VerticalEleFcType = (premier: string) => JSX.IntrinsicElements.span
 export type SentenceClickFcType = (idx: number) => void
 export type StoryModalEleFcType = () => JSX.IntrinsicElements.div
+export type FootnoteEleFcType = () => JSX.IntrinsicElements.div
 export type SentenceSubmitFcType = (e: React.FormEvent<HTMLFormElement>) => void;
-
+export type SentenceFootnoteMouseOverFcType = (event: React.MouseEvent<HTMLSpanElement, MouseEvent>, over: boolean, idx: number) => void;
 
 interface SentenceUserInputType { // 사용자 입력 데이터 타입
     content: string,
@@ -19,7 +20,7 @@ interface SentenceUserInputCheckBoxType { // 사용자 입력 데이터시 주�
     footNoteCheckBox: boolean,
     changeParagraph: boolean
 }
-export interface sentenceUserInputDataTotal extends SentenceUserInputType, SentenceUserInputCheckBoxType {// 사용자 모든 입력데이터 
+export interface SentenceUserInputDataTotal extends SentenceUserInputType, SentenceUserInputCheckBoxType {// 사용자 모든 입력데이터 
 
 }
 export interface SentenceType extends SentenceUserInputType { // 사용자 입력 데이터 타입 + 날짜등 정보 추가
