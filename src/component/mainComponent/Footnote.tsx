@@ -1,6 +1,6 @@
-import './../css/Footnote.css'
-import { ReduxAllType} from './../type/Type';
-import { useAppSelector } from '../app/store';
+import './../../css/mainCss/Footnote.css'
+import { ReduxAllType} from './../../type/Type';
+import { useAppSelector } from './../../app/store';
 
 
 function FootnotePage(): JSX.Element {

@@ -1,11 +1,11 @@
-import './../css/Input.css'
+import './../../css/mainCss/Input.css'
 import moment from 'moment';
 import { useState } from 'react';
-import { useAppSelector, useAppDispatch } from '../app/store';
-import { SentenceUserInputDataTotal, SentenceSubmitFcType, ReduxAllType, SentenceStoreSliceType, SentenceUserInputType, ValidationTotalFucRetrunType } from '../type/Type';
-import { validationTotal } from './../function/validation'
-import { addSentence } from '../app/action1/sentenceStoreSlice';
-import { plusParagraphCount, plusSentenceCount, lastWordsChange, lastWordsReset } from '../app/action1/sentenceCounterSlice';
+import { useAppSelector, useAppDispatch } from './../../app/store';
+import { SentenceUserInputDataTotal, SentenceSubmitFcType, ReduxAllType, SentenceStoreSliceType, SentenceUserInputType, ValidationTotalFucRetrunType } from './../../type/Type';
+import { validationTotal } from './../../function/validation'
+import { addSentence } from './../../app/action1/sentenceStoreSlice';
+import { plusParagraphCount, plusSentenceCount, lastWordsChange, lastWordsReset } from './../../app/action1/sentenceCounterSlice';
 
 
 function InputPage(): JSX.Element {

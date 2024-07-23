@@ -1,7 +1,8 @@
-import './css/App.css';
+import './App.css';
 import { Routes, Route } from 'react-router-dom'
 import Nav from './component/Nav';
-import MainPage from './component/Main';
+import MainPage from './component/mainComponent/Main';
+import HistoryPage from './component/historyComponent/History';
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
         <Nav />
         <Routes>
           <Route path='/' element={<MainPage />} />
-
+          <Route path='/history' element={<HistoryPage />} />
         </Routes>
 
       </div>

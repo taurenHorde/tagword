@@ -1,6 +1,6 @@
-import './../css/Keyword.css'
-import { ReduxAllType } from '../type/Type';
-import { useAppSelector } from '../app/store';
+import './../../css/mainCss/Keyword.css'
+import { ReduxAllType } from './../../type/Type';
+import { useAppSelector } from './../../app/store';
 
 function KeywordPage(): JSX.Element {
 
