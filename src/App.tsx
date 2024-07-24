@@ -4,7 +4,9 @@ import Nav from './component/Nav';
 import MainPage from './component/mainComponent/Main';
 import HistoryPage from './component/historyComponent/History';
 
+
 function App() {
+
   return (
     <div className="App flex jc-center ai-center">
       <div className='containWrap flex column jc-start ai-start'>

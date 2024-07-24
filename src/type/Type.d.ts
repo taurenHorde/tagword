@@ -57,8 +57,8 @@ export interface SentenceCounterSliceType {
 }
 export interface ReduxAllType { // 모든 reducer 타입모음 // 각 component에서 useAppSelector 로 불러올 때 사용
     sentenceStoreSlice: SentenceStoreSliceType[],
-    sentenceCounterSlice: SentenceCounterSliceType
-    footnoteConversionStoreSlice: FootnoteExtractFcReturnType[]
+    sentenceCounterSlice: SentenceCounterSliceType,
+    footnoteConversionStoreSlice: FootnoteExtractFcReturnType[],
 }
 
 

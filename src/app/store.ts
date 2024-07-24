@@ -8,7 +8,7 @@ export const store = configureStore({
     reducer: {
         sentenceStoreSlice: sentenceStoreSliceReducer,
         sentenceCounterSlice: sentenceCounterSliceReducer,
-        footnoteConversionStoreSlice: footnoteConversionStoreSliceReducer
+        footnoteConversionStoreSlice: footnoteConversionStoreSliceReducer,
     }
 });
 

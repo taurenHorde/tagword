@@ -1,0 +1,66 @@
+.HistoryWrapPage {
+    width: 100%;
+    min-height: 200px;
+    margin-top: 0.3125rem;
+    box-sizing: border-box;
+}
+
+.historyBoxWrap {
+    width: 100%;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    margin: 10px 0px;
+    border: 1px solid rgba(0, 0, 0, 0.24);
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.075);
+    transition: all 0.5s;
+}
+
+.historyBoxWrap:hover {
+    background: rgba(0, 0, 255, 0.082);
+
+}
+
+.historyBoxWrap>div {
+    width: 100%;
+}
+
+.historyBoxHead {
+    padding-bottom: 0.2rem;
+}
+
+.historyContent {
+    width: 100%;
+    padding: 0.1rem 0px;
+}
+
+.historyContent p {
+    font-size: 1rem;
+}
+
+.historyFootnote {
+    width: 100%;
+}
+
+.historyFootnote p {
+    font-size: 0.8rem;
+    color: gray;
+}
+
+.historyBoxBody {
+    margin-top: 0.3rem;
+    flex-wrap: wrap;
+}
+
+.historyBoxBody>div {
+    padding: 5px;
+    margin-right: 5px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background: rgba(106, 114, 89, 0.11);
+}
+
+.historyBoxBody>div p {
+    font-size: 0.75rem;
+    text-wrap: nowrap;
+}
