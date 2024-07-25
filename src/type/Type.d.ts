@@ -1,16 +1,25 @@
 import { CustomHelpers } from "joi";
 
-
 export type FootnoteExtractFcType = (setenceData: SentenceStoreSliceType[]) => FootnoteExtractFcReturnType[];
 export type VerticalEleFcType = (premier: string) => JSX.IntrinsicElements.span
 export type SentenceClickFcType = (idx: number, event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void
 export type StoryModalEleFcType = () => JSX.IntrinsicElements.div
 export type FootnoteEleFcType = () => JSX.IntrinsicElements.div
+export type MakeBookCheckFcType = () => void
+export type MakeSumbitFcType = (e: React.FormEvent<HTMLFormElement>) => void;
 export type SentenceSubmitFcType = (e: React.FormEvent<HTMLFormElement>) => void;
 export type SentenceFootnoteMouseOverFcType = (event: React.MouseEvent<HTMLSpanElement, MouseEvent>, over: boolean, idx: number) => void;
 export type CustomValidationType = (value: string, helpers: CustomHelpers) => string | Joi.ValidationError;
 
 // -----------------------------------
+
+interface MakeBookUserInputType {
+    title: string,
+    topic: string,
+    direction: string,
+    Password1: string,
+    Password2: string
+}
 
 interface FootnoteExtractFcReturnType {
     no: number,
@@ -56,7 +65,13 @@ export interface SentenceCounterSliceType {
     paragraphCount: number,
     pageCount: number,
     lastWords: string[],
-    newStart: boolean
+    newStart: boolean,
+    title: string,
+    topic: string,
+    direction: string,
+    books: number
+    password1?: string
+    password2?: string
 }
 export interface ReduxAllType { // 모든 reducer 타입모음 // 각 component에서 useAppSelector 로 불러올 때 사용
     sentenceStoreSlice: SentenceStoreSliceType[],

@@ -82,10 +82,110 @@
 }
 
 .titlePageMakeBookBut {
-    width: 50px;
-    height: 50px;
-    background: floralwhite;
+    width: 40px;
+    height: 40px;
     border-radius: 100px;
     box-sizing: border-box;
-    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.096);
+    border: 1px solid rgba(0, 0, 0, 0.048);
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3), -5px -5px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    user-select: none;
+}
+
+.titlePageMakeBookBut h6 {
+    font-size: 0.9rem;
+}
+
+.titlePageMakeBookDiv2 {
+    width: 100%;
+    min-height: 100px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1), -5px -5px 5px rgba(0, 0, 0, 0.1);
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.titlePageMakeBookDiv2>div {
+    width: 100%;
+    padding: 2px 5px;
+    box-sizing: border-box;
+}
+
+.makeTitle input {
+    width: 100%;
+    padding: 2px 5px;
+    box-sizing: border-box;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+
+.makeTopic input,
+.makeDirection input {
+    width: 100%;
+    padding: 2px 5px;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+.makePassword input {
+    padding: 2px 5px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    margin-right: 0.325rem;
+}
+
+.makePasswordInfo {
+    font-size: 1.2rem;
+    cursor: pointer;
+    position: relative;
+}
+
+.makePasswordInfo::before {
+    content: "소설 관리시 필요한 비밀번호입니다.";
+    display: block;
+    padding: 2.5px 5px;
+    background: white;
+    border: 1px solid;
+    position: absolute;
+    font-size: 0.8rem;
+    text-wrap: nowrap;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.makePasswordInfo:hover::before {
+    opacity: 1;
+}
+
+
+.makeButton button {
+    padding: 10px 15px;
+    box-sizing: border-box;
+    border: none;
+
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.288);
+    cursor: pointer;
+    user-select: none;
+    margin-left: 5px;
+}
+
+.makeButton button:nth-of-type(1) {
+    background: skyblue;
+}
+
+.makeButton button:nth-of-type(2) {
+    background: rgb(255, 111, 111);
+}
+
+
+
+.TitlePageBookBoxWarp{
+    width: 100%;
+    min-height: 150px;
+    background: rgba(255, 0, 0, 0.075);
 }

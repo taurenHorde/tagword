@@ -1,15 +1,40 @@
 
-
-import { useState } from 'react'
 import './../css/Title.css'
+import { useEffect, useState } from 'react'
+import { MakeSumbitFcType, MakeBookCheckFcType, SentenceCounterSliceType } from '../type/Type'
+import { useMutation } from 'react-query'
+import { makeSumbitPost, booksGet } from '../function/Api'
 
 function TitlePage(): JSX.Element {
+
+    const [revice, setRecive] = useState<boolean>(false)
+    const [bookData, setBookData] = useState<SentenceCounterSliceType[]>();
+    const booksGetMutation = useMutation(booksGet, {
+        onSuccess: (data) => {
+            console.log(data.books)
+            setBookData(data.books)
+        },
+        onError: (error) => {
+            console.log('작동에러')
+            console.log(error)
+        }
+    })
+    useEffect(() => {
+        booksGetMutation.mutate();
+    }, [revice])
+
+
+    const makeBookCheckFc: MakeBookCheckFcType = () => {
+        setRecive(pre => !pre)
+    }
 
     return <div className='TitlePageWrap'>
         <div className='titlePageBox flex column jc-start ai-center'>
             <TitlePageInfo />
-
-            <TitlePageMakeBook />
+            <TitlePageMakeBook makeBookCheckFc={makeBookCheckFc} />
+            {bookData?.map((val, idx) =>
+                <TitlePageBookBox key={idx} bookData={val} />
+            )}
         </div>
     </div>
 }
@@ -61,21 +86,124 @@ function TitlePageInfo(): JSX.Element {
     </div>
 }
 
+function TitlePageMakeBook(props: { makeBookCheckFc: MakeBookCheckFcType }): JSX.Element {
 
-function TitlePageMakeBook(): JSX.Element {
+    const makeBookCheckFc = props.makeBookCheckFc
+
+    const [make, setMake] = useState<boolean>(false)
+    const [makeTitle, setMakeTitle] = useState<string>("")
+    const [makeTopic, setMakeTopic] = useState<string>("")
+    const [makeDirection, setMakeDirection] = useState<string>("")
+    const [makePassword1, setMakePassword1] = useState<string>("")
+    const [makePassword2, setMakePassword2] = useState<string>("")
+
+    const makeSubmitMutation = useMutation(makeSumbitPost, {
+        onSuccess: (data) => {
+            console.log(data)
+            setMake(false)
+            setMakeTitle("")
+            setMakeTopic("")
+            setMakeDirection("")
+            setMakePassword1("")
+            setMakePassword2("")
+            makeBookCheckFc()
+        },
+        onError: (error) => {
+            console.log('작동에러')
+            console.log(error)
+        }
+    })
+
+
+    const makeSubmit: MakeSumbitFcType = async (e) => {
+        e.preventDefault();
+        // - 검증절차 필요함
+        makeSubmitMutation.mutate({
+            title: makeTitle,
+            topic: makeTopic,
+            direction: makeDirection,
+            Password1: makePassword1,
+            Password2: makePassword2
+        })
+    }
+
+
     return <div className='TitlePageMakeBookWrap'>
-
-        <div className='titlePageMakeBookDiv1 flex jc-center ai-center'>
-            <div className='titlePageMakeBookBut flex jc-center ai-center'>
-                <h6>+</h6>
+        {make ? <>
+            <form onSubmit={(e) => makeSubmit(e)}>
+                <div className='titlePageMakeBookDiv2 flex column jc-start al-start'>
+                    <div className='makeTitle'>
+                        <input
+                            type='text'
+                            placeholder='소설 제목을 입력해주세요. (필수)'
+                            onChange={(e) => setMakeTitle(e.target.value)}
+                            value={makeTitle}
+                        />
+                    </div>
+                    <div className='makeTopic'>
+                        <input
+                            type='text'
+                            placeholder='소설 주제를 간략하게 입력해주세요.'
+                            onChange={(e) => setMakeTopic(e.target.value)}
+                            value={makeTopic}
+                        />
+                    </div>
+                    <div className='makeDirection'>
+                        <input
+                            type='text'
+                            placeholder='소설 방향을 간략하게 입력해주세요.'
+                            onChange={(e) => setMakeDirection(e.target.value)}
+                            value={makeDirection}
+                        />
+                    </div>
+                    <div className='makePassword flex row jc-start ai-center'>
+                        <input
+                            type='password'
+                            placeholder='비밀번호를 입력해주세요'
+                            onChange={(e) => setMakePassword1(e.target.value)}
+                            value={makePassword1}
+                        />
+                        <input
+                            type='password'
+                            placeholder='비밀번호를 다시 입력해주세요'
+                            onChange={(e) => setMakePassword2(e.target.value)}
+                            value={makePassword2}
+                        />
+                        <p className='makePasswordInfo'>⚠️</p>
+                    </div>
+                    <div className='makeButton flex row jc-end ai-center'>
+                        <button type='submit'>만들기</button>
+                        <button onClick={() => setMake(false)}>취소</button>
+                    </div>
+                </div>
+            </form>
+        </> : <>
+            <div className='titlePageMakeBookDiv1 flex jc-center ai-center'>
+                <div className='titlePageMakeBookBut flex jc-center ai-center'
+                    onClick={() => setMake(true)}
+                >
+                    <h6>+</h6>
+                </div>
             </div>
-        </div>
-
-
-        <div className='titlePageMakeBookDiv2'></div>
-
+        </>}
     </div>
 }
 
+function TitlePageBookBox(props: { bookData: SentenceCounterSliceType }): JSX.Element {
+    const bookData = props.bookData;
+    return (
+        <div className='TitlePageBookBoxWarp flex column jc-start al-start'>
+            <div className='bookTitle'>
+                <h6>{bookData.title}</h6>
+            </div>
+            <div className='bookTopic'>
+                <h6>{bookData.topic}</h6>
+            </div>
+            <div className='bookDirection'>
+                <h6>{bookData.direction}</h6>
+            </div>
+        </div>
+    )
+}
 
 export default TitlePage

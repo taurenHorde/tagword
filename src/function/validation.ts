@@ -10,10 +10,8 @@ const customValidation: CustomValidationType = (value, helpers) => {
     }
     return value;
 }
-// const inputCheckKoreanPattern = /^[가-힣][가-힣0-9!?.\s]*$/;
 const inputCheckKoreanPattern = /^[가-힣][^\0-\x1F\x7F-\x9F]*$/;
 const inputSentenceValidation = Joi.object({
-
     content: Joi.string().pattern(inputCheckKoreanPattern).min(5).custom(customValidation, '한글 5글자 이상 여부').required()
         .messages({
             'string.pattern.base': '한글 및 숫자 특수기호 (!,.,?) 만 사용가능하며 첫 글자는 한글이여야만 합니다.',

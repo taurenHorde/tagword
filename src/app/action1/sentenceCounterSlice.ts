@@ -8,7 +8,11 @@ const initialState: SentenceCounterSliceType =
     paragraphCount: 1,
     pageCount: 1,
     lastWords: ['일', '이', '삼'],
-    newStart: true
+    newStart: true,
+    title: '',
+    topic: '',
+    direction: '',
+    books: 0
     // 기본데이터
 }
 
