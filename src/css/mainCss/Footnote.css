@@ -1,19 +1,17 @@
 .FootnotePageWrap {
     width: 100%;
-    min-height: 120px;
+    min-height: 50px;
     margin-top: 0.625rem;
+    margin-bottom: 30px;
     padding: 5px 0px;
     box-sizing: border-box;
 }
 
-.footnoteHead {
-    width: 100%;
-    border-top: 1px solid rgba(128, 128, 128, 0.589);
-}
-
 .footnoteBody {
     margin-top: 0.3125rem;
+    padding: 0px 5px;
     width: 100%;
+    box-sizing: border-box;
 }
 
 .footnoteBody>div {

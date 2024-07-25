@@ -1,6 +1,7 @@
 .KeywordPageWrap {
     width: 100%;
     margin-top: 0.625rem;
+    padding: 0px 10px;
     box-sizing: border-box;
 }
 
@@ -15,12 +16,6 @@
 .keywordPageBody p {
     font-size: 1rem;
     font-weight: bold;
-    font-style: italic;
     text-decoration: underline;
 }
 
-.keywordPageFooter p {
-    font-size: 0.9rem;
-    color: red;
-    font-weight: bold;
-}

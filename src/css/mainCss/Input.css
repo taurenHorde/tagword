@@ -1,10 +1,8 @@
 .InputPageWrap {
     width: 100%;
     min-height: 50px;
-    padding: 10px 0px;
+    padding: 4px 0px 50px 0px;
     box-sizing: border-box;
-    margin-top: 0.625rem;
-    background: rgba(128, 128, 128, 0.103);
 }
 
 .inputBox {
@@ -13,10 +11,11 @@
 
 .inputBox>input {
     width: 99%;
-    min-height: 25px;
+    min-height: 30px;
     padding: 0px 10px;
     box-sizing: border-box;
     border: none;
+    border-radius: 5px;
     font-size: 0.8rem;
     margin-top: 5px;
 }
@@ -34,7 +33,7 @@
 }
 
 .inputCheckbox label {
-    margin: 1px 0px;
+    margin: 1px 3px;
     font-size: 0.9rem;
     display: flex;
     justify-content: center;

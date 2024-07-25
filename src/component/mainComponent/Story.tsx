@@ -1,23 +1,35 @@
 import './../../css/mainCss/Story.css'
 import { SentenceType, VerticalEleFcType, SentenceClickFcType, StoryModalEleFcType, ReduxAllType, SentenceFootnoteMouseOverFcType, FootnoteEleFcType } from './../../type/Type';
-import { useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useAppSelector, useAppDispatch } from './../../app/store';
 import { addExpression } from './../../app/action1/sentenceStoreSlice';
 
 function StoryPage(): JSX.Element {
-
     const dispatch = useAppDispatch();
 
     const sentenceStoreSlice = useAppSelector((state: ReduxAllType) => state.sentenceStoreSlice)
     const sentenceCounterSlice = useAppSelector((state: ReduxAllType) => state.sentenceCounterSlice)
 
 
+    useEffect(() => {
+        if (divRef.current) {
+            const storyPageWrapDivHeight = divRef.current.offsetHeight;
+            console.log(storyPageWrapDivHeight)
+        }
+    }, [sentenceCounterSlice])
+
+    const divRef = useRef<HTMLDivElement>(null);
     const [modal, setModal] = useState<boolean>(false);
     const [modalDataIndex, setModalDataIndex] = useState<number>(-1)
+    const [modalBoxPosition, setModalBoxPosition] = useState<number[]>([0, 0])
     const [modalFootnote, setModalFootnote] = useState<boolean>(false)
     const [modalfootnotePosition, setModalFootnotePosition] = useState<number[]>([0, 0])
 
-    const sentenceClickFc: SentenceClickFcType = (idx) => { setModal(true); setModalDataIndex(idx) }
+    const sentenceClickFc: SentenceClickFcType = (idx, event) => {
+        setModal(true);
+        setModalDataIndex(idx);
+        setModalBoxPosition([event.clientX, event.clientY])
+    }
     const sentenceFootnoteMouseOverFc: SentenceFootnoteMouseOverFcType = (event, over, idx) => {
         setModalFootnotePosition(over ? [event.clientX, event.clientY] : [0, 0]); setModalFootnote(over); setModalDataIndex(idx)
     }
@@ -25,7 +37,9 @@ function StoryPage(): JSX.Element {
         dispatch(addExpression([expressionIdx, modalDataIndex]))
     };
     const storyModalElement: StoryModalEleFcType = () => <div
-        className='storyModalBox flex column jc-center ai-center'>
+        className='storyModalBox flex column jc-center ai-center'
+        style={{ left: modalBoxPosition[0], top: modalBoxPosition[1] }}
+    >
         <div className='storyModalExpression flex row ai-center'>
             {['🤣', '🥹', '👍', '❤️'].map((val, idx) => <div key={idx} onClick={() => expressionClickFc(idx)}>
                 {val} | {sentenceStoreSlice[modalDataIndex]?.expression[idx]}
@@ -61,7 +75,7 @@ function StoryPage(): JSX.Element {
     </div>
 
     return (
-        <div className="StoryPageWrap">
+        <div className="StoryPageWrap" ref={divRef} >
             <div className='storyBox'>
                 {new Array(sentenceCounterSlice.paragraphCount).fill("").map((_, idxPara) =>
                     <p className='storyParagraph' key={idxPara}>
@@ -78,7 +92,11 @@ function StoryPage(): JSX.Element {
                         )}
                     </p>
                 )}
-                {modal && (<div className='storyModalWrap'>{storyModalElement()}</div>)}
+
+                {modal && (<div
+                    className='storyModalWrap'
+                >{storyModalElement()}</div>)}
+
                 {modalFootnote && (footnoteElement())}
             </div>
         </div>
@@ -108,7 +126,7 @@ function StorySentence(
     )
     return <span
         className='storySentence'
-        onClick={() => sentenceClick(sentenceIndex)}>
+        onClick={(event) => sentenceClick(sentenceIndex, event)}>
         {content}
         {footnote && (verticalElement(footnote))}
     </span>

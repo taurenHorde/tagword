@@ -1,0 +1,91 @@
+.TitlePageWrap {
+    width: 100%;
+    padding: 40px 0px;
+    box-sizing: border-box;
+}
+
+.titlePageBox {
+    width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.TitlePageInfoWrap {
+    width: 100%;
+    min-height: 100px;
+    background: rgba(0, 139, 139, 0.068);
+    margin-bottom: 10px;
+}
+
+.titlePageInfoHead {
+    width: 100%;
+}
+
+.titlePageInfoHead>div {
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.titlePageInfoHead h5 {
+    font-size: 1.4rem;
+}
+
+.titlePageInfoHead h6 {
+    font-size: 1rem;
+}
+
+.titlePageInfoHead p {
+    font-size: 1rem;
+    font-weight: bold;
+    color: blue;
+}
+
+.titlePageInfoBody {
+    width: 100%;
+    padding: 2.5px 0px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.titlePageInfoBody h6 {
+    font-size: 1rem;
+    padding: 2px 0px;
+}
+
+.titlePageInfoBody p {
+    font-size: 0.9rem;
+    padding: 1px 0px;
+}
+
+
+.TitlePageMakeBookWrap {
+    width: 100%;
+    min-height: 100px;
+    margin: 5px 0px;
+    padding: 10px;
+
+}
+
+.titlePageMakeBookDiv1 {
+    width: 100%;
+}
+
+.titlePageMakeBookBut {
+    width: 50px;
+    height: 50px;
+    background: floralwhite;
+    border-radius: 100px;
+    box-sizing: border-box;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.096);
+}

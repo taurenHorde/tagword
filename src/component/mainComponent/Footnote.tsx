@@ -9,7 +9,6 @@ function FootnotePage(): JSX.Element {
 
     return (
         <div className='FootnotePageWrap flex column jc-start ai-start'>
-            <div className='footnoteHead' />
             <div className='footnoteBody flex column jc-start'>
                 {footnoteConversionData.map((val, idx) => <div className='flex row jc-start ai-center' key={idx}>
                     <span>[{val.no}]</span>

@@ -3,7 +3,7 @@ import { CustomHelpers } from "joi";
 
 export type FootnoteExtractFcType = (setenceData: SentenceStoreSliceType[]) => FootnoteExtractFcReturnType[];
 export type VerticalEleFcType = (premier: string) => JSX.IntrinsicElements.span
-export type SentenceClickFcType = (idx: number) => void
+export type SentenceClickFcType = (idx: number, event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void
 export type StoryModalEleFcType = () => JSX.IntrinsicElements.div
 export type FootnoteEleFcType = () => JSX.IntrinsicElements.div
 export type SentenceSubmitFcType = (e: React.FormEvent<HTMLFormElement>) => void;
@@ -47,8 +47,11 @@ export interface ValidationTotalFucRetrunType { // validate retrun type
 
 // store.ts  initialState 용 type interface
 
-export interface SentenceStoreSliceType extends SentenceType { }  // SentenceType 이랑 동일 
+export interface SentenceStoreSliceType extends SentenceType {
+    _id?: string
+}  // SentenceType 이랑 동일 
 export interface SentenceCounterSliceType {
+    _id?: string
     sentenceCount: number,
     paragraphCount: number,
     pageCount: number,

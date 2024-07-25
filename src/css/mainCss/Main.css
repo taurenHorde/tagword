@@ -1,0 +1,48 @@
+.MainWrap {
+    width: 100%;
+}
+
+.mainTab {
+    width: 100%;
+    position: fixed;
+    bottom: 0px;
+}
+
+.mainTabBox {
+    max-width: 1300px;
+    width: 100%;
+    background: white;
+}
+
+.mainTabHead {
+    width: 100%;
+    padding: 0px 10px 0px 10px;
+    box-sizing: border-box;
+}
+.mainTabHeadPrePage,
+.mainTabHeadNextPage,
+.mainTabHeadAddSentence,
+.mainTabHeadViewFootnote {
+    padding: 0px 10px;
+    min-height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(238, 227, 208);
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.mainTabHeadPrePage h6,
+.mainTabHeadNextPage h6,
+.mainTabHeadAddSentence h6,
+.mainTabHeadAddSentence h6 {
+    font-size: 0.9rem;
+    user-select: none;
+}
+
+.mainTabBody {
+    width: 100%;
+    /* background: rgb(238, 227, 208); */
+    background: white;
+}
