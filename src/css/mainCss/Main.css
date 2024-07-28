@@ -11,17 +11,20 @@
 .mainTabBox {
     max-width: 1300px;
     width: 100%;
+    padding-top: 7px;
     background: white;
 }
 
 .mainTabHead {
     width: 100%;
+    min-height: 50px;
     padding: 0px 10px 0px 10px;
     box-sizing: border-box;
+    border-top: 1px solid;
+    background: white;
 }
 
-.mainTabHeadPrePage,
-.mainTabHeadNextPage,
+
 .mainTabHeadAddSentence,
 .mainTabHeadTabClose,
 .mainTabHeadViewFootnote {
@@ -30,22 +33,30 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgb(238, 227, 208);
+    /* background: white; */
     cursor: pointer;
     margin-left: 10px;
 }
 
-.mainTabHeadPrePage h6,
-.mainTabHeadNextPage h6,
+.mainTabHeadNavi {
+    padding: 0px 10px;
+    min-height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
 .mainTabHeadAddSentence h6,
-.mainTabHeadAddSentence h6,
-.mainTabHeadTabClose h6 {
+.mainTabHeadViewFootnote h6,
+.mainTabHeadTabClose h6,
+.mainTabHeadNavi h6 {
     font-size: 0.9rem;
     user-select: none;
 }
 
 .mainTabBody {
     width: 100%;
-    /* background: rgb(238, 227, 208); */
+    min-height: 200px;
     background: white;
 }

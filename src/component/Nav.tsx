@@ -1,13 +1,10 @@
 import './../css/Nav.css'
-import { useNavigate } from 'react-router-dom'
+import { NavigateFcType } from './../type/Type';
 
+function Nav(props: { navigateFc: NavigateFcType }): JSX.Element {
 
-function Nav(props: { id: any }): JSX.Element {
+    const navigateFc = props.navigateFc
 
-    const { id } = props.id
-    console.log(id)
-
-    const navigate = useNavigate()
     return (
         <div className='navWrap flex row jc-start ai-center'>
             <div className='navHead flex jc-start ai-center'>
@@ -16,7 +13,7 @@ function Nav(props: { id: any }): JSX.Element {
             <div className='navBody flex jc-end ai-center'>
                 <div
                     className='navMenu flex jc-center ai-center'
-                    onClick={() => navigate(`/${id}/main`)}
+                    onClick={() => navigateFc(1)}
                 >
                     <p>
                         이야기 보기
@@ -24,7 +21,7 @@ function Nav(props: { id: any }): JSX.Element {
                 </div>
                 <div
                     className='navMenu flex jc-center ai-center'
-                    onClick={() => navigate(`/${id}/history`)}
+                    onClick={() => navigateFc(2)}
                 >
                     <p>
                         기록 보기

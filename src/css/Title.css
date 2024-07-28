@@ -87,7 +87,6 @@
     border-radius: 100px;
     box-sizing: border-box;
     border: 1px solid rgba(0, 0, 0, 0.048);
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3), -5px -5px 10px rgba(0, 0, 0, 0.2);
     cursor: pointer;
     user-select: none;
 }
@@ -100,13 +99,13 @@
     width: 100%;
     min-height: 100px;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1), -5px -5px 5px rgba(0, 0, 0, 0.1);
-    padding: 5px;
+    padding: 10px 5px;
     box-sizing: border-box;
 }
 
 .titlePageMakeBookDiv2>div {
     width: 100%;
-    padding: 2px 5px;
+    padding: 3px 5px;
     box-sizing: border-box;
 }
 
@@ -114,8 +113,9 @@
     width: 100%;
     padding: 2px 5px;
     box-sizing: border-box;
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: bold;
+    border: none;
 }
 
 
@@ -124,14 +124,16 @@
     width: 100%;
     padding: 2px 5px;
     box-sizing: border-box;
-    font-size: 1rem;
+    font-size: 0.9rem;
+    border: none;
 }
 
 .makePassword input {
     padding: 2px 5px;
     box-sizing: border-box;
-    font-size: 1rem;
     margin-right: 0.325rem;
+    font-size: 0.9rem;
+    border: none;
 }
 
 .makePasswordInfo {
@@ -160,12 +162,23 @@
     opacity: 1;
 }
 
+.makeButtonMode>div {
+    padding: 4px 8px;
+    box-sizing: border-box;
+    color: rgb(0, 0, 0);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.288);
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-right: 5px;
+    cursor: pointer;
+    user-select: none;
+}
 
 .makeButton button {
-    padding: 10px 15px;
+    padding: 4px 8px;
     box-sizing: border-box;
     border: none;
-
+    font-size: 0.9rem;
     font-weight: bold;
     color: rgb(0, 0, 0);
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.288);
@@ -186,7 +199,7 @@
 
 .TitlePageBookBoxWarp {
     width: 100%;
-    background: rgba(255, 188, 188, 0.075);
+    background: rgba(179, 179, 179, 0.075);
     padding: 10px;
     box-sizing: border-box;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1), -5px -5px 5px rgba(0, 0, 0, 0.1);
@@ -216,8 +229,16 @@
 
 .bookInfo>div {
     padding: 5px 8px;
-    background: skyblue;
-    border-radius: 10px;
+    box-sizing: border-box;
+    border: none;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.288);
+    cursor: pointer;
+    user-select: none;
+    margin-left: 5px;
+    background: rgb(200, 235, 135);
 }
 
 .bookInfo>div p {
@@ -225,7 +246,7 @@
 }
 
 .bookButton button {
-    padding: 10px 15px;
+    padding: 5px 8px;
     box-sizing: border-box;
     border: none;
     font-size: 0.8rem;

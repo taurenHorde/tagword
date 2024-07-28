@@ -12,7 +12,8 @@ const initialState: SentenceCounterSliceType =
     title: '',
     topic: '',
     direction: '',
-    books: 0
+    books: 0,
+    mode: true
     // 기본데이터
 }
 
@@ -29,6 +30,7 @@ const sentenceCounterSlice = createSlice({
             state.lastWords.length = 0;
             state.lastWords.push(...t)
             state.newStart = PayloadAction.payload.newStart
+            state.mode = PayloadAction.payload.mode
         }
     },
 });

@@ -18,6 +18,8 @@
     border-radius: 5px;
     font-size: 0.8rem;
     margin-top: 5px;
+    background: none;
+    border: 1px solid;
 }
 
 .inputOption {

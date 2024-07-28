@@ -3,12 +3,18 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import sentenceStoreSliceReducer from './action1/sentenceStoreSlice';
 import sentenceCounterSliceReducer from './action1/sentenceCounterSlice';
 import footnoteConversionStoreSliceReducer from './action1/footnoteConversionStoreSlice';
+import mainControllerSliceReducer from './action2/mainControllerSlice';
+import clickSentenceDataSliceRedcer from './action2/clickSentenceDataSlice';
 
 export const store = configureStore({
     reducer: {
+        // Action 1
         sentenceStoreSlice: sentenceStoreSliceReducer,
         sentenceCounterSlice: sentenceCounterSliceReducer,
         footnoteConversionStoreSlice: footnoteConversionStoreSliceReducer,
+        // Action 2
+        mainControllerSlice: mainControllerSliceReducer,
+        clickSentenceDataSlice: clickSentenceDataSliceRedcer
     }
 });
 

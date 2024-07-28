@@ -1,4 +1,4 @@
-import { SentenceUserInputDataTotal, ValidationTotalFucRetrunType, CustomValidationType } from './../type/Type';
+import { SentenceUserInputDataTotal, ValidationInputSentenceFucRetrunType, CustomValidationType, MakeBookUserInputType, ValidationInputBookFucRetrunType } from './../type/Type';
 const Joi = require('joi')
 
 const customValidation: CustomValidationType = (value, helpers) => {
@@ -6,25 +6,28 @@ const customValidation: CustomValidationType = (value, helpers) => {
     const afterMatch = value.match(regex);
     const afterJoin = afterMatch ? afterMatch.join('') : '';
     if (afterJoin.length < 4) {
-        return helpers.error('string.custom', { massage: '최소 5글자 이상 입력바랍니다. 한글입력이 적어도 5글자 이상 입력하셔야합니다.' })
+        return helpers.error('string.custom', { massage: '완성형 한글이 최소 5글자 이상 있어야 합니다.' })
     }
     return value;
 }
-const inputCheckKoreanPattern = /^[가-힣][^\0-\x1F\x7F-\x9F]*$/;
+// const inputCheckKoreanPattern = /^[가-힣][^\0-\x1F\x7F-\x9F]*$/;
+const inputCheckKoreanPattern = /^[^\0-\x1F\x7F-\x9F]*$/;
+
+
 const inputSentenceValidation = Joi.object({
     content: Joi.string().pattern(inputCheckKoreanPattern).min(5).custom(customValidation, '한글 5글자 이상 여부').required()
         .messages({
-            'string.pattern.base': '한글 및 숫자 특수기호 (!,.,?) 만 사용가능하며 첫 글자는 한글이여야만 합니다.',
-            'string.empty': '입력 값이 비어있습니다. 최소 5글자 이상 입력바랍니다.',
-            'string.min': '최소 5글자 이상 입력바랍니다. 한글입력이 적어도 5글자 이상 입력하셔야합니다..',
-            'string.custom': '최소 5글자 이상 입력바랍니다. 한글입력이 적어도 5글자 이상 입력하셔야합니다.'
+            // 'string.pattern.base': '한글 및 숫자 특수기호 (!,.,?) 만 사용가능하며 첫 글자는 한글이여야만 합니다.',
+            'string.empty': '입력 값이 비어있습니다. 입력바랍니다.',
+            'string.min': '최소 5글자 이상 입력바랍니다.',
+            'string.custom': '완성형 한글이 최소 5글자 이상 있어야 합니다.'
         })
     ,
-    footnote: Joi.string().pattern(inputCheckKoreanPattern).min(2).optional()
+    footnote: Joi.string().pattern(inputCheckKoreanPattern).min(5).optional()
         .messages({
-            'string.pattern.base': '한글 및 숫자 특수기호 (!,.,?) 만 사용가능하며 첫 글자는 한글이여야만 합니다.',
-            'string.empty': '입력 값이 비어있습니다. 최소 2글자 이상 입력바랍니다.',
-            'string.min': '최소 2글자 이상 입력바랍니다.'
+            // 'string.pattern.base': '한글 및 숫자 특수기호 (!,.,?) 만 사용가능하며 첫 글자는 한글이여야만 합니다.',
+            'string.empty': '입력 값이 비어있습니다. 입력바랍니다.',
+            'string.min': '최소 5글자 이상 입력바랍니다.'
         }),
     nickname: Joi.string().min(2).max(8).required()
         .messages({
@@ -41,8 +44,42 @@ const inputSentenceValidation = Joi.object({
         })
 })
 
+const inputBookValidation = Joi.object({
+    title: Joi.string().pattern(inputCheckKoreanPattern).min(5).max(40).required()
+        .messages({
+            'string.empty': '제목은 최소 5글자에서 40글자 사이로 입력바랍니다.',
+            'string.min': '제목은 최소 5글자에서 40글자 사이로 입력바랍니다.',
+            'string.custom': '제목은 최소 5글자에서 40글자 사이로 입력바랍니다.'
+        }),
+    topic: Joi.string().pattern(inputCheckKoreanPattern).min(5).max(40).required()
+        .messages({
+            'string.empty': '주제는 최소 5글자에서 40글자 사이로 입력바랍니다.',
+            'string.min': '주제는 최소 5글자에서 40글자 사이로 입력바랍니다.',
+            'string.custom': '주제는 최소 5글자에서 40글자 사이로 입력바랍니다.'
+        }),
+    direction: Joi.string().pattern(inputCheckKoreanPattern).min(5).max(40).required()
+        .messages({
+            'string.empty': '방향은 최소 5글자에서 40글자 사이로 입력바랍니다.',
+            'string.min': '방향은 최소 5글자에서 40글자 사이로 입력바랍니다.',
+            'string.custom': '방향은 최소 5글자에서 40글자 사이로 입력바랍니다.'
+        }),
+    password1: Joi.string().min(4).max(20).required()
+        .messages({
+            'string.empty': '비밀번호는 최소 4글자에서 20글자 사이로 입력바랍니다.',
+            'string.min': '비밀번호는 최소 4글자에서 20글자 사이로 입력바랍니다.',
+            'string.custom': '비밀번호는 최소 4글자에서 20글자 사이로 입력바랍니다.'
+        }),
+    password2: Joi.string().min(4).max(20).required()
+        .messages({
+            'string.empty': '비밀번호는 최소 4글자에서 20글자 사이로 입력바랍니다.',
+            'string.min': '비밀번호는 최소 4글자에서 20글자 사이로 입력바랍니다.',
+            'string.custom': '비밀번호는 최소 4글자에서 20글자 사이로 입력바랍니다.'
+        }),
+    mode: Joi.boolean().required()
+})
 
-export async function validationTotal(validationData: SentenceUserInputDataTotal): Promise<ValidationTotalFucRetrunType> {
+
+export async function validationInputSentence(validationData: SentenceUserInputDataTotal): Promise<ValidationInputSentenceFucRetrunType> {
     // validationFucNum - 필요 Joi 검증 번호 / validationData - Joi 검증 대상 데이터
     const { footNoteCheckBox, changeParagraph, ...needValidate } = await validationData
     if (!footNoteCheckBox) await delete needValidate.footnote
@@ -50,5 +87,8 @@ export async function validationTotal(validationData: SentenceUserInputDataTotal
     return { error, value }
 }
 
-
+export async function validationInputBook(validationData: MakeBookUserInputType): Promise<ValidationInputBookFucRetrunType> {
+    const { error, value } = await inputBookValidation.validate(validationData)
+    return { error, value }
+}
 

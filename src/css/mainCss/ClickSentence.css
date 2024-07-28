@@ -1,0 +1,48 @@
+.ClickSentencePageWrap {
+    min-height: 100px;
+    border-radius: 20px;
+    padding: 5px 10px;
+    box-sizing: border-box;
+}
+
+.clickSentenceContent,
+.clickSentenceExpression,
+.clickSentenceInfo,
+.clickSentenceButton {
+    justify-content: space-around;
+}
+
+.clickSentenceContent {
+    width: 100%;
+    padding: 3px 0px;
+}
+
+.clickSentenceContent p {
+    font-size: 1.1rem;
+    text-wrap: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.clickSentenceExpression>div {
+    margin: 2px 5px 0px;
+    padding: 2px 10px;
+    background: rgb(207, 207, 207);
+    border-radius: 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    user-select: none;
+
+}
+
+.clickSentenceInfo {
+    margin-top: 3px;
+}
+
+.clickSentenceInfo>div {
+    margin: 3px 5px 0px;
+}
+
+.clickSentenceInfo>div p {
+    font-size: 1rem;
+}

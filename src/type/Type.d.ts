@@ -1,13 +1,14 @@
 import { CustomHelpers } from "joi";
 
 export type FootnoteExtractFcType = (setenceData: SentenceStoreSliceType[]) => FootnoteExtractFcReturnType[];
-export type SentenceClickFcType = (idx: number, event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void
-export type StoryModalEleFcType = () => JSX.IntrinsicElements.div
-
+export type SentenceClickFcType = (SentenceType: SentenceType) => void
+export type MainTabFcType = (n: number) => void
 export type MakeBookCheckFcType = () => void
 export type MakeSumbitFcType = (e: React.FormEvent<HTMLFormElement>) => void;
+export type NavigateFcType = (location: number) => void;
 export type SentenceSubmitFcType = (e: React.FormEvent<HTMLFormElement>) => void;
 export type CustomValidationType = (value: string, helpers: CustomHelpers) => string | Joi.ValidationError;
+
 
 // -----------------------------------
 
@@ -15,8 +16,9 @@ interface MakeBookUserInputType {
     title: string,
     topic: string,
     direction: string,
-    Password1: string,
-    Password2: string
+    password1: string,
+    password2: string
+    mode: boolean
 }
 
 interface FootnoteExtractFcReturnType {
@@ -44,9 +46,15 @@ export interface SentenceType extends SentenceUserInputType { // 사용자 입�
     writeDate: string,
     paragraph: number
 }
-export interface ValidationTotalFucRetrunType { // validate retrun type
+
+export interface ValidationInputSentenceFucRetrunType { // validate retrun type
     error: string | undefined,
     value: SentenceUserInputType,
+}
+
+export interface ValidationInputBookFucRetrunType { // validate retrun type
+    error: string | undefined,
+    value: MakeBookUserInputTyp,
 }
 
 
@@ -56,7 +64,10 @@ export interface ValidationTotalFucRetrunType { // validate retrun type
 
 export interface SentenceStoreSliceType extends SentenceType {
     _id?: string
+
 }  // SentenceType 이랑 동일 
+
+
 export interface SentenceCounterSliceType {
     _id?: string
     sentenceCount: number,
@@ -70,11 +81,14 @@ export interface SentenceCounterSliceType {
     books: number
     password1?: string
     password2?: string
+    mode: boolean
 }
 export interface ReduxAllType { // 모든 reducer 타입모음 // 각 component에서 useAppSelector 로 불러올 때 사용
     sentenceStoreSlice: SentenceStoreSliceType[],
     sentenceCounterSlice: SentenceCounterSliceType,
     footnoteConversionStoreSlice: FootnoteExtractFcReturnType[],
+    mainControllerSlice: any,
+    clickSentenceDataSlice: any
 }
 
 

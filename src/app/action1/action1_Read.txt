@@ -1,21 +1,12 @@
 
 
- - action1 = Input.tsx 와 Story.tsx 에 대한 관련
-
- - sentenceStoreSlice - 서버에서 보내주는 데이터를 보관 핸들링 하는 곳 (사용자가 입력한 문구 포함 모든것들을 보관)
- - sentenceCounterSlice - 서버에서 보내주는 데이터 통계 등을 보관 하는 곳 (현재 문장이 몇개인지, 페이지는 몇 페이지고 등등)
-
- - footnoteConversionStoreSlice - 서버에서 보내준 sentenceStoreSlice 데이터에서 각주부분을 변환/추출해서 사용하기 편하게 작업 후 저장 될 공간
-    // 서버에 저장 안하고 데이터 가져오면 그때마다 변환 /추출 이유 -
-    - 현재 노출중인 페이지 , 문단, 문장에 대한 데이터 기준으로 가장 빠른 문장 데이터부터 순번 처리해야하는데
-    - 노출 데이터를 예측 할 수 없음 
-    -- 이용자가 문단 변경 없이 계속 문장을 사용하다가, 최대 글이 넘어 갈 경우등 
-    그렇기에 필요한 문장 데이터들을 가져오면 그 안에서 순차적으로 넘버 부과하고 돌려야함 
-
-    - 문단 끝내기 및 페이지를 강제 할 수 있으나 그럴 경우 페이지마다 height가 너무 다를 꺼임, 
-
-    일단 예정이고, 입력데이터가 많아지면 그때 다시 고민 할 예정
 
 
 
-    // ---------------------------- 일단은 서버 연결전 
+ action1 - 바인딩이 필요한 데이터들을 보관하는 역할.
+
+ - sentenceStoreSlice - param @book 페이지 입장시  Socket.Io 를 통해 현재까지 저장된 모든 문장 정보를 저장 하는 Slice,
+
+ - sentenceCounterSlice - param @book 페이지 입장시 Socket.Io 를 통해 현재 소설 정보들 가져와서 저장 하는 Slice,
+
+ - footnoteConversionStoreSlice - sentenceStoreSlice 저장 된 데이터 중, 설명 글 추출 하여 보관하는 Slice

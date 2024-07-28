@@ -1,0 +1,7 @@
+
+
+
+
+
+  action2 - MainPage 또는 TitlePage 내 기능을 제어용 데이터를 저장하는 역할
+
