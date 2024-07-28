@@ -1,29 +1,22 @@
 import './../css/Nav.css'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
-
-function Nav(): JSX.Element {
 
 
-    function resetBot() {
-        axios.get('/reset').then((res) => {
-            console.log('리셋완료')
-        })
-    }
+function Nav(props: { id: any }): JSX.Element {
 
-
+    const { id } = props.id
+    console.log(id)
 
     const navigate = useNavigate()
     return (
         <div className='navWrap flex row jc-start ai-center'>
             <div className='navHead flex jc-start ai-center'>
-                {/* <h6 onClick={() => resetBot()}>TagWord</h6> */}
                 <h6>TagWord</h6>
             </div>
             <div className='navBody flex jc-end ai-center'>
                 <div
                     className='navMenu flex jc-center ai-center'
-                    onClick={() => navigate('/')}
+                    onClick={() => navigate(`/${id}/main`)}
                 >
                     <p>
                         이야기 보기
@@ -31,7 +24,7 @@ function Nav(): JSX.Element {
                 </div>
                 <div
                     className='navMenu flex jc-center ai-center'
-                    onClick={() => navigate('/history')}
+                    onClick={() => navigate(`/${id}/history`)}
                 >
                     <p>
                         기록 보기

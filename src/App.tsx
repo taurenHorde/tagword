@@ -1,8 +1,7 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom'
-import Nav from './component/Nav';
 import TitlePage from './component/Title';
-import MainPage from './component/mainComponent/Main';
+import { MainPage, FcSocketIoFisrtGet } from './component/mainComponent/Main';
 import HistoryPage from './component/historyComponent/History';
 
 
@@ -11,13 +10,16 @@ function App() {
   return (
     <div className="App flex jc-center ai-center">
       <div className='containWrap flex column jc-start ai-start'>
-        {/* <Nav /> */}
-        <Routes>
 
+
+        <Routes>
           <Route path='/' element={<TitlePage />} />
 
-          {/* <Route path='/' element={<MainPage />} />
-          <Route path='/history' element={<HistoryPage />} /> */}
+          <Route path='/:id' element={<FcSocketIoFisrtGet />}>
+            {/* 위는 Ele 는 없고, 방 접속시 그 방 데이터 Socket 으로 받아오는 기능만 있음 */}
+            <Route path='/:id/main' element={<MainPage />} />
+            <Route path='/:id/history' element={<HistoryPage />} />
+          </Route>
         </Routes>
 
       </div>

@@ -3,13 +3,18 @@ import { useEffect, useState } from 'react';
 import { useAppSelector, useAppDispatch } from './../../app/store';
 import { inputConversionData } from './../../app/action1/footnoteConversionStoreSlice';
 import { ReduxAllType } from './../../type/Type';
+import { Outlet, useNavigate, useParams } from 'react-router-dom';
+import { io, Socket } from 'socket.io-client'
+import { serverToCounter } from '../../app/action1/sentenceCounterSlice';
+import { serverToSentence } from '../../app/action1/sentenceStoreSlice';
 import footnoteExtractFc from './../../function/Conversion';
 import InputPage from './Input';
 import KeywordPage from './Keyword';
 import StoryPage from './Story';
 import FootnotePage from './Footnote';
+import Nav from './../Nav';
 
-
+const socket: Socket = io()
 
 function MainPage(): JSX.Element {
 
@@ -26,11 +31,10 @@ function MainPage(): JSX.Element {
     return <div
         className='MainWrap flex column jc-start ai-center'>
         <StoryPage />
-
         <div className='mainTab flex column jc-start ai-center'>
             <div className='mainTabBox flex column jc-start ai-center'>
                 <div className='mainTabHead flex row jc-end ai-center'>
-                    <div className='mainTabHeadPrePage'>
+                    {/* <div className='mainTabHeadPrePage'>
                         <h6>
                             이전
                         </h6>
@@ -44,21 +48,26 @@ function MainPage(): JSX.Element {
                         <h6>
                             다음
                         </h6>
-                    </div>
+                    </div> */}
                     <div className='mainTabHeadViewFootnote'
-                        onClick={() => setTab(pre => pre === 2 ? 0 : 2)}
+                        onClick={() => setTab(2)}
                     >
                         <h6>
-                            {tab === 2 ? "닫기" : "주석"}
-
+                            주석
                         </h6>
                     </div>
                     <div className='mainTabHeadAddSentence'
-                        onClick={() => setTab(pre => pre === 1 ? 0 : 1)}
+                        onClick={() => setTab(1)}
                     >
                         <h6>
-                            {tab === 1 ? "닫기" : "➕추가"}
-
+                            ➕추가
+                        </h6>
+                    </div>
+                    <div className='mainTabHeadTabClose'
+                        onClick={() => setTab(0)}
+                    >
+                        <h6>
+                            닫기
                         </h6>
                     </div>
                 </div>
@@ -78,6 +87,24 @@ function MainPage(): JSX.Element {
     </div>
 }
 
+function FcSocketIoFisrtGet(): JSX.Element {
+    const navigate = useNavigate()
+    const dispatch = useAppDispatch();
+    const { id } = useParams()
+
+    socket.emit('connectFirst', id)
+    socket.on('connectData', (resData) => {
+        const { sentenceConnectData, counterConnectData } = resData
+        dispatch(serverToCounter(counterConnectData))
+        dispatch(serverToSentence(sentenceConnectData))
+    })
+    socket.on('Err404', (message) => {
+        navigate('/')
+    })
+
+    return <><Nav id={id} /><Outlet /></>
+}
 
 
-export default MainPage
+
+export { MainPage, FcSocketIoFisrtGet }

@@ -19,9 +19,11 @@
     padding: 0px 10px 0px 10px;
     box-sizing: border-box;
 }
+
 .mainTabHeadPrePage,
 .mainTabHeadNextPage,
 .mainTabHeadAddSentence,
+.mainTabHeadTabClose,
 .mainTabHeadViewFootnote {
     padding: 0px 10px;
     min-height: 30px;
@@ -36,7 +38,8 @@
 .mainTabHeadPrePage h6,
 .mainTabHeadNextPage h6,
 .mainTabHeadAddSentence h6,
-.mainTabHeadAddSentence h6 {
+.mainTabHeadAddSentence h6,
+.mainTabHeadTabClose h6 {
     font-size: 0.9rem;
     user-select: none;
 }

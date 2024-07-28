@@ -42,10 +42,6 @@
     color: white !important;
 }
 
-.storyVertical {
-    font-size: 0.5rem;
-    vertical-align: top;
-}
 
 .storyModalWrap {
     position: fixed;
@@ -58,7 +54,7 @@
 
 .storyModalBox {
     position: absolute;
-    min-width: 200px;
+    /* min-width: 200px; */
     min-height: 50px;
     border-radius: 20px;
     padding: 5px 10px;
@@ -97,17 +93,3 @@
     user-select: none;
 }
 
-.storyModalFootnote {
-    position: absolute;
-    max-width: 300px;
-    transform: translateX(-50%) translateY(-115%);
-    padding: 5px 5px 2px;
-    box-sizing: border-box;
-    z-index: 999;
-    border: 1px solid;
-    background: white;
-}
-
-.storyModalFootnote p {
-    font-size: 0.8rem;
-}

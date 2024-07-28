@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { MakeSumbitFcType, MakeBookCheckFcType, SentenceCounterSliceType } from '../type/Type'
 import { useMutation } from 'react-query'
 import { makeSumbitPost, booksGet } from '../function/Api'
+import { useNavigate } from 'react-router-dom'
 
 function TitlePage(): JSX.Element {
 
@@ -45,7 +46,7 @@ function TitlePage(): JSX.Element {
 
 function TitlePageInfo(): JSX.Element {
 
-    const [open, setOpen] = useState<boolean>(true)
+    const [open, setOpen] = useState<boolean>(false)
 
     return <div className='TitlePageInfoWrap flex column jc-start ai-center'>
         <div className='titlePageInfoHead flex column jc-start ai-center'>
@@ -190,17 +191,29 @@ function TitlePageMakeBook(props: { makeBookCheckFc: MakeBookCheckFcType }): JSX
 }
 
 function TitlePageBookBox(props: { bookData: SentenceCounterSliceType }): JSX.Element {
+
+    const navigate = useNavigate();
     const bookData = props.bookData;
+
     return (
         <div className='TitlePageBookBoxWarp flex column jc-start al-start'>
-            <div className='bookTitle'>
-                <h6>{bookData.title}</h6>
+            <div className='bookTitle flex row jc-start al-center'>
+                <h6>{bookData.books}. {bookData.title}</h6>
             </div>
-            <div className='bookTopic'>
-                <h6>{bookData.topic}</h6>
+            <div className='bookTopic flex row jc-start al-center'>
+                <p>주제 - {bookData.topic}</p>
             </div>
-            <div className='bookDirection'>
-                <h6>{bookData.direction}</h6>
+            <div className='bookDirection flex row jc-start al-center'>
+                <p>방향 - {bookData.direction}</p>
+            </div>
+            <div className='bookInfo flex row jc-start al-center'>
+                <div className='flex jc-center al-center'>
+                    <p> 총 문장의 갯수 : {bookData.sentenceCount}</p>
+                </div>
+            </div>
+            <div className='bookButton flex row jc-end al-center'>
+                <button onClick={() => navigate(`@book${bookData.books}/main`)}>입장</button>
+                <button>관리자(구현x)</button>
             </div>
         </div>
     )

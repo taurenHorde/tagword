@@ -1,14 +1,12 @@
 import { CustomHelpers } from "joi";
 
 export type FootnoteExtractFcType = (setenceData: SentenceStoreSliceType[]) => FootnoteExtractFcReturnType[];
-export type VerticalEleFcType = (premier: string) => JSX.IntrinsicElements.span
 export type SentenceClickFcType = (idx: number, event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void
 export type StoryModalEleFcType = () => JSX.IntrinsicElements.div
-export type FootnoteEleFcType = () => JSX.IntrinsicElements.div
+
 export type MakeBookCheckFcType = () => void
 export type MakeSumbitFcType = (e: React.FormEvent<HTMLFormElement>) => void;
 export type SentenceSubmitFcType = (e: React.FormEvent<HTMLFormElement>) => void;
-export type SentenceFootnoteMouseOverFcType = (event: React.MouseEvent<HTMLSpanElement, MouseEvent>, over: boolean, idx: number) => void;
 export type CustomValidationType = (value: string, helpers: CustomHelpers) => string | Joi.ValidationError;
 
 // -----------------------------------

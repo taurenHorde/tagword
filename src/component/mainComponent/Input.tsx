@@ -7,17 +7,12 @@ import { validationTotal } from './../../function/validation'
 import { io, Socket } from 'socket.io-client'
 import { serverToCounter } from '../../app/action1/sentenceCounterSlice';
 import { serverToSentence } from '../../app/action1/sentenceStoreSlice';
+import { useParams } from 'react-router-dom';
 
 const socket: Socket = io()
 
 
 function InputPage(): JSX.Element {
-
-    socket.on('connectData', (resData) => {
-        const { sentenceConnectData, counterConnectData } = resData
-        dispatch(serverToCounter(counterConnectData))
-        dispatch(serverToSentence(sentenceConnectData))
-    })
 
     socket.on('addSentenceResult', (resData) => {
         const { sentenceResData, counterResData } = resData
@@ -25,7 +20,7 @@ function InputPage(): JSX.Element {
         dispatch(serverToSentence(sentenceResData))
     })
 
-
+    const { id } = useParams();
     const currentDate = moment(new Date()).format('YYYY-M-D HH:mm:ss')
     const sentenceStoreSlice = useAppSelector((state: ReduxAllType) => state.sentenceStoreSlice)
     const sentenceCounterSlice = useAppSelector((state: ReduxAllType) => state.sentenceCounterSlice)
@@ -65,7 +60,6 @@ function InputPage(): JSX.Element {
             if (!lastWords.includes(inputFirstWord) && !sentenceCounterSlice.newStart) { // 첫 글자 틀렸을 때
                 alert(`반드시 ${lastWords} 중 한 글자로 시작하셔야합니다.`)
             } else { // 첫 글자 맞으면 dispatch 작업
-
                 socket.emit('addSentence', {
                     ...afterValidationDate,
                     no: sentenceCounterSlice.sentenceCount + 1,
@@ -74,6 +68,7 @@ function InputPage(): JSX.Element {
                     writeDate: currentDate,
                     paragraph: sentenceCounterSlice.paragraphCount,
                     changeParagraph: changeParagraph,
+                    params: id
                 }) //
                 setInputSentece("")
                 setInputFootNote("")
