@@ -15,6 +15,10 @@
     padding: 0px 10px;
 }
 
+.optionPageSearch form {
+    width: 100%;
+}
+
 .optionPageSearch select {
     padding: 4.5px 3px;
     font-size: 0.9rem;
@@ -48,6 +52,13 @@
     margin-left: 2px;
 }
 
-.optionNumber option{
+.optionNumber option {
     font-size: 0.8rem;
+}
+
+.historyWrapFooter p {
+    padding: 0px 4px;
+    margin: 0px 5px;
+    user-select: none;
+    cursor: pointer;
 }

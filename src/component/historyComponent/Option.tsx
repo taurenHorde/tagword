@@ -1,42 +1,76 @@
-import { useState } from 'react';
 import './../../css/historyCss/Option.css'
+import { useAppSelector, useAppDispatch } from '../../app/store'
+import { ReduxAllType, SearchOptionFcType } from '../../type/Type'
+import { viewOption, paragraphOption, searchOption, searchText } from '../../app/action2/historyOptionSlice';
+import { useState } from 'react';
 
 
 function OptionPage() {
 
+    const dispatch = useAppDispatch();
+    const sentenceCounterSlice = useAppSelector((state: ReduxAllType) => state.sentenceCounterSlice)
+    const paragraphArray = Array(sentenceCounterSlice.paragraphCount).fill(null)
+
+    const [searchOptionType, setSearchOptionType] = useState<number>(0);
+    const [searchOptionText, setSearchOptionText] = useState<string>("");
+
+    const searchOptionFc: SearchOptionFcType = (e) => {
+        e.preventDefault();
+        if (searchOptionType !== 1 && searchOptionType !== 2 && searchOptionType !== 3) return alert('검색분류를 선택해주세요.')
+        if (searchOptionText.length < 1) return alert('최소 두 글자를 입력해주세요.')
+        dispatch(searchOption(searchOptionType))
+        dispatch(searchText(searchOptionText))
+    }
+
     return (
         <div className='OptionPageWrap flex column jc-start ai-start'>
             <div className='optionPageBody flex column jc-start ai-start'>
-                <div className='optionPageSearch flex row jc-start ai-center'>
-                    <select
-                        defaultValue={0}
-                    >
-                        <option
-                            value={0}
-                            disabled
-                        >종류</option>
-                        {['닉네임', '문장내용', '주석내용'].map((val, idx) =>
-                            <option key={idx} value={idx + 1}>{val}</option>
-                        )}
-                    </select>
-                    <input
-                        type='text'
-                        placeholder='검색 내용을 입력해주세요.'
-                    />
+                <div className='optionPageSearch'>
+                    <form className='flex row jc-start ai-center' onSubmit={searchOptionFc}>
+                        <select
+                            defaultValue={0}
+                            onChange={(e) => { setSearchOptionType(Number(e.target.value)) }}
+                        >
+                            <option
+                                value={0}
+                                disabled
+                            >종류</option>
+                            {['닉네임', '문장내용', '주석내용'].map((val, idx) =>
+                                <option key={idx} value={idx + 1}>{val}</option>
+                            )}
+                        </select>
+                        <input
+                            type='text'
+                            placeholder='검색 내용을 입력해주세요.'
+                            onChange={(e) => setSearchOptionText(e.target.value)}
+                        />
+                    </form>
                 </div>
                 <div className='optionPageOption flex row ai-center'>
                     <div className='optionView flex row jc-start ai-center'>
-                        <p>ㆍ박스 형태로 보기</p>
+                        <p>ㆍ검색 초기화</p>
                     </div>
                     <div className='optionNumber'>
-                        <select>
-                            <option>10개씩 보기</option>
-                            <option>25개씩 보기</option>
-                            <option>50개씩 보기</option>
+                        <select
+                            onChange={(e) => dispatch(viewOption(Number(e.target.value)))}
+                        >
+                            {[10, 25, 50].map((val, idx) =>
+                                <option
+                                    key={idx}
+                                    value={val}
+                                >{val}개씩 보기</option>
+                            )}
                         </select>
-                        <select>
-                            <option>전체 문단</option>
-                            <option>1번 문단</option>
+                        <select
+                            onChange={(e) => dispatch(paragraphOption(Number(e.target.value)))}
+                        >
+                            <option value={0}>전체 문단</option>
+                            {paragraphArray.map((_, idx) =>
+                                <option
+                                    key={idx}
+                                    value={idx + 1}
+                                >{idx + 1}번 문단</option>
+                            )}
                         </select>
                     </div>
                 </div>

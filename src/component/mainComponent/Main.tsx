@@ -8,7 +8,7 @@ import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import { io, Socket } from 'socket.io-client'
 import { serverToCounter } from '../../app/action1/sentenceCounterSlice';
 import { serverToSentence } from '../../app/action1/sentenceStoreSlice';
-import footnoteExtractFc from './../../function/Conversion';
+import { footnoteExtractFc } from './../../function/Conversion';
 import InputPage from './Input';
 import KeywordPage from './Keyword';
 import StoryPage from './Story';

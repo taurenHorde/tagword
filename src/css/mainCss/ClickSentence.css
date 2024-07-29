@@ -1,11 +1,11 @@
 .ClickSentencePageWrap {
+    width: 100%;
     min-height: 100px;
     border-radius: 20px;
     padding: 5px 10px;
     box-sizing: border-box;
 }
 
-.clickSentenceContent,
 .clickSentenceExpression,
 .clickSentenceInfo,
 .clickSentenceButton {
@@ -14,24 +14,26 @@
 
 .clickSentenceContent {
     width: 100%;
-    padding: 3px 0px;
+    padding: 3px 5px;
+    box-sizing: border-box;
 }
 
 .clickSentenceContent p {
-    font-size: 1.1rem;
+    font-size: 1rem;
     text-wrap: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-weight: bold;
 }
 
 .clickSentenceExpression>div {
     margin: 2px 5px 0px;
-    padding: 2px 10px;
-    background: rgb(207, 207, 207);
-    border-radius: 20px;
+    padding: 5px 10px;
+    background: rgb(82, 146, 130);
     font-size: 1rem;
     cursor: pointer;
     user-select: none;
+    font-weight: bold;
 
 }
 
@@ -44,5 +46,14 @@
 }
 
 .clickSentenceInfo>div p {
-    font-size: 1rem;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: gray;
+}
+
+.clickSentenceLinkTo{
+    color: blue !important;
+    user-select: none;
+    cursor: pointer;
+    text-decoration: underline;
 }

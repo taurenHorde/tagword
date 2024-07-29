@@ -18,7 +18,6 @@ const mainControllerSlice = createSlice({
     initialState,
     reducers: {
         mainTabControl: (state, PayloadAction: PayloadAction<number>) => {
-            console.log('tab' + PayloadAction.payload)
             state.tabControlNumber = PayloadAction.payload
         }
     },

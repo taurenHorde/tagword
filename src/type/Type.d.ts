@@ -1,10 +1,12 @@
-import { CustomHelpers } from "joi";
+import { CustomHelpers, number } from "joi";
 
 export type FootnoteExtractFcType = (setenceData: SentenceStoreSliceType[]) => FootnoteExtractFcReturnType[];
+export type HisToryExtractFcType = (setenceData: SentenceStoreSliceType[], optionData: historyOptionSliceType) => Promise<{ returnData: SentenceStoreSliceType[], conversionedDataConunt: number }>;
 export type SentenceClickFcType = (SentenceType: SentenceType) => void
 export type MainTabFcType = (n: number) => void
 export type MakeBookCheckFcType = () => void
 export type MakeSumbitFcType = (e: React.FormEvent<HTMLFormElement>) => void;
+export type SearchOptionFcType = (e: React.FormEvent<HTMLFormElement>) => void;
 export type NavigateFcType = (location: number) => void;
 export type SentenceSubmitFcType = (e: React.FormEvent<HTMLFormElement>) => void;
 export type CustomValidationType = (value: string, helpers: CustomHelpers) => string | Joi.ValidationError;
@@ -83,12 +85,24 @@ export interface SentenceCounterSliceType {
     password2?: string
     mode: boolean
 }
+export interface historyOptionSliceType {
+    paragraphOn: boolean,
+    paragraphNumber: number,
+    viewNumber: 10 | 25 | 50,
+    searchOn: boolean,
+    searchType: number,
+    searchText: string,
+    page:number,
+    pageCount:number
+}
+
 export interface ReduxAllType { // 모든 reducer 타입모음 // 각 component에서 useAppSelector 로 불러올 때 사용
     sentenceStoreSlice: SentenceStoreSliceType[],
     sentenceCounterSlice: SentenceCounterSliceType,
     footnoteConversionStoreSlice: FootnoteExtractFcReturnType[],
     mainControllerSlice: any,
-    clickSentenceDataSlice: any
+    clickSentenceDataSlice: any,
+    historyOptionSlice: historyOptionSliceType
 }
 
 
