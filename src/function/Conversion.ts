@@ -19,11 +19,22 @@ const footnoteExtractFc: FootnoteExtractFcType = (sentenceData) => {
     return retrunData;
 }
 
+const historyExtractFc: HisToryExtractFcType = async (sentenceData, optionData, page) => {
+    const { paragraphNumber, paragraphOn, searchOn, searchText, searchType, viewNumber } = await optionData
 
-const historyExtractFc: HisToryExtractFcType = async (sentenceData, optionData) => {
-    const { paragraphNumber, paragraphOn, searchOn, searchText, searchType, viewNumber, page } = await optionData
     var filterData = await sentenceData;
-    if (searchOn) console.log('')
+    if (searchOn) {
+        const searchTextTrim = await searchText.trim();
+        const copy = await filterData.filter((val, idx) => {
+            return searchType === 1
+                ?
+                val.nickname.includes(searchTextTrim)
+                : searchType === 2
+                    ? val.content.includes(searchTextTrim)
+                    : val.footnote!.includes(searchTextTrim)
+        })
+        filterData = await copy
+    }
     if (paragraphOn) filterData = await filterData.filter((val) => val.paragraph === paragraphNumber)
     const conversionedDataConunt = await filterData.length
     const startIdx = (page - 1) * viewNumber

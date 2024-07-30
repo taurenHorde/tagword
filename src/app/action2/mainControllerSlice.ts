@@ -25,5 +25,5 @@ const mainControllerSlice = createSlice({
 
 
 
-export const { mainTabControl } = mainControllerSlice.actions;
+export const { mainTabControl} = mainControllerSlice.actions;
 export default mainControllerSlice.reducer;

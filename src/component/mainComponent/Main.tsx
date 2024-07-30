@@ -57,7 +57,7 @@ function MainPage(): JSX.Element {
                             onClick={() => mainTabFc(2)}
                         >
                             <h6>
-                                메모
+                                주석
                             </h6>
                         </div>
                         <div className='mainTabHeadAddSentence'

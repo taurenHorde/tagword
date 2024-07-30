@@ -1,16 +1,16 @@
 import { CustomHelpers, number } from "joi";
 
 export type FootnoteExtractFcType = (setenceData: SentenceStoreSliceType[]) => FootnoteExtractFcReturnType[];
-export type HisToryExtractFcType = (setenceData: SentenceStoreSliceType[], optionData: historyOptionSliceType) => Promise<{ returnData: SentenceStoreSliceType[], conversionedDataConunt: number }>;
-export type SentenceClickFcType = (SentenceType: SentenceType) => void
+export type HisToryExtractFcType = (setenceData: SentenceStoreSliceType[], optionData: historyOptionSliceType, page: number) => Promise<{ returnData: SentenceStoreSliceType[], conversionedDataConunt: number }>;
 export type MainTabFcType = (n: number) => void
+export type SentenceClickFcType = (SentenceType: SentenceType) => void
 export type MakeBookCheckFcType = () => void
 export type MakeSumbitFcType = (e: React.FormEvent<HTMLFormElement>) => void;
 export type SearchOptionFcType = (e: React.FormEvent<HTMLFormElement>) => void;
 export type NavigateFcType = (location: number) => void;
 export type SentenceSubmitFcType = (e: React.FormEvent<HTMLFormElement>) => void;
+export type ExpressionClickFcType = (data: SentenceStoreSliceType, idx: number) => void;
 export type CustomValidationType = (value: string, helpers: CustomHelpers) => string | Joi.ValidationError;
-
 
 // -----------------------------------
 
@@ -22,7 +22,6 @@ interface MakeBookUserInputType {
     password2: string
     mode: boolean
 }
-
 interface FootnoteExtractFcReturnType {
     no: number,
     footnote?: string, // 수정 필요
@@ -68,8 +67,6 @@ export interface SentenceStoreSliceType extends SentenceType {
     _id?: string
 
 }  // SentenceType 이랑 동일 
-
-
 export interface SentenceCounterSliceType {
     _id?: string
     sentenceCount: number,
@@ -92,19 +89,14 @@ export interface historyOptionSliceType {
     searchOn: boolean,
     searchType: number,
     searchText: string,
-    page:number,
-    pageCount:number
 }
-
 export interface ReduxAllType { // 모든 reducer 타입모음 // 각 component에서 useAppSelector 로 불러올 때 사용
     sentenceStoreSlice: SentenceStoreSliceType[],
     sentenceCounterSlice: SentenceCounterSliceType,
     footnoteConversionStoreSlice: FootnoteExtractFcReturnType[],
     mainControllerSlice: any,
-    clickSentenceDataSlice: any,
+    clickSentenceDataSlice: SentenceStoreSliceType,
     historyOptionSlice: historyOptionSliceType
 }
-
-
 
 

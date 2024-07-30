@@ -4,8 +4,9 @@ import sentenceStoreSliceReducer from './action1/sentenceStoreSlice';
 import sentenceCounterSliceReducer from './action1/sentenceCounterSlice';
 import footnoteConversionStoreSliceReducer from './action1/footnoteConversionStoreSlice';
 import mainControllerSliceReducer from './action2/mainControllerSlice';
-import clickSentenceDataSliceRedcer from './action2/clickSentenceDataSlice';
-import historyOptionSliceRedcer from './action2/historyOptionSlice';
+import clickSentenceDataSliceReducer from './action2/clickSentenceDataSlice';
+import historyOptionSliceReducer from './action2/historyOptionSlice';
+
 
 export const store = configureStore({
     reducer: {
@@ -15,8 +16,9 @@ export const store = configureStore({
         footnoteConversionStoreSlice: footnoteConversionStoreSliceReducer,
         // Action 2
         mainControllerSlice: mainControllerSliceReducer,
-        clickSentenceDataSlice: clickSentenceDataSliceRedcer,
-        historyOptionSlice: historyOptionSliceRedcer
+        clickSentenceDataSlice: clickSentenceDataSliceReducer,
+        historyOptionSlice: historyOptionSliceReducer,
+        
 
     }
 });

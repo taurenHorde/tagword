@@ -5,3 +5,10 @@
 
   action2 - MainPage 또는 TitlePage 내 기능을 제어용 데이터를 저장하는 역할
 
+ clickSentenceDataSlice - stroyd에서 클릭한 데이터를 clickSentence 에서 사용하기 위함
+ 
+  historyOptionSlick - 기록보기 페이지에서 모든 필터 설정 저장 및 사용
+
+  mainControllerSlice - main 내 하단 팝업(탭) 정보 저장용
+
+  

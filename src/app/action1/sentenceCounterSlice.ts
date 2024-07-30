@@ -31,7 +31,8 @@ const sentenceCounterSlice = createSlice({
             state.lastWords.push(...t)
             state.newStart = PayloadAction.payload.newStart
             state.mode = PayloadAction.payload.mode
-        }
+        },
+        
     },
 });
 

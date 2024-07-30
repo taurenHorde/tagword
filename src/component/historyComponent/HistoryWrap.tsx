@@ -1,44 +1,51 @@
 import './../../css/historyCss/HistoryWrap.css'
-import { useAppSelector, useAppDispatch } from '../../app/store'
+import { useAppSelector } from '../../app/store'
 import { ReduxAllType, SentenceType, SentenceStoreSliceType } from '../../type/Type'
 import { useEffect, useState } from 'react'
 import { historyExtractFc } from '../../function/Conversion'
-import { currentPage, pageMax } from '../../app/action2/historyOptionSlice'
+import { expressionPost } from '../../function/Api'
+import { useMutation } from 'react-query'
 
 
 function HistoryWarpPage(): JSX.Element {
-    
-    const dispatch = useAppDispatch();
+
+    const [optionFiltered, setOptionFiltered] = useState<SentenceStoreSliceType[]>([])
+    const [loading, setLoading] = useState<boolean>(false)
+    const [currentPage, setCurrntPage] = useState<number>(1)
+    const [pageSentenceCount, setPageSentenceCount] = useState<number>(1)
+
     const sentenceStoreSlice = useAppSelector((state: ReduxAllType) => state.sentenceStoreSlice)
     const historyOptionSlice = useAppSelector((state: ReduxAllType) => state.historyOptionSlice)
-    const [optionFiltered, setOptionFiltered] = useState<SentenceStoreSliceType[]>([])
-    const [count, setCount] = useState<number>(0)
-    const [loading, setLoading] = useState<boolean>(false)
+    const optionText1 = historyOptionSlice.paragraphOn ? `${historyOptionSlice.paragraphNumber}번 문단 ` : `전체 문단`
+    const optionText2 = `${historyOptionSlice.viewNumber}개씩 보기`
+    const optionText3 = historyOptionSlice.searchOn ? `ㆍ${['닉네임', '문장내용', '설명내용'][historyOptionSlice.searchType]} ${historyOptionSlice.searchText} 검색` : ""
+    const pageArray = Array(Math.ceil(pageSentenceCount / historyOptionSlice.viewNumber)).fill("")
+
+    useEffect(() => {
+        setCurrntPage(1)
+    }, [historyOptionSlice.paragraphNumber])
 
     useEffect(() => {
         setLoading(false)
-        const historyExtractResult = historyExtractFc(sentenceStoreSlice, historyOptionSlice)
+        const historyExtractResult = historyExtractFc(sentenceStoreSlice, historyOptionSlice, currentPage)
         historyExtractResult.then((result) => {
             const { returnData, conversionedDataConunt } = result
             setOptionFiltered(returnData)
-            setCount(conversionedDataConunt)
             setLoading(true)
+            setPageSentenceCount(conversionedDataConunt)
         })
-        dispatch(pageMax(Math.ceil(count / historyOptionSlice.viewNumber)))
-    }, [historyOptionSlice, sentenceStoreSlice])
+        setLoading(true)
+    }, [historyOptionSlice, sentenceStoreSlice, currentPage])
 
-    const optionText1 = historyOptionSlice.paragraphOn ? `${historyOptionSlice.paragraphNumber}번 문단 ` : `전체 문단`
-    const optionText2 = `${historyOptionSlice.viewNumber}개씩 보기`
-    const pageArray = Array(historyOptionSlice.pageCount).fill("")
 
     return (
         <div className='HistoryWrapPage'>
             <div className='historyWrapHead flex row jc-space ai-center'>
                 <div>
-                    <p>{optionText1}ㆍ{optionText2}</p>
+                    <p>{optionText1}ㆍ{optionText2}{optionText3}</p>
                 </div>
                 <div>
-                    <p>총 {count}문장 중 {optionFiltered.length}개 [{historyOptionSlice.page}페이지]</p>
+                    <p>총 {pageSentenceCount}문장 중 {optionFiltered.length}개 [{currentPage}페이지]</p>
                 </div>
             </div>
             <div className='historyWrapBody'>
@@ -55,20 +62,24 @@ function HistoryWarpPage(): JSX.Element {
             </div>
             <div className='historyWrapFooter flex jc-center ai-center'>
                 <div className='flex jc-center ai-center'>
-                    <p> {`< 이전`} </p>
+                    <p
+                    // onClick={() => dispatch(pagePreNextPage(-1))}
+                    > {`< 이전`} </p>
                     {pageArray.map((_, idx) => {
                         const style = {
-                            color: historyOptionSlice.page === idx + 1 ? "black" : "gray",
-                            fontWeight: historyOptionSlice.page === idx + 1 ? "bold" : "none"
+                            color: currentPage === idx + 1 ? "black" : "gray",
+                            fontWeight: currentPage === idx + 1 ? "bold" : "normal"
                         }
                         return <p
                             key={idx}
                             style={style}
-                            onClick={() => dispatch(currentPage(idx + 1))}
+                            onClick={() => setCurrntPage(idx + 1)}
                         >{idx + 1}</p>
                     }
                     )}
-                    <p> {`다음 >`} </p>
+                    <p
+                    // onClick={() => dispatch(pagePreNextPage(1))}
+                    > {`다음 >`} </p>
                 </div>
             </div>
         </div>

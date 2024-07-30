@@ -22,7 +22,7 @@
 
 .historyBoxWrap {
     width: 100%;
-    padding: 5px 10px;
+    padding: 10px 10px;
     box-sizing: border-box;
     margin: 10px 0px;
     border: 1px solid rgba(0, 0, 0, 0.24);
@@ -51,6 +51,7 @@
 
 .historyContent p {
     font-size: 1rem;
+    font-weight: bold;
 }
 
 .historyFootnote {
@@ -73,9 +74,11 @@
     border-radius: 5px;
     box-sizing: border-box;
     background: rgba(106, 114, 89, 0.11);
+    user-select: none;
+    cursor: pointer;
 }
 
 .historyBoxBody>div p {
-    font-size: 0.75rem;
+    font-size: 0.9rem;
     text-wrap: nowrap;
 }

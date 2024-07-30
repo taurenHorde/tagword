@@ -1,7 +1,7 @@
 import './../../css/historyCss/Option.css'
 import { useAppSelector, useAppDispatch } from '../../app/store'
 import { ReduxAllType, SearchOptionFcType } from '../../type/Type'
-import { viewOption, paragraphOption, searchOption, searchText } from '../../app/action2/historyOptionSlice';
+import { viewOption, paragraphOption, searchOption, searchText, resetOption } from '../../app/action2/historyOptionSlice';
 import { useState } from 'react';
 
 
@@ -9,6 +9,7 @@ function OptionPage() {
 
     const dispatch = useAppDispatch();
     const sentenceCounterSlice = useAppSelector((state: ReduxAllType) => state.sentenceCounterSlice)
+    const historyOptionSlice = useAppSelector((state: ReduxAllType) => state.historyOptionSlice)
     const paragraphArray = Array(sentenceCounterSlice.paragraphCount).fill(null)
 
     const [searchOptionType, setSearchOptionType] = useState<number>(0);
@@ -28,8 +29,8 @@ function OptionPage() {
                 <div className='optionPageSearch'>
                     <form className='flex row jc-start ai-center' onSubmit={searchOptionFc}>
                         <select
-                            defaultValue={0}
                             onChange={(e) => { setSearchOptionType(Number(e.target.value)) }}
+                            value={historyOptionSlice.searchType}
                         >
                             <option
                                 value={0}
@@ -43,16 +44,18 @@ function OptionPage() {
                             type='text'
                             placeholder='검색 내용을 입력해주세요.'
                             onChange={(e) => setSearchOptionText(e.target.value)}
+                            defaultValue ={historyOptionSlice.searchText}
                         />
                     </form>
                 </div>
                 <div className='optionPageOption flex row ai-center'>
                     <div className='optionView flex row jc-start ai-center'>
-                        <p>ㆍ검색 초기화</p>
+                        <p onClick={() => dispatch(resetOption())}>ㆍ검색 초기화</p>
                     </div>
                     <div className='optionNumber'>
                         <select
                             onChange={(e) => dispatch(viewOption(Number(e.target.value)))}
+                            value={historyOptionSlice.viewNumber}
                         >
                             {[10, 25, 50].map((val, idx) =>
                                 <option
@@ -63,6 +66,7 @@ function OptionPage() {
                         </select>
                         <select
                             onChange={(e) => dispatch(paragraphOption(Number(e.target.value)))}
+                            value={historyOptionSlice.paragraphNumber}
                         >
                             <option value={0}>전체 문단</option>
                             {paragraphArray.map((_, idx) =>
