@@ -1,27 +1,30 @@
 import './../../css/historyCss/Option.css'
 import { useAppSelector, useAppDispatch } from '../../app/store'
-import { ReduxAllType, SearchOptionFcType } from '../../type/Type'
+import { ReduxAllType, InFormEventReturnVoidFc } from '../../type/Type'
 import { viewOption, paragraphOption, searchOption, searchText, resetOption } from '../../app/action2/historyOptionSlice';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 
 function OptionPage() {
 
     const dispatch = useAppDispatch();
-    const sentenceCounterSlice = useAppSelector((state: ReduxAllType) => state.sentenceCounterSlice)
-    const historyOptionSlice = useAppSelector((state: ReduxAllType) => state.historyOptionSlice)
+    const { sentenceCounterSlice, historyOptionSlice } = useAppSelector((state: ReduxAllType) => state)
     const paragraphArray = Array(sentenceCounterSlice.paragraphCount).fill(null)
 
     const [searchOptionType, setSearchOptionType] = useState<number>(0);
     const [searchOptionText, setSearchOptionText] = useState<string>("");
 
-    const searchOptionFc: SearchOptionFcType = (e) => {
+    const searchOptionFc: InFormEventReturnVoidFc = (e) => {
         e.preventDefault();
         if (searchOptionType !== 1 && searchOptionType !== 2 && searchOptionType !== 3) return alert('검색분류를 선택해주세요.')
         if (searchOptionText.length < 1) return alert('최소 두 글자를 입력해주세요.')
         dispatch(searchOption(searchOptionType))
         dispatch(searchText(searchOptionText))
     }
+
+    useEffect(() => {
+        dispatch(resetOption())
+    }, [])
 
     return (
         <div className='OptionPageWrap flex column jc-start ai-start'>
@@ -44,7 +47,7 @@ function OptionPage() {
                             type='text'
                             placeholder='검색 내용을 입력해주세요.'
                             onChange={(e) => setSearchOptionText(e.target.value)}
-                            defaultValue ={historyOptionSlice.searchText}
+                            defaultValue={historyOptionSlice.searchText}
                         />
                     </form>
                 </div>

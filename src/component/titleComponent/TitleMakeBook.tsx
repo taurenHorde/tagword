@@ -1,75 +1,13 @@
-
-import './../css/Title.css'
-import { useEffect, useState } from 'react'
-import { MakeSumbitFcType, MakeBookCheckFcType, SentenceCounterSliceType } from '../type/Type'
+import './../../css/titleCss/Title.css'
+import { useState } from 'react'
+import { MakeSumbitFcType, MakeBookCheckFcType } from './../../type/Type'
 import { useMutation } from 'react-query'
-import { makeSumbitPost, booksGet } from '../function/Api'
-import { useNavigate } from 'react-router-dom'
-import { validationInputBook } from '../function/validation'
+import { makeSumbitPost } from './../../function/Api'
+import { validationInputBook } from './../../function/validation'
 
-
-
-
-function TitlePage(): JSX.Element {
-
-    const [revice, setRecive] = useState<boolean>(false)
-    const [bookData, setBookData] = useState<SentenceCounterSliceType[]>();
-    const booksGetMutation = useMutation(booksGet, {
-        onSuccess: (data) => {
-            setBookData(data.books)
-        },
-        onError: (error) => {
-            console.log('작동에러')
-            console.log(error)
-        }
-    })
-    useEffect(() => {
-        booksGetMutation.mutate();
-    }, [revice])
-
-
-    const makeBookCheckFc: MakeBookCheckFcType = () => {
-        setRecive(pre => !pre)
-    }
-
-    return <div className='TitlePageWrap'>
-        <div className='titlePageBox flex column jc-start ai-center'>
-            <TitlePageInfo />
-            <TitlePageMakeBook makeBookCheckFc={makeBookCheckFc} />
-            {bookData?.map((val, idx) =>
-                <TitlePageBookBox key={idx} bookData={val} />
-            )}
-        </div>
-    </div>
-}
-
-function TitlePageInfo(): JSX.Element {
-
-    const [open, setOpen] = useState<boolean>(false)
-
-    return <div className='TitlePageInfoWrap flex column jc-start ai-center'>
-        <div className='titlePageInfoHead flex column jc-start ai-center'>
-            <div>
-                <h5>📒</h5>
-            </div>
-            <div>
-                <h6>끝말잇기로 쓰는 소설</h6>
-            </div>
-            <div>
-                <p onClick={() => setOpen(pre => !pre)}>{open ? "▲접기▲" : "▼펼치기▼"}</p>
-            </div>
-        </div>
-        <div className='titlePageInfoBody flex column jc-start ai-center'
-            style={{ height: open ? "auto" : "0px" }}>
-
-        </div>
-    </div>
-}
 
 function TitlePageMakeBook(props: { makeBookCheckFc: MakeBookCheckFcType }): JSX.Element {
-
     const makeBookCheckFc = props.makeBookCheckFc
-
     const [make, setMake] = useState<boolean>(false)
     const [makeTitle, setMakeTitle] = useState<string>("")
     const [makeTopic, setMakeTopic] = useState<string>("")
@@ -80,7 +18,6 @@ function TitlePageMakeBook(props: { makeBookCheckFc: MakeBookCheckFcType }): JSX
 
     const makeSubmitMutation = useMutation(makeSumbitPost, {
         onSuccess: (data) => {
-            console.log(data)
             setMake(false)
             setMakeTitle("")
             setMakeTopic("")
@@ -97,7 +34,6 @@ function TitlePageMakeBook(props: { makeBookCheckFc: MakeBookCheckFcType }): JSX
 
     const makeSubmit: MakeSumbitFcType = async (e) => {
         e.preventDefault();
-
         const validatationResult = await validationInputBook({
             title: makeTitle,
             topic: makeTopic,
@@ -106,7 +42,6 @@ function TitlePageMakeBook(props: { makeBookCheckFc: MakeBookCheckFcType }): JSX
             password2: makePassword2,
             mode: makeMode
         })
-
         if (validatationResult.error) {
             alert(validatationResult.error)
         } else {
@@ -120,7 +55,7 @@ function TitlePageMakeBook(props: { makeBookCheckFc: MakeBookCheckFcType }): JSX
             })
         }
     }
-
+    
     return <div className='TitlePageMakeBookWrap'>
         {make ? <>
             <form onSubmit={(e) => makeSubmit(e)}>
@@ -194,38 +129,5 @@ function TitlePageMakeBook(props: { makeBookCheckFc: MakeBookCheckFcType }): JSX
     </div>
 }
 
-function TitlePageBookBox(props: { bookData: SentenceCounterSliceType }): JSX.Element {
 
-    const navigate = useNavigate();
-    const bookData = props.bookData;
-
-    return (
-        <div className='TitlePageBookBoxWarp flex column jc-start al-start'>
-            <div className='bookTitle flex row jc-start al-center'>
-                <h6>{bookData.books}. {bookData.title}</h6>
-            </div>
-            <div className='bookTopic flex row jc-start al-center'>
-                <p>주제 : {bookData.topic}</p>
-            </div>
-            <div className='bookDirection flex row jc-start al-center'>
-                <p>방향 : {bookData.direction}</p>
-            </div>
-            <div className='flex row jc-space al-center'>
-                <div className='bookInfo flex row jc-start al-center'>
-                    <div className='flex jc-center al-center'>
-                        <p> 총 문장의 갯수 : {bookData.sentenceCount}</p>
-                    </div>
-                    <div className='flex jc-center al-center'>
-                        <p> {bookData.mode ? "자유모드" : "끝말잇기 모드"}</p>
-                    </div>
-                </div>
-                <div className='bookButton flex row jc-end al-center'>
-                    <button onClick={() => navigate(`@book${bookData.books}/main`)}>입장</button>
-                    <button>관리자(구현x)</button>
-                </div>
-            </div>
-        </div>
-    )
-}
-
-export default TitlePage
+export default TitlePageMakeBook;

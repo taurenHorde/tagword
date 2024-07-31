@@ -1,0 +1,49 @@
+.LoadingPageWrap {
+    width: 100%;
+    min-height: 200px;
+}
+
+.loadingAnimationBox {
+    box-sizing: border-box;
+    min-width: 300px;
+}
+
+.loadingBar {
+    width: 100%;
+    height: 20px;
+    background: skyblue;
+    margin-top: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.loadingBar>div {
+    position: absolute;
+    width: 100%;
+    height: 20px;
+    left: -100%;
+    background: rgb(255, 137, 137);
+    animation: loading 2s alternate infinite ease-out;
+}
+
+@keyframes loading {
+    0% {
+        left: -100%;
+    }
+
+    25% {
+        left: -75%;
+    }
+
+    50% {
+        left: -50%;
+    }
+
+    75% {
+        left: -25%;
+    }
+
+    100% {
+        left: 0%;
+    }
+}

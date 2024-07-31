@@ -1,10 +1,8 @@
-import './../css/Nav.css'
-import { NavigateFcType } from './../type/Type';
+import './../../css//mainCss/Nav.css'
 
-function Nav(props: { navigateFc: NavigateFcType }): JSX.Element {
 
+function Nav(props: { navigateFc: (location: number) => void }): JSX.Element {
     const navigateFc = props.navigateFc
-
     return (
         <div className='navWrap flex row jc-start ai-center'>
             <div className='navHead flex jc-start ai-center'>

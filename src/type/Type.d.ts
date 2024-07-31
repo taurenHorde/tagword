@@ -1,18 +1,53 @@
 import { CustomHelpers, number } from "joi";
 
-export type FootnoteExtractFcType = (setenceData: SentenceStoreSliceType[]) => FootnoteExtractFcReturnType[];
+
+
+
+// ///////////////////////////////////////////
+//  Fc Type //////////////////////////////////
+// ///////////////////////////////////////////
+
+export type InFormEventReturnVoidFc = (e: React.FormEvent<HTMLFormElement>) => void;
+
+
+
+export type ExpressionClickFc = (sentenceData: SentenceStoreSliceType, idx: number) => void; // ClickSentence.tsx
 export type HisToryExtractFcType = (setenceData: SentenceStoreSliceType[], optionData: historyOptionSliceType, page: number) => Promise<{ returnData: SentenceStoreSliceType[], conversionedDataConunt: number }>;
-export type MainTabFcType = (n: number) => void
 export type SentenceClickFcType = (SentenceType: SentenceType) => void
 export type MakeBookCheckFcType = () => void
 export type MakeSumbitFcType = (e: React.FormEvent<HTMLFormElement>) => void;
-export type SearchOptionFcType = (e: React.FormEvent<HTMLFormElement>) => void;
-export type NavigateFcType = (location: number) => void;
+export type FootnoteExtractFcType = (setenceData: SentenceStoreSliceType[]) => FootnoteExtractFcReturnType[];
 export type SentenceSubmitFcType = (e: React.FormEvent<HTMLFormElement>) => void;
-export type ExpressionClickFcType = (data: SentenceStoreSliceType, idx: number) => void;
 export type CustomValidationType = (value: string, helpers: CustomHelpers) => string | Joi.ValidationError;
 
-// -----------------------------------
+// ///////////////////////////////////////////
+//  props Type //////////////////////////////////
+// ///////////////////////////////////////////
+
+export type HistoryBoxProps = {
+    sentenceData: SentenceType,
+    expressionClickFc: ExpressionClickFc
+}
+
+export type EmptyPageProps = {
+    pageNumber : number
+}
+
+
+
+// ///////////////////////////////////////////
+//  TypeGuard Type //////////////////////////////////
+// ///////////////////////////////////////////
+
+
+interface IsAddSentenceResult {
+    sentenceResData: SentenceStoreSliceType[]
+    counterResData: SentenceCounterSliceType
+}
+
+
+
+
 
 interface MakeBookUserInputType {
     title: string,
@@ -48,11 +83,11 @@ export interface SentenceType extends SentenceUserInputType { // 사용자 입�
     paragraph: number
 }
 
+
 export interface ValidationInputSentenceFucRetrunType { // validate retrun type
     error: string | undefined,
     value: SentenceUserInputType,
 }
-
 export interface ValidationInputBookFucRetrunType { // validate retrun type
     error: string | undefined,
     value: MakeBookUserInputTyp,
@@ -94,7 +129,7 @@ export interface ReduxAllType { // 모든 reducer 타입모음 // 각 component�
     sentenceStoreSlice: SentenceStoreSliceType[],
     sentenceCounterSlice: SentenceCounterSliceType,
     footnoteConversionStoreSlice: FootnoteExtractFcReturnType[],
-    mainControllerSlice: any,
+    mainControllerSlice: { tabControlNumber: number },
     clickSentenceDataSlice: SentenceStoreSliceType,
     historyOptionSlice: historyOptionSliceType
 }

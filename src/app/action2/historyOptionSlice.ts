@@ -11,7 +11,7 @@ const initialState: historyOptionSliceType = {
     searchText: "", 
 }
 const historyOptionSlice = createSlice({
-    name: 'titleControllerSlice',
+    name: 'historyOptionSlic',
     initialState,
     reducers: {
         paragraphOption: (state, PayloadAction: PayloadAction<number>) => {

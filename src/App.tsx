@@ -1,6 +1,6 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom'
-import TitlePage from './component/Title';
+import TitlePage from './component/titleComponent/Title';
 import { MainPage, FcSocketIoFisrtGet } from './component/mainComponent/Main';
 import HistoryPage from './component/historyComponent/History';
 

@@ -24,11 +24,21 @@ const clickSentenceDataSlice = createSlice({
     reducers: {
         clickSentenceIdx: (state, PayloadAction: PayloadAction<SentenceStoreSliceType>) => {
             Object.assign(state, PayloadAction.payload)
-        }
+        },
+        addExpressionT: (state, PayloadAction: PayloadAction<[number, number]>) => { // 임시방편
+            // ['🤣', '🥹', '👍', '❤️'] expressionIdx
+            const expressionIdx = PayloadAction.payload[0];
+            state.expression[expressionIdx]++
+        },
+        removeExpressionT: (state, PayloadAction: PayloadAction<[number, number]>) => { // 임시방편
+            // ['🤣', '🥹', '👍', '❤️'] expressionIdx
+            const expressionIdx = PayloadAction.payload[0];
+            state.expression[expressionIdx]--
+        },
     },
 });
 
 
 
-export const { clickSentenceIdx } = clickSentenceDataSlice.actions;
+export const { clickSentenceIdx, addExpressionT, removeExpressionT } = clickSentenceDataSlice.actions;
 export default clickSentenceDataSlice.reducer;

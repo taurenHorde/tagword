@@ -1,34 +1,31 @@
 import './../../css/mainCss/ClickSentence.css'
 import { useAppSelector, useAppDispatch } from './../../app/store';
-import { ReduxAllType, ExpressionClickFcType } from './../../type/Type';
+import { ReduxAllType, ExpressionClickFc, SentenceStoreSliceType } from './../../type/Type';
 import { useMutation } from 'react-query'
 import { expressionPost } from '../../function/Api'
 import { useParams } from 'react-router-dom';
-import { addExpression } from '../../app/action1/sentenceStoreSlice';
-import { isNumberArrayLengthTwo } from '../../type/TypeGuards';
+import { addExpression, removeExpression } from '../../app/action1/sentenceStoreSlice';
+import { addExpressionT, removeExpressionT } from '../../app/action2/clickSentenceDataSlice'
 
 function ClickSenctencePage(): JSX.Element {
-
     const { id } = useParams();
     const dispatch = useAppDispatch();
     const clickSentenceStoreSlice = useAppSelector((state: ReduxAllType) => state.clickSentenceDataSlice)
-    const mutation = useMutation(expressionPost, {
-        onSuccess: (data) => {
-            console.log(data)
-            const dispatchApplicationData = data.updateDBInfo
-            if (isNumberArrayLengthTwo(dispatchApplicationData)) {
-                dispatch(addExpression([...dispatchApplicationData]))
-            }
-        },
-        onError: (error) => {
-            console.log(error)
+
+    const mutation = useMutation(
+        (data: { sentenceData: SentenceStoreSliceType, idx: number, params: string }) => expressionPost(data), {
+        onSuccess: (data) => { },
+        onError: (error, data) => {
+            dispatch(removeExpression([data.idx, data.sentenceData.no]))
+            dispatch(removeExpressionT([data.idx, data.sentenceData.no]))
+            alert('감정표현 클릭이 실패 하였습니다. 잠시 후 다시 시도해주시길 바랍니다.')
         }
     })
-
-
-    const expressionClickFc: ExpressionClickFcType = (sentenceData, idx) => {
-        if (!id) return; // 문제있다리
+    const expressionClickFc: ExpressionClickFc = (sentenceData, idx) => {
+        if (!id) return;
         mutation.mutate({ sentenceData: sentenceData, idx: idx, params: id })
+        dispatch(addExpression([idx, sentenceData.no]))
+        dispatch(addExpressionT([idx, sentenceData.no]))
     }
 
     return (
@@ -43,16 +40,16 @@ function ClickSenctencePage(): JSX.Element {
                     {val}   {clickSentenceStoreSlice.expression[idx]}
                 </div>
                 )}
-                <div>
+                {/* <div>
                     💬   {clickSentenceStoreSlice.comments}
-                </div>
+                </div> */}
             </div>
             <div className='clickSentenceInfo flex row ai-center'>
                 {['닉네임', '등록일'].map((val, idx) => {
                     const dataValue = [clickSentenceStoreSlice.nickname, clickSentenceStoreSlice.writeDate]
                     return <div key={idx}><p> {dataValue[idx]}</p></div>
                 })}
-                <div><p className='clickSentenceLinkTo'>기록페이지에서</p></div>
+                {/* <div><p className='clickSentenceLinkTo'>기록페이지에서</p></div> */}
             </div>
         </div>
     )

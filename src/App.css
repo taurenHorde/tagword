@@ -65,5 +65,15 @@
 }
 
 .flex11 {
+
   flex: 1 1
+}
+
+
+.pd5{
+  padding: 5px;
+}
+
+.borderbox{
+  box-sizing: border-box;
 }

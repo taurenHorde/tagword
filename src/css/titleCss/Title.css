@@ -8,19 +8,6 @@
     width: 100%;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 .TitlePageInfoWrap {
     width: 100%;
     min-height: 100px;
@@ -71,10 +58,8 @@
 
 .TitlePageMakeBookWrap {
     width: 100%;
-    min-height: 50px;
     margin: 5px 0px;
     padding: 10px;
-
 }
 
 .titlePageMakeBookDiv1 {
@@ -89,6 +74,12 @@
     border: 1px solid rgba(0, 0, 0, 0.048);
     cursor: pointer;
     user-select: none;
+    transition: 0.5s all;
+}
+
+.titlePageMakeBookBut:hover {
+    background: skyblue;
+    color: white;
 }
 
 .titlePageMakeBookBut h6 {
@@ -106,6 +97,7 @@
 .titlePageMakeBookDiv2>div {
     width: 100%;
     padding: 3px 5px;
+    margin: 1px 0px;
     box-sizing: border-box;
 }
 
@@ -199,7 +191,7 @@
 
 .TitlePageBookBoxWarp {
     width: 100%;
-    background: rgba(179, 179, 179, 0.075);
+    background: rgba(219, 219, 219, 0.075);
     padding: 10px;
     box-sizing: border-box;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1), -5px -5px 5px rgba(0, 0, 0, 0.1);
@@ -208,6 +200,7 @@
 
 .TitlePageBookBoxWarp>div {
     width: 100%;
+    margin: 3px 0px;
 }
 
 .bookTitle {

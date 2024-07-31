@@ -2,7 +2,7 @@ import './../../css/mainCss/Input.css'
 import moment from 'moment';
 import { useState } from 'react';
 import { useAppSelector, useAppDispatch } from './../../app/store';
-import { SentenceUserInputDataTotal, SentenceSubmitFcType, ReduxAllType, SentenceStoreSliceType, SentenceUserInputType, ValidationInputSentenceFucRetrunType } from './../../type/Type';
+import { SentenceUserInputDataTotal, ReduxAllType, SentenceUserInputType, ValidationInputSentenceFucRetrunType } from './../../type/Type';
 import { validationInputSentence } from './../../function/validation'
 import { io, Socket } from 'socket.io-client'
 import { serverToCounter } from '../../app/action1/sentenceCounterSlice';
@@ -19,13 +19,11 @@ function InputPage(): JSX.Element {
         dispatch(serverToCounter(counterResData))
         dispatch(serverToSentence(sentenceResData))
     })
-
+    
+    const dispatch = useAppDispatch()
     const { id } = useParams();
     const currentDate = moment(new Date()).format('YYYY-M-D HH:mm:ss')
-    const sentenceStoreSlice = useAppSelector((state: ReduxAllType) => state.sentenceStoreSlice)
     const sentenceCounterSlice = useAppSelector((state: ReduxAllType) => state.sentenceCounterSlice)
-    const dispatch = useAppDispatch()
-
     const lastWords = sentenceCounterSlice.mode ?
         "[자유모드] 자유롭게 입력해주세요."
         : sentenceCounterSlice.newStart
@@ -41,7 +39,7 @@ function InputPage(): JSX.Element {
     const [changeParagraph, setChangeParagraph] = useState<boolean>(false)
     const [inputAble, setInputAble] = useState<boolean>(true)
 
-    const sentenceSubmit: SentenceSubmitFcType = async (e: React.FormEvent<HTMLFormElement>) => {
+    const sentenceSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
         setInputAble(false)
         const userInputData: SentenceUserInputDataTotal = await {
@@ -56,10 +54,8 @@ function InputPage(): JSX.Element {
         if (validationResult.error) {
             alert(validationResult.error)
         } else { // 검증 문제 없을 시
-
             const thisBookMode = sentenceCounterSlice.mode;
             const afterValidationDate: SentenceUserInputType = validationResult.value
-
             if (!thisBookMode) {
                 const { lastWords } = sentenceCounterSlice;
                 const inputFirstWord: string = inputSentence[0]
@@ -67,7 +63,6 @@ function InputPage(): JSX.Element {
                     return alert(`반드시 ${lastWords} 중 한 글자로 시작하셔야합니다.`)
                 }
             }
-
             socket.emit('addSentence', {
                 ...afterValidationDate,
                 no: sentenceCounterSlice.sentenceCount + 1,
@@ -83,12 +78,9 @@ function InputPage(): JSX.Element {
             setFootNoteCheckBox(false)
             setChangeParagraph(false)
             setInputAble(true)
-
         }
 
     }
-
-
 
     return (
         <div className='InputPageWrap flex column '

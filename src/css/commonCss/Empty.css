@@ -1,0 +1,12 @@
+.EmptyPageWrap {
+    width: 100%;
+    min-height: 200px;
+}
+
+.EmptyPageWrap h6 {
+    font-size: 1rem;
+}
+
+.EmptyPageWrap p {
+    font-size: 0.8rem;
+}

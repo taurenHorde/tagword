@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from './../../app/store';
 import { inputConversionData } from './../../app/action1/footnoteConversionStoreSlice';
 import { mainTabControl } from '../../app/action2/mainControllerSlice';
-import { ReduxAllType, MainTabFcType, NavigateFcType } from './../../type/Type';
+import { ReduxAllType } from './../../type/Type';
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import { io, Socket } from 'socket.io-client'
 import { serverToCounter } from '../../app/action1/sentenceCounterSlice';
@@ -14,9 +14,35 @@ import KeywordPage from './Keyword';
 import StoryPage from './Story';
 import FootnotePage from './Footnote';
 import ClickSenctencePage from './ClickSentence'
-import Nav from './../Nav';
+import Nav from './Nav';
 
 const socket: Socket = io()
+
+function FcSocketIoFisrtGet(): JSX.Element {
+    const navigate = useNavigate()
+    const dispatch = useAppDispatch();
+    const { id } = useParams()
+
+    const navigateFc = (location: number): void => {
+        if (location === 1) navigate(`/${id}/main`)
+        if (location === 2) navigate(`/${id}/history`)
+    }
+
+    socket.emit('connectFirst', id)
+    socket.on('connectData', (resData) => {
+        const { sentenceConnectData, counterConnectData } = resData
+        dispatch(serverToCounter(counterConnectData))
+        dispatch(serverToSentence(sentenceConnectData))
+    })
+    socket.on('Err404', (message) => {
+        navigate('/')
+    })
+
+    return <>
+        <Nav navigateFc={navigateFc} />
+        <Outlet />
+    </>
+}
 
 function MainPage(): JSX.Element {
 
@@ -30,7 +56,11 @@ function MainPage(): JSX.Element {
         dispatch(inputConversionData(conversionReusult))
     }, [sentenceStoreSlice])
 
-    const mainTabFc: MainTabFcType = (n) => {
+    useEffect(() => {
+        dispatch(mainTabControl(0))
+    }, [])
+
+    const mainTabFc = (n: number): void => {
         dispatch(mainTabControl(n))
     }
 
@@ -78,7 +108,7 @@ function MainPage(): JSX.Element {
                 </div>
                 <div className='mainTabBody mainTabBodyInput'
                     style={{ display: mainControllerSlice.tabControlNumber === 1 ? "block" : "none" }}
-                >
+>
                     <KeywordPage />
                     <InputPage />
                 </div>
@@ -97,31 +127,9 @@ function MainPage(): JSX.Element {
     </div>
 }
 
-function FcSocketIoFisrtGet(): JSX.Element {
-    const navigate = useNavigate()
-    const dispatch = useAppDispatch();
-    const { id } = useParams()
 
-    const navigateFc: NavigateFcType = (location) => {
-        if (location === 1) navigate(`/${id}/main`)
-        if (location === 2) navigate(`/${id}/history`)
-    }
 
-    socket.emit('connectFirst', id)
-    socket.on('connectData', (resData) => {
-        const { sentenceConnectData, counterConnectData } = resData
-        dispatch(serverToCounter(counterConnectData))
-        dispatch(serverToSentence(sentenceConnectData))
-    })
-    socket.on('Err404', (message) => {
-        navigate('/')
-    })
 
-    return <>
-        <Nav navigateFc={navigateFc} />
-        <Outlet />
-    </>
-}
 
 
 

@@ -69,11 +69,12 @@ const inputBookValidation = Joi.object({
             'string.min': '비밀번호는 최소 4글자에서 20글자 사이로 입력바랍니다.',
             'string.custom': '비밀번호는 최소 4글자에서 20글자 사이로 입력바랍니다.'
         }),
-    password2: Joi.string().min(4).max(20).required()
+    password2: Joi.string().min(4).max(20).valid(Joi.ref('password1')).required()
         .messages({
             'string.empty': '비밀번호는 최소 4글자에서 20글자 사이로 입력바랍니다.',
             'string.min': '비밀번호는 최소 4글자에서 20글자 사이로 입력바랍니다.',
-            'string.custom': '비밀번호는 최소 4글자에서 20글자 사이로 입력바랍니다.'
+            'string.custom': '비밀번호는 최소 4글자에서 20글자 사이로 입력바랍니다.',
+            'any.only' : '비밀번호가 서로 다릅니다.'
         }),
     mode: Joi.boolean().required()
 })

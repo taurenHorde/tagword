@@ -29,7 +29,7 @@
 .clickSentenceExpression>div {
     margin: 2px 5px 0px;
     padding: 5px 10px;
-    background: rgb(82, 146, 130);
+    background: rgba(82, 146, 130, 0.082);
     font-size: 1rem;
     cursor: pointer;
     user-select: none;

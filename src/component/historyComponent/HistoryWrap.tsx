@@ -1,25 +1,22 @@
 import './../../css/historyCss/HistoryWrap.css'
-import { useAppSelector } from '../../app/store'
-import { ReduxAllType, SentenceType, SentenceStoreSliceType } from '../../type/Type'
+import { useAppSelector, useAppDispatch } from '../../app/store'
+import { ReduxAllType, SentenceStoreSliceType, HistoryBoxProps, ExpressionClickFc } from '../../type/Type'
 import { useEffect, useState } from 'react'
 import { historyExtractFc } from '../../function/Conversion'
 import { expressionPost } from '../../function/Api'
 import { useMutation } from 'react-query'
+import { useParams } from 'react-router-dom'
+import { addExpression, removeExpression } from '../../app/action1/sentenceStoreSlice';
 
 
 function HistoryWarpPage(): JSX.Element {
-
+    const { id } = useParams();
+    const dispatch = useAppDispatch();
     const [optionFiltered, setOptionFiltered] = useState<SentenceStoreSliceType[]>([])
     const [loading, setLoading] = useState<boolean>(false)
     const [currentPage, setCurrntPage] = useState<number>(1)
     const [pageSentenceCount, setPageSentenceCount] = useState<number>(1)
-
-    const sentenceStoreSlice = useAppSelector((state: ReduxAllType) => state.sentenceStoreSlice)
-    const historyOptionSlice = useAppSelector((state: ReduxAllType) => state.historyOptionSlice)
-    const optionText1 = historyOptionSlice.paragraphOn ? `${historyOptionSlice.paragraphNumber}번 문단 ` : `전체 문단`
-    const optionText2 = `${historyOptionSlice.viewNumber}개씩 보기`
-    const optionText3 = historyOptionSlice.searchOn ? `ㆍ${['닉네임', '문장내용', '설명내용'][historyOptionSlice.searchType]} ${historyOptionSlice.searchText} 검색` : ""
-    const pageArray = Array(Math.ceil(pageSentenceCount / historyOptionSlice.viewNumber)).fill("")
+    const { sentenceStoreSlice, historyOptionSlice } = useAppSelector((state: ReduxAllType) => state)
 
     useEffect(() => {
         setCurrntPage(1)
@@ -37,6 +34,24 @@ function HistoryWarpPage(): JSX.Element {
         setLoading(true)
     }, [historyOptionSlice, sentenceStoreSlice, currentPage])
 
+    const mutation = useMutation(
+        (data: { sentenceData: SentenceStoreSliceType, idx: number, params: string }) => expressionPost(data), {
+        onSuccess: (data) => { },
+        onError: (error, data) => {
+            dispatch(removeExpression([data.idx, data.sentenceData.no]))
+            alert('감정표현 클릭이 실패 하였습니다. 잠시 후 다시 시도해주시길 바랍니다.')
+        }
+    })
+    const expressionClickFc: ExpressionClickFc = (sentenceData, idx) => {
+        if (!id) return;
+        mutation.mutate({ sentenceData: sentenceData, idx: idx, params: id })
+        dispatch(addExpression([idx, sentenceData.no]))
+    }
+
+    const optionText1 = historyOptionSlice.paragraphOn ? `${historyOptionSlice.paragraphNumber}번 문단 ` : `전체 문단`
+    const optionText2 = `${historyOptionSlice.viewNumber}개씩 보기`
+    const optionText3 = historyOptionSlice.searchOn ? `ㆍ${['닉네임', '문장내용', '설명내용'][historyOptionSlice.searchType]} ${historyOptionSlice.searchText} 검색` : ""
+    const pageArray = Array(Math.ceil(pageSentenceCount / historyOptionSlice.viewNumber)).fill("")
 
     return (
         <div className='HistoryWrapPage'>
@@ -54,6 +69,7 @@ function HistoryWarpPage(): JSX.Element {
                         <HistoryBox
                             key={idx}
                             sentenceData={val}
+                            expressionClickFc={expressionClickFc}
                         />
                     )}
                 </> : <>
@@ -86,8 +102,9 @@ function HistoryWarpPage(): JSX.Element {
     )
 }
 
-function HistoryBox(props: { sentenceData: SentenceType }): JSX.Element {
-    const sentenceData: SentenceType = props.sentenceData
+function HistoryBox(props: HistoryBoxProps): JSX.Element {
+    const { sentenceData, expressionClickFc } = props
+
     return (
         <div
             className='historyBoxWrap flex column jc-start ai-start'>
@@ -115,17 +132,27 @@ function HistoryBox(props: { sentenceData: SentenceType }): JSX.Element {
                     <p>작성일 : {sentenceData.writeDate}</p>
                 </div>
                 {['🤣', '🥹', '👍', '❤️'].map((val, idx) =>
-                    <div className='historyExpressions' key={idx}>
+                    <div className='historyExpressions' key={idx}
+                        onClick={() => expressionClickFc(sentenceData, idx)}
+                    >
                         <p>{val}{sentenceData.expression[idx]}</p>
                     </div>
                 )}
-                <div className='historyComments'>
+                {/* <div className='historyComments'>
                     <p>💬{sentenceData.comments}</p>
-                </div>
+                </div> */}
             </div>
         </div>
     )
 }
+
+
+
+
+
+
+
+
 
 
 export default HistoryWarpPage

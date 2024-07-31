@@ -4,9 +4,7 @@ import { useAppSelector } from './../../app/store';
 
 
 function FootnotePage(): JSX.Element {
-
     const footnoteConversionData = useAppSelector((state: ReduxAllType) => state.footnoteConversionStoreSlice)
-
     return (
         <div className='FootnotePageWrap flex column jc-start ai-start'>
             <div className='footnoteBody flex column jc-start'>
