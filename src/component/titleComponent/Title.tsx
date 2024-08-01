@@ -35,18 +35,18 @@ function TitlePage(): JSX.Element {
         <div className='titlePageBox flex column jc-start ai-center'>
             <TitlePageInfo />
             <TitlePageMakeBook makeBookCheckFc={makeBookCheckFc} />
-
             {booksGetMutation.isLoading && < LoadingPage />}
             {booksGetMutation.isSuccess && <>
-                {bookData?.length === 0 ? <>
+
+                {bookData?.length === 0 ?
                     <EmptyPage pageNumber={0} />
-                </> : <>
-                    {bookData?.map((val, idx) =>
-                        <TitlePageBookBox key={idx} bookData={val} />
-                    )}
-                </>}
+                    : <div className='titleBooksContain'>
+                        {bookData?.map((val, idx) =>
+                            <TitlePageBookBox key={idx} bookData={val} makeBookCheckFc={makeBookCheckFc} />
+                        )}
+                    </div>}
             </>}
-            {booksGetMutation.isError && <></>}
+            {booksGetMutation.isError && <ErrorPage />}
         </div>
     </div>
 }

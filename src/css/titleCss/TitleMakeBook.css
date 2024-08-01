@@ -1,0 +1,131 @@
+
+.TitlePageMakeBookWrap {
+    width: 100%;
+    margin: 5px 0px;
+    padding: 10px;
+}
+
+.titlePageMakeBookDiv1 {
+    width: 100%;
+}
+
+.titlePageMakeBookBut {
+    width: 40px;
+    height: 40px;
+    border-radius: 100px;
+    box-sizing: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.048);
+    cursor: pointer;
+    user-select: none;
+    transition: 0.5s all;
+}
+
+.titlePageMakeBookBut:hover {
+    background: skyblue;
+    color: white;
+}
+
+.titlePageMakeBookBut h6 {
+    font-size: 0.9rem;
+}
+
+.titlePageMakeBookDiv2 {
+    width: 100%;
+    min-height: 100px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1), -5px -5px 5px rgba(0, 0, 0, 0.1);
+    padding: 10px 5px;
+    box-sizing: border-box;
+}
+
+.titlePageMakeBookDiv2>div {
+    width: 100%;
+    padding: 3px 5px;
+    margin: 1px 0px;
+    box-sizing: border-box;
+}
+
+.makeTitle input {
+    width: 100%;
+    padding: 2px 5px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+}
+
+
+.makeTopic input,
+.makeDirection input {
+    width: 100%;
+    padding: 2px 5px;
+    box-sizing: border-box;
+    font-size: 0.9rem;
+    border: none;
+}
+
+.makePassword input {
+    padding: 2px 5px;
+    box-sizing: border-box;
+    margin-right: 0.325rem;
+    font-size: 0.9rem;
+    border: none;
+}
+
+.makePasswordInfo {
+    font-size: 1.2rem;
+    cursor: pointer;
+    position: relative;
+}
+
+.makePasswordInfo::before {
+    content: "소설 관리시 필요한 비밀번호입니다.";
+    display: block;
+    padding: 2.5px 5px;
+    background: white;
+    border: 1px solid;
+    position: absolute;
+    font-size: 0.8rem;
+    text-wrap: nowrap;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.makePasswordInfo:hover::before {
+    opacity: 1;
+}
+
+.makeButtonMode>div {
+    padding: 4px 8px;
+    box-sizing: border-box;
+    color: rgb(0, 0, 0);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.288);
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-right: 5px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.makeButton button {
+    padding: 4px 8px;
+    box-sizing: border-box;
+    border: none;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.288);
+    cursor: pointer;
+    user-select: none;
+    margin-left: 5px;
+}
+
+.makeButton button:nth-of-type(1) {
+    background: skyblue;
+}
+
+.makeButton button:nth-of-type(2) {
+    background: rgb(255, 111, 111);
+}

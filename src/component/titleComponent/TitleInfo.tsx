@@ -1,4 +1,4 @@
-import './../../css/titleCss/Title.css'
+import './../../css/titleCss/TitleInfo.css'
 import { useState } from 'react'
 
 

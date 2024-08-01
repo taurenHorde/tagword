@@ -1,4 +1,4 @@
-import './../../css/titleCss/Title.css'
+import './../../css/titleCss/TitleMakeBook.css'
 import { useState } from 'react'
 import { MakeSumbitFcType, MakeBookCheckFcType } from './../../type/Type'
 import { useMutation } from 'react-query'

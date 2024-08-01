@@ -3,6 +3,7 @@ import { SentenceType, SentenceClickFcType, ReduxAllType } from './../../type/Ty
 import { useAppSelector, useAppDispatch } from './../../app/store';
 import { mainTabControl } from '../../app/action2/mainControllerSlice';
 import { clickSentenceIdx } from '../../app/action2/clickSentenceDataSlice';
+import EmptyPage from '../commonComponent/Empty';
 
 function StoryPage(): JSX.Element {
     const dispatch = useAppDispatch();
@@ -18,20 +19,22 @@ function StoryPage(): JSX.Element {
     return (
         <div className="StoryPageWrap" >
             <div className='storyBox'>
-                {new Array(sentenceCounterSlice.paragraphCount).fill("").map((_, idxPara) =>
-                    <p className='storyParagraph' key={idxPara}>
-                        {sentenceStoreSlice.map((val: SentenceType, idx: number) => {
-                            if (val.paragraph !== idxPara + 1) return null;
-                            return <StorySentence
-                                key={idx}
-                                sentenceClickFc={sentenceClickFc}
-                                sentenceData={val}
-                                sentenceIndex={idx}
-                            />
-                        }
-                        )}
-                    </p>
-                )}
+                {sentenceStoreSlice.length === 0 ? <EmptyPage pageNumber={1}/> : <>
+                    {new Array(sentenceCounterSlice.paragraphCount).fill("").map((_, idxPara) =>
+                        <p className='storyParagraph' key={idxPara}>
+                            {sentenceStoreSlice.map((val: SentenceType, idx: number) => {
+                                if (val.paragraph !== idxPara + 1) return null;
+                                return <StorySentence
+                                    key={idx}
+                                    sentenceClickFc={sentenceClickFc}
+                                    sentenceData={val}
+                                    sentenceIndex={idx}
+                                />
+                            }
+                            )}
+                        </p>
+                    )}
+                </>}
             </div>
         </div>
     )

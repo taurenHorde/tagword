@@ -8,9 +8,6 @@ import { CustomHelpers, number } from "joi";
 // ///////////////////////////////////////////
 
 export type InFormEventReturnVoidFc = (e: React.FormEvent<HTMLFormElement>) => void;
-
-
-
 export type ExpressionClickFc = (sentenceData: SentenceStoreSliceType, idx: number) => void; // ClickSentence.tsx
 export type HisToryExtractFcType = (setenceData: SentenceStoreSliceType[], optionData: historyOptionSliceType, page: number) => Promise<{ returnData: SentenceStoreSliceType[], conversionedDataConunt: number }>;
 export type SentenceClickFcType = (SentenceType: SentenceType) => void
@@ -30,15 +27,33 @@ export type HistoryBoxProps = {
 }
 
 export type EmptyPageProps = {
-    pageNumber : number
+    pageNumber: number
 }
 
+// ///////////////////////////////////////////
+//  Validation(Joi) Return Data Type //////////////////////////////////
+// ///////////////////////////////////////////
 
+export interface ValidationInputSentenceFucRetrunType { // validate retrun type
+    error: string | undefined,
+    value: SentenceUserInputType,
+}
+export interface ValidationInputBookFucRetrunType { // validate retrun type
+    error: string | undefined,
+    value: MakeBookUserInputTyp,
+}
+export interface ValidationInputBookEditFucRetrunType { // validate retrun type
+    error: string | undefined,
+    value: EditBookUserInputType,
+}
+export interface ValidationInputBookCloseFucRetrunType { // validate retrun type
+    error: string | undefined,
+    value: CloseBookUserInputType ,
+}
 
 // ///////////////////////////////////////////
 //  TypeGuard Type //////////////////////////////////
 // ///////////////////////////////////////////
-
 
 interface IsAddSentenceResult {
     sentenceResData: SentenceStoreSliceType[]
@@ -48,7 +63,58 @@ interface IsAddSentenceResult {
 
 
 
+// ///////////////////////////////////////////
+//  Slice Type //////////////////////////////////
+// ///////////////////////////////////////////
 
+export interface SentenceStoreSliceType extends SentenceType {
+    _id?: string
+
+}  // SentenceType 이랑 동일 
+export interface SentenceCounterSliceType {
+    _id?: string
+    sentenceCount: number,
+    paragraphCount: number,
+    pageClose: boolean,
+    lastWords: string[],
+    newStart: boolean,
+    title: string,
+    topic: string,
+    direction: string,
+    books: number
+    password1?: string
+    password2?: string
+    mode: boolean
+}
+export interface historyOptionSliceType {
+    paragraphOn: boolean,
+    paragraphNumber: number,
+    viewNumber: 10 | 25 | 50,
+    searchOn: boolean,
+    searchType: number,
+    searchText: string,
+}
+export interface sentenceLoadingSliceType {
+    setenceFirstGetLoading: boolean
+}
+export interface ReduxAllType { // 모든 reducer 타입모음 // 각 component에서 useAppSelector 로 불러올 때 사용
+    sentenceStoreSlice: SentenceStoreSliceType[],
+    sentenceCounterSlice: SentenceCounterSliceType,
+    footnoteConversionStoreSlice: FootnoteExtractFcReturnType[],
+    mainControllerSlice: { tabControlNumber: number },
+    clickSentenceDataSlice: SentenceStoreSliceType,
+    historyOptionSlice: historyOptionSliceType
+    sentenceLoadingSlice: sentenceLoadingSliceType
+}
+
+
+
+// ///////////////////////////////////////////
+// 이것저것 Data Type //////////////////////////////////
+// ///////////////////////////////////////////
+interface CloseBookUserInputType {
+    password: string
+}
 interface MakeBookUserInputType {
     title: string,
     topic: string,
@@ -56,6 +122,11 @@ interface MakeBookUserInputType {
     password1: string,
     password2: string
     mode: boolean
+}
+interface EditBookUserInputType {
+    editTopic: string,
+    editDirection: string,
+    editPassword: string
 }
 interface FootnoteExtractFcReturnType {
     no: number,
@@ -82,56 +153,4 @@ export interface SentenceType extends SentenceUserInputType { // 사용자 입�
     writeDate: string,
     paragraph: number
 }
-
-
-export interface ValidationInputSentenceFucRetrunType { // validate retrun type
-    error: string | undefined,
-    value: SentenceUserInputType,
-}
-export interface ValidationInputBookFucRetrunType { // validate retrun type
-    error: string | undefined,
-    value: MakeBookUserInputTyp,
-}
-
-
-
-
-// store.ts  initialState 용 type interface
-
-export interface SentenceStoreSliceType extends SentenceType {
-    _id?: string
-
-}  // SentenceType 이랑 동일 
-export interface SentenceCounterSliceType {
-    _id?: string
-    sentenceCount: number,
-    paragraphCount: number,
-    pageCount: number,
-    lastWords: string[],
-    newStart: boolean,
-    title: string,
-    topic: string,
-    direction: string,
-    books: number
-    password1?: string
-    password2?: string
-    mode: boolean
-}
-export interface historyOptionSliceType {
-    paragraphOn: boolean,
-    paragraphNumber: number,
-    viewNumber: 10 | 25 | 50,
-    searchOn: boolean,
-    searchType: number,
-    searchText: string,
-}
-export interface ReduxAllType { // 모든 reducer 타입모음 // 각 component에서 useAppSelector 로 불러올 때 사용
-    sentenceStoreSlice: SentenceStoreSliceType[],
-    sentenceCounterSlice: SentenceCounterSliceType,
-    footnoteConversionStoreSlice: FootnoteExtractFcReturnType[],
-    mainControllerSlice: { tabControlNumber: number },
-    clickSentenceDataSlice: SentenceStoreSliceType,
-    historyOptionSlice: historyOptionSliceType
-}
-
 

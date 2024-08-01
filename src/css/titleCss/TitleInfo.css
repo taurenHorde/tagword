@@ -1,0 +1,46 @@
+.TitlePageInfoWrap {
+    width: 100%;
+    min-height: 100px;
+    background: rgba(0, 139, 139, 0.068);
+    margin-bottom: 10px;
+}
+
+.titlePageInfoHead {
+    width: 100%;
+}
+
+.titlePageInfoHead>div {
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.titlePageInfoHead h5 {
+    font-size: 1.4rem;
+}
+
+.titlePageInfoHead h6 {
+    font-size: 1rem;
+}
+
+.titlePageInfoHead p {
+    font-size: 1rem;
+    font-weight: bold;
+    color: blue;
+}
+
+.titlePageInfoBody {
+    width: 100%;
+    padding: 2.5px 0px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.titlePageInfoBody h6 {
+    font-size: 1rem;
+    padding: 2px 0px;
+}
+
+.titlePageInfoBody p {
+    font-size: 0.9rem;
+    padding: 1px 0px;
+}

@@ -9,4 +9,8 @@
 
  - sentenceCounterSlice - param @book 페이지 입장시 Socket.Io 를 통해 현재 소설 정보들 가져와서 저장 하는 Slice,
 
+ - sentenceLoadingSlice - param @book 페이지 입장시 Socket.Io 상태 체크 (로딩)(storypage 와 historypage 에서 사용)
+
+ - bookStoreSlice - title 페이지 입장 시 useMutation을 통해 현재 소설책들 정보 가져와서 저장하는 SLice
+
  - footnoteConversionStoreSlice - sentenceStoreSlice 저장 된 데이터 중, 설명 글 추출 하여 보관하는 Slice

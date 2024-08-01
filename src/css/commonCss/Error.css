@@ -1,0 +1,12 @@
+.ErrorPageWrap {
+    width: 100%;
+    min-height: 200px;
+}
+
+.errorPageWrap h6 {
+    font-size: 1rem;
+}
+
+.errorPageWrap p {
+    font-size: 0.8rem;
+}

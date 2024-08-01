@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import sentenceStoreSliceReducer from './action1/sentenceStoreSlice';
 import sentenceCounterSliceReducer from './action1/sentenceCounterSlice';
+import sentenceLoadingSliceReducer from './action1/sentenceLoadingSlice';
 import footnoteConversionStoreSliceReducer from './action1/footnoteConversionStoreSlice';
 import mainControllerSliceReducer from './action2/mainControllerSlice';
 import clickSentenceDataSliceReducer from './action2/clickSentenceDataSlice';
@@ -13,13 +14,12 @@ export const store = configureStore({
         // Action 1
         sentenceStoreSlice: sentenceStoreSliceReducer,
         sentenceCounterSlice: sentenceCounterSliceReducer,
+        sentenceLoadingSlice: sentenceLoadingSliceReducer,
         footnoteConversionStoreSlice: footnoteConversionStoreSliceReducer,
         // Action 2
         mainControllerSlice: mainControllerSliceReducer,
         clickSentenceDataSlice: clickSentenceDataSliceReducer,
         historyOptionSlice: historyOptionSliceReducer,
-        
-
     }
 });
 

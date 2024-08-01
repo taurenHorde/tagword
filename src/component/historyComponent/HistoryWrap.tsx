@@ -7,7 +7,8 @@ import { expressionPost } from '../../function/Api'
 import { useMutation } from 'react-query'
 import { useParams } from 'react-router-dom'
 import { addExpression, removeExpression } from '../../app/action1/sentenceStoreSlice';
-
+import EmptyPage from '../commonComponent/Empty'
+import LoadingPage from '../commonComponent/Loading'
 
 function HistoryWarpPage(): JSX.Element {
     const { id } = useParams();
@@ -16,7 +17,7 @@ function HistoryWarpPage(): JSX.Element {
     const [loading, setLoading] = useState<boolean>(false)
     const [currentPage, setCurrntPage] = useState<number>(1)
     const [pageSentenceCount, setPageSentenceCount] = useState<number>(1)
-    const { sentenceStoreSlice, historyOptionSlice } = useAppSelector((state: ReduxAllType) => state)
+    const { sentenceStoreSlice, historyOptionSlice, sentenceLoadingSlice } = useAppSelector((state: ReduxAllType) => state)
 
     useEffect(() => {
         setCurrntPage(1)
@@ -55,49 +56,51 @@ function HistoryWarpPage(): JSX.Element {
 
     return (
         <div className='HistoryWrapPage'>
-            <div className='historyWrapHead flex row jc-space ai-center'>
-                <div>
-                    <p>{optionText1}ㆍ{optionText2}{optionText3}</p>
-                </div>
-                <div>
-                    <p>총 {pageSentenceCount}문장 중 {optionFiltered.length}개 [{currentPage}페이지]</p>
-                </div>
-            </div>
-            <div className='historyWrapBody'>
-                {loading ? <>
-                    {optionFiltered.map((val, idx) =>
-                        <HistoryBox
-                            key={idx}
-                            sentenceData={val}
-                            expressionClickFc={expressionClickFc}
-                        />
-                    )}
-                </> : <>
-                    <div>롸딩중</div>
+            {sentenceLoadingSlice.setenceFirstGetLoading ? <>
+                {sentenceStoreSlice.length === 0 ? <EmptyPage pageNumber={2} /> : <>
+                    <div className='historyWrapHead flex row jc-space ai-center'>
+                        <div>
+                            <p>{optionText1}ㆍ{optionText2}{optionText3}</p>
+                        </div>
+                        <div>
+                            <p>총 {pageSentenceCount}문장 중 {optionFiltered.length}개 [{currentPage}페이지]</p>
+                        </div>
+                    </div>
+                    {optionFiltered.length === 0 ? <EmptyPage pageNumber={3} /> : <>
+                        <div className='historyWrapBody'>
+                            {optionFiltered.map((val, idx) =>
+                                <HistoryBox
+                                    key={idx}
+                                    sentenceData={val}
+                                    expressionClickFc={expressionClickFc}
+                                />
+                            )}
+                        </div>
+                        <div className='historyWrapFooter flex jc-center ai-center'>
+                            <div className='flex jc-center ai-center'>
+                                <p
+                                // onClick={() => dispatch(pagePreNextPage(-1))}
+                                > {`< 이전`} </p>
+                                {pageArray.map((_, idx) => {
+                                    const style = {
+                                        color: currentPage === idx + 1 ? "black" : "gray",
+                                        fontWeight: currentPage === idx + 1 ? "bold" : "normal"
+                                    }
+                                    return <p
+                                        key={idx}
+                                        style={style}
+                                        onClick={() => setCurrntPage(idx + 1)}
+                                    >{idx + 1}</p>
+                                }
+                                )}
+                                <p
+                                // onClick={() => dispatch(pagePreNextPage(1))}
+                                > {`다음 >`} </p>
+                            </div>
+                        </div>
+                    </>}
                 </>}
-            </div>
-            <div className='historyWrapFooter flex jc-center ai-center'>
-                <div className='flex jc-center ai-center'>
-                    <p
-                    // onClick={() => dispatch(pagePreNextPage(-1))}
-                    > {`< 이전`} </p>
-                    {pageArray.map((_, idx) => {
-                        const style = {
-                            color: currentPage === idx + 1 ? "black" : "gray",
-                            fontWeight: currentPage === idx + 1 ? "bold" : "normal"
-                        }
-                        return <p
-                            key={idx}
-                            style={style}
-                            onClick={() => setCurrntPage(idx + 1)}
-                        >{idx + 1}</p>
-                    }
-                    )}
-                    <p
-                    // onClick={() => dispatch(pagePreNextPage(1))}
-                    > {`다음 >`} </p>
-                </div>
-            </div>
+            </> : <LoadingPage />}
         </div>
     )
 }

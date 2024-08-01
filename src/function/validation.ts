@@ -1,4 +1,4 @@
-import { SentenceUserInputDataTotal, ValidationInputSentenceFucRetrunType, CustomValidationType, MakeBookUserInputType, ValidationInputBookFucRetrunType } from './../type/Type';
+import { SentenceUserInputDataTotal, ValidationInputSentenceFucRetrunType, CustomValidationType, MakeBookUserInputType, ValidationInputBookCloseFucRetrunType, CloseBookUserInputType, ValidationInputBookFucRetrunType, EditBookUserInputType, ValidationInputBookEditFucRetrunType } from './../type/Type';
 const Joi = require('joi')
 
 const customValidation: CustomValidationType = (value, helpers) => {
@@ -10,8 +10,9 @@ const customValidation: CustomValidationType = (value, helpers) => {
     }
     return value;
 }
-// const inputCheckKoreanPattern = /^[가-힣][^\0-\x1F\x7F-\x9F]*$/;
 const inputCheckKoreanPattern = /^[^\0-\x1F\x7F-\x9F]*$/;
+
+
 
 
 const inputSentenceValidation = Joi.object({
@@ -45,38 +46,68 @@ const inputSentenceValidation = Joi.object({
 })
 
 const inputBookValidation = Joi.object({
-    title: Joi.string().pattern(inputCheckKoreanPattern).min(5).max(40).required()
+    title: Joi.string().pattern(inputCheckKoreanPattern).min(2).max(20).required()
         .messages({
-            'string.empty': '제목은 최소 5글자에서 40글자 사이로 입력바랍니다.',
-            'string.min': '제목은 최소 5글자에서 40글자 사이로 입력바랍니다.',
-            'string.custom': '제목은 최소 5글자에서 40글자 사이로 입력바랍니다.'
+            'string.empty': '제목은 최소 2글자에서 20글자 사이로 입력바랍니다.',
+            'string.min': '제목은 최소 2글자에서 20글자 사이로 입력바랍니다.',
+            'string.custom': '제목은 최소 2글자에서 20글자 사이로 입력바랍니다.'
         }),
-    topic: Joi.string().pattern(inputCheckKoreanPattern).min(5).max(40).required()
+    topic: Joi.string().pattern(inputCheckKoreanPattern).min(2).max(20).required()
         .messages({
-            'string.empty': '주제는 최소 5글자에서 40글자 사이로 입력바랍니다.',
-            'string.min': '주제는 최소 5글자에서 40글자 사이로 입력바랍니다.',
-            'string.custom': '주제는 최소 5글자에서 40글자 사이로 입력바랍니다.'
+            'string.empty': '주제는 최소 2글자에서 20글자 사이로 입력바랍니다.',
+            'string.min': '주제는 최소 2글자에서 20글자 사이로 입력바랍니다.',
+            'string.custom': '주제는 최소 2글자에서 20글자 사이로 입력바랍니다.'
         }),
-    direction: Joi.string().pattern(inputCheckKoreanPattern).min(5).max(40).required()
+    direction: Joi.string().pattern(inputCheckKoreanPattern).min(2).max(20).required()
         .messages({
-            'string.empty': '방향은 최소 5글자에서 40글자 사이로 입력바랍니다.',
-            'string.min': '방향은 최소 5글자에서 40글자 사이로 입력바랍니다.',
-            'string.custom': '방향은 최소 5글자에서 40글자 사이로 입력바랍니다.'
+            'string.empty': '방향은 최소 2글자에서 20글자 사이로 입력바랍니다.',
+            'string.min': '방향은 최소 2글자에서 20글자 사이로 입력바랍니다.',
+            'string.custom': '방향은 최소 2글자에서 20글자 사이로 입력바랍니다.'
         }),
-    password1: Joi.string().min(4).max(20).required()
+    password1: Joi.string().min(4).max(12).required()
         .messages({
-            'string.empty': '비밀번호는 최소 4글자에서 20글자 사이로 입력바랍니다.',
-            'string.min': '비밀번호는 최소 4글자에서 20글자 사이로 입력바랍니다.',
-            'string.custom': '비밀번호는 최소 4글자에서 20글자 사이로 입력바랍니다.'
+            'string.empty': '비밀번호는 최소 4글자에서 12글자 사이로 입력바랍니다.',
+            'string.min': '비밀번호는 최소 4글자에서 12글자 사이로 입력바랍니다.',
+            'string.custom': '비밀번호는 최소 4글자에서 12글자 사이로 입력바랍니다.'
         }),
-    password2: Joi.string().min(4).max(20).valid(Joi.ref('password1')).required()
+    password2: Joi.string().min(4).max(12).valid(Joi.ref('password1')).required()
         .messages({
-            'string.empty': '비밀번호는 최소 4글자에서 20글자 사이로 입력바랍니다.',
-            'string.min': '비밀번호는 최소 4글자에서 20글자 사이로 입력바랍니다.',
-            'string.custom': '비밀번호는 최소 4글자에서 20글자 사이로 입력바랍니다.',
-            'any.only' : '비밀번호가 서로 다릅니다.'
+            'string.empty': '비밀번호는 최소 4글자에서 12글자 사이로 입력바랍니다.',
+            'string.min': '비밀번호는 최소 4글자에서 12글자 사이로 입력바랍니다.',
+            'string.custom': '비밀번호는 최소 4글자에서 12글자 사이로 입력바랍니다.',
+            'any.only': '비밀번호가 서로 다릅니다.'
         }),
     mode: Joi.boolean().required()
+})
+
+const inputBookEditValidation = Joi.object({
+    editTopic: Joi.string().pattern(inputCheckKoreanPattern).min(2).max(20).required()
+        .messages({
+            'string.empty': '주제는 최소 2글자에서 20글자 사이로 입력바랍니다.',
+            'string.min': '주제는 최소 2글자에서 20글자 사이로 입력바랍니다.',
+            'string.custom': '주제는 최소 2글자에서 20글자 사이로 입력바랍니다.'
+        }),
+    editDirection: Joi.string().pattern(inputCheckKoreanPattern).min(2).max(20).required()
+        .messages({
+            'string.empty': '방향은 최소 2글자에서 20글자 사이로 입력바랍니다.',
+            'string.min': '방향은 최소 2글자에서 20글자 사이로 입력바랍니다.',
+            'string.custom': '방향은 최소 2글자에서 20글자 사이로 입력바랍니다.'
+        }),
+    editPassword: Joi.string().min(4).max(12).required()
+        .messages({
+            'string.empty': '비밀번호는 최소 4글자에서 12글자 사이로 입력바랍니다.',
+            'string.min': '비밀번호는 최소 4글자에서 12글자 사이로 입력바랍니다.',
+            'string.custom': '비밀번호는 최소 4글자에서 12글자 사이로 입력바랍니다.'
+        })
+})
+
+const inputBookCloseValidation = Joi.object({
+    password: Joi.string().min(4).max(12).required()
+        .messages({
+            'string.empty': '비밀번호는 최소 4글자에서 12글자 사이로 입력바랍니다.',
+            'string.min': '비밀번호는 최소 4글자에서 12글자 사이로 입력바랍니다.',
+            'string.custom': '비밀번호는 최소 4글자에서 12글자 사이로 입력바랍니다.'
+        })
 })
 
 
@@ -93,3 +124,12 @@ export async function validationInputBook(validationData: MakeBookUserInputType)
     return { error, value }
 }
 
+export async function validationInputBookEdit(validationData: EditBookUserInputType): Promise<ValidationInputBookEditFucRetrunType> {
+    const { error, value } = await inputBookEditValidation.validate(validationData)
+    return { error, value }
+}
+// : Promise<ValidationInputBookCloseFucRetrunType>
+export async function validationInputBookClose(validationData: CloseBookUserInputType): Promise<any> {
+    const { error, value } = await inputBookCloseValidation.validate(validationData)
+    return { error, value }
+}

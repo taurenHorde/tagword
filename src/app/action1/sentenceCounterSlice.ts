@@ -6,7 +6,7 @@ const initialState: SentenceCounterSliceType =
     _id: "",
     sentenceCount: 0,
     paragraphCount: 1,
-    pageCount: 1,
+    pageClose: false,
     lastWords: ['일', '이', '삼'],
     newStart: true,
     title: '',
@@ -26,7 +26,7 @@ const sentenceCounterSlice = createSlice({
             state._id = PayloadAction.payload._id
             state.sentenceCount = PayloadAction.payload.sentenceCount
             state.paragraphCount = PayloadAction.payload.paragraphCount
-            state.pageCount = PayloadAction.payload.pageCount
+            state.pageClose = PayloadAction.payload.pageClose
             state.lastWords.length = 0;
             state.lastWords.push(...t)
             state.newStart = PayloadAction.payload.newStart
