@@ -12,32 +12,9 @@
 }
 
 .storyParagraph {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .storyParagraph>span:nth-of-type(1) {
     margin-left: 0.8rem;
-}
-
-.storyParagraph>span:nth-of-type(odd) {
-    color: rgb(0, 0, 0);
-}
-
-.storyParagraph>span:nth-of-type(even) {
-    color: rgb(112, 112, 112);
-}
-
-.storySentence {
-    font-size: 1rem;
-    margin-right: 5px;
-    text-wrap: wrap;
-    cursor: pointer;
-    user-select: none;
-    transition: all 0.2s ease;
-    position: relative
-}
-
-.storySentence:hover {
-    background: rgb(83, 83, 255);
-    color: white !important;
 }

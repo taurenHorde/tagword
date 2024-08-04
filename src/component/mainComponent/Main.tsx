@@ -27,7 +27,6 @@ function FcSocketIoFisrtGet(): JSX.Element {
 
     useEffect(() => {
         dispatch(socketGetLoadingFalse())
-
     }, [])
 
     const navigateFc = (location: number): void => {
@@ -46,6 +45,9 @@ function FcSocketIoFisrtGet(): JSX.Element {
         navigate('/')
     })
 
+
+
+    
     return <>
         <Nav navigateFc={navigateFc} />
         <Outlet />
@@ -56,7 +58,7 @@ function MainPage(): JSX.Element {
 
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    const { sentenceStoreSlice, mainControllerSlice, sentenceLoadingSlice } = useAppSelector((state: ReduxAllType) => state)
+    const { sentenceStoreSlice, mainControllerSlice, sentenceLoadingSlice, sentenceCounterSlice } = useAppSelector((state: ReduxAllType) => state)
 
     useEffect(() => {
         const conversionReusult = footnoteExtractFc(sentenceStoreSlice)
@@ -98,13 +100,15 @@ function MainPage(): JSX.Element {
                                     메모
                                 </h6>
                             </div>
-                            <div className='mainTabHeadAddSentence'
-                                onClick={() => mainTabFc(1)}
-                            >
-                                <h6>
-                                    ➕추가
-                                </h6>
-                            </div>
+                            {!sentenceCounterSlice.pageClose && (
+                                <div className='mainTabHeadAddSentence'
+                                    onClick={() => mainTabFc(1)}
+                                >
+                                    <h6>
+                                        ➕추가
+                                    </h6>
+                                </div>
+                            )}
                             <div className='mainTabHeadTabClose'
                                 onClick={() => mainTabFc(0)}
                             >
@@ -114,17 +118,20 @@ function MainPage(): JSX.Element {
                             </div>
                         </div>
                     </div>
-                    <div className='mainTabBody mainTabBodyInput'
-                        style={{ display: mainControllerSlice.tabControlNumber === 1 ? "block" : "none" }}
-                    >
-                        <KeywordPage />
-                        <InputPage />
-                    </div>
+                    {!sentenceCounterSlice.pageClose && (
+                        <div className='mainTabBody mainTabBodyInput'
+                            style={{ display: mainControllerSlice.tabControlNumber === 1 ? "block" : "none" }}
+                        >
+                            <KeywordPage />
+                            <InputPage />
+                        </div>
+                    )}
                     <div className='mainTabBody mainTabBodyFootnote'
                         style={{ display: mainControllerSlice.tabControlNumber === 2 ? "block" : "none" }}
                     >
                         <FootnotePage />
                     </div>
+
                     <div className='mainTabBody mainTabBodyClickSentence'
                         style={{ display: mainControllerSlice.tabControlNumber === 3 ? "block" : "none" }}
                     >
