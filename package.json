@@ -52,9 +52,8 @@
       "last 1 safari version"
     ]
   },
+  "proxy": "https://port-0-tagword-back-lyr24nghd8a65a2c.sel5.cloudtype.app",
   "devDependencies": {
     "@types/socket.io-client": "^3.0.0"
   }
 }
-
-

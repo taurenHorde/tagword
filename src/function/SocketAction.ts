@@ -22,11 +22,11 @@ export const joinRoomSocket = (dispatch: AppDispatch, id: string, navigate: Navi
     dispatch(socketGetLoadingFalse())
 
     //  데이터 전송
-    socket.emit('joinRoom', id)
+    socket.emit('api/joinRoom', id)
 
     // 응답처리
     // 성공
-    socket.on('joinRoomResultData', (resData) => {
+    socket.on('api/joinRoomResultData', (resData) => {
         const { sentenceConnectData, counterConnectData } = resData
         dispatch(serverToCounter(counterConnectData))
         dispatch(serverToSentence(sentenceConnectData))
@@ -34,7 +34,7 @@ export const joinRoomSocket = (dispatch: AppDispatch, id: string, navigate: Navi
     })
 
     //실패 
-    socket.on('joinRoomErrorData', (message) => {
+    socket.on('api/joinRoomErrorData', (message) => {
         console.log(`${message}`) // 접속 막아야함~
         alert('잘못 된 접근입니다. 메인페이지로 이동됩니다.)')
         navigate('/')
@@ -45,7 +45,7 @@ export const joinRoomSocket = (dispatch: AppDispatch, id: string, navigate: Navi
 }
 
 export const addSentenceSocket = (dispatch: AppDispatch, sentenceData: addSentencePostSocketInputType) => {
-    
+
     //  데이터 전송
     socket.emit('addSentence', {
         ...sentenceData
