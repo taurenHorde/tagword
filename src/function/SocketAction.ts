@@ -7,8 +7,8 @@ import { addSentencePostSocketInputType } from '../type/Type';
 import { NavigateFunction } from 'react-router-dom';
 
 
-// const socket: Socket = io(`${process.env.SOCKET_ADDRES!}/api`)
-const socket = io()
+const socket: Socket = io(`${process.env.SOCKET_ADDRES!}/api`)
+// const socket = io()
 
 // 0806 18h   io 주소 삭제 / socket 이름들 앞 슬래쉬 장착
 
