@@ -48,7 +48,7 @@ export interface ValidationInputBookEditFucRetrunType { // validate retrun type
 }
 export interface ValidationInputBookCloseFucRetrunType { // validate retrun type
     error: string | undefined,
-    value: CloseBookUserInputType ,
+    value: CloseBookUserInputType,
 }
 
 // ///////////////////////////////////////////
@@ -152,5 +152,10 @@ export interface SentenceType extends SentenceUserInputType { // 사용자 입�
     comments: number,
     writeDate: string,
     paragraph: number
+}
+
+export interface addSentencePostSocketInputType extends SentenceType {
+    changeParagraph: boolean
+    params:string | undefined
 }
 

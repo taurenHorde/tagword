@@ -13,6 +13,8 @@
 
 .storyParagraph {
     margin-bottom: 1.5rem;
+    width: 100%;
+    /*  확인 필요 */
 }
 
 .storyParagraph>span:nth-of-type(1) {

@@ -1,12 +1,17 @@
 .ErrorPageWrap {
     width: 100%;
-    min-height: 200px;
+    min-height: 400px;
 }
 
-.errorPageWrap h6 {
+.errorPageBox h6 {
     font-size: 1rem;
 }
 
-.errorPageWrap p {
+.errorPageBox p {
+    margin-top: 20px;
     font-size: 0.8rem;
+    font-weight: bold;
+    color: blue;
+    cursor: pointer;
+    user-select: none;
 }

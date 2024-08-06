@@ -1,10 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-// import {  } from '../../type/Type';
+import { sentenceLoadingSliceType } from '../../type/Type';
 
 
 
 
-const initialState: any = {
+
+const initialState: sentenceLoadingSliceType = {
     setenceFirstGetLoading: false
 };
 

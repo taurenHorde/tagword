@@ -46,23 +46,23 @@ const inputSentenceValidation = Joi.object({
 })
 
 const inputBookValidation = Joi.object({
-    title: Joi.string().pattern(inputCheckKoreanPattern).min(2).max(20).required()
+    title: Joi.string().pattern(inputCheckKoreanPattern).min(2).max(40).required()
         .messages({
-            'string.empty': '제목은 최소 2글자에서 20글자 사이로 입력바랍니다.',
-            'string.min': '제목은 최소 2글자에서 20글자 사이로 입력바랍니다.',
-            'string.custom': '제목은 최소 2글자에서 20글자 사이로 입력바랍니다.'
+            'string.empty': '제목은 최소 2글자에서 40글자 사이로 입력바랍니다.',
+            'string.min': '제목은 최소 2글자에서 40글자 사이로 입력바랍니다.',
+            'string.custom': '제목은 최소 2글자에서 40글자 사이로 입력바랍니다.'
         }),
-    topic: Joi.string().pattern(inputCheckKoreanPattern).min(2).max(20).required()
+    topic: Joi.string().pattern(inputCheckKoreanPattern).min(2).max(40).required()
         .messages({
-            'string.empty': '주제는 최소 2글자에서 20글자 사이로 입력바랍니다.',
-            'string.min': '주제는 최소 2글자에서 20글자 사이로 입력바랍니다.',
-            'string.custom': '주제는 최소 2글자에서 20글자 사이로 입력바랍니다.'
+            'string.empty': '주제는 최소 2글자에서 40글자 사이로 입력바랍니다.',
+            'string.min': '주제는 최소 2글자에서 40글자 사이로 입력바랍니다.',
+            'string.custom': '주제는 최소 2글자에서 40글자 사이로 입력바랍니다.'
         }),
-    direction: Joi.string().pattern(inputCheckKoreanPattern).min(2).max(20).required()
+    direction: Joi.string().pattern(inputCheckKoreanPattern).min(2).max(40).required()
         .messages({
-            'string.empty': '방향은 최소 2글자에서 20글자 사이로 입력바랍니다.',
-            'string.min': '방향은 최소 2글자에서 20글자 사이로 입력바랍니다.',
-            'string.custom': '방향은 최소 2글자에서 20글자 사이로 입력바랍니다.'
+            'string.empty': '방향은 최소 2글자에서 40글자 사이로 입력바랍니다.',
+            'string.min': '방향은 최소 2글자에서 40글자 사이로 입력바랍니다.',
+            'string.custom': '방향은 최소 2글자에서 40글자 사이로 입력바랍니다.'
         }),
     password1: Joi.string().min(4).max(12).required()
         .messages({
@@ -81,17 +81,17 @@ const inputBookValidation = Joi.object({
 })
 
 const inputBookEditValidation = Joi.object({
-    editTopic: Joi.string().pattern(inputCheckKoreanPattern).min(2).max(20).required()
+    editTopic: Joi.string().pattern(inputCheckKoreanPattern).min(2).max(40).required()
         .messages({
-            'string.empty': '주제는 최소 2글자에서 20글자 사이로 입력바랍니다.',
-            'string.min': '주제는 최소 2글자에서 20글자 사이로 입력바랍니다.',
-            'string.custom': '주제는 최소 2글자에서 20글자 사이로 입력바랍니다.'
+            'string.empty': '주제는 최소 2글자에서 40글자 사이로 입력바랍니다.',
+            'string.min': '주제는 최소 2글자에서 40글자 사이로 입력바랍니다.',
+            'string.custom': '주제는 최소 2글자에서 40글자 사이로 입력바랍니다.'
         }),
-    editDirection: Joi.string().pattern(inputCheckKoreanPattern).min(2).max(20).required()
+    editDirection: Joi.string().pattern(inputCheckKoreanPattern).min(2).max(40).required()
         .messages({
-            'string.empty': '방향은 최소 2글자에서 20글자 사이로 입력바랍니다.',
-            'string.min': '방향은 최소 2글자에서 20글자 사이로 입력바랍니다.',
-            'string.custom': '방향은 최소 2글자에서 20글자 사이로 입력바랍니다.'
+            'string.empty': '방향은 최소 2글자에서 40글자 사이로 입력바랍니다.',
+            'string.min': '방향은 최소 2글자에서 40글자 사이로 입력바랍니다.',
+            'string.custom': '방향은 최소 2글자에서 40글자 사이로 입력바랍니다.'
         }),
     editPassword: Joi.string().min(4).max(12).required()
         .messages({

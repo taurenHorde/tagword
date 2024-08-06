@@ -3,13 +3,10 @@ import { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from './../../app/store';
 import { inputConversionData } from './../../app/action1/footnoteConversionStoreSlice';
 import { mainTabControl } from '../../app/action2/mainControllerSlice';
-import { socketGetLoadingFalse, socketGetLoadingTrue } from '../../app/action1/sentenceLoadingSlice';
 import { ReduxAllType } from './../../type/Type';
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
-import { io, Socket } from 'socket.io-client'
-import { serverToCounter } from '../../app/action1/sentenceCounterSlice';
-import { serverToSentence } from '../../app/action1/sentenceStoreSlice';
 import { footnoteExtractFc } from './../../function/Conversion';
+import { joinRoomSocket, leaveRoomSocket } from '../../function/SocketAction';
 import InputPage from './Input';
 import KeywordPage from './Keyword';
 import StoryPage from './Story';
@@ -18,36 +15,32 @@ import ClickSenctencePage from './ClickSentence'
 import Nav from './Nav';
 import LoadingPage from '../commonComponent/Loading';
 
-const socket: Socket = io()
 
 function FcSocketIoFisrtGet(): JSX.Element {
+    // Socket 을 따로 ts로 빼서 작업을 하고자 했으나 redux 등 컴포넌트 안에서 사용해야하는 작업이 많아 컴포넌트를 만들어 작업
+    // 이 컴포넌트는 오직 socket 관련 기능을 위함
+
     const navigate = useNavigate()
     const dispatch = useAppDispatch();
     const { id } = useParams()
 
     useEffect(() => {
-        dispatch(socketGetLoadingFalse())
+        if (!id) return
+        joinRoomSocket(dispatch, id, navigate)
+        const leaveRoomFc = () => {
+            leaveRoomSocket(dispatch, id,)
+        }
+        window.addEventListener('beforeunload', leaveRoomFc)
+        return () => {
+            leaveRoomFc();
+            window.removeEventListener('beforeunload', leaveRoomFc)
+        }
     }, [])
 
-    const navigateFc = (location: number): void => {
+    const navigateFc = (location: number) => {
         if (location === 1) navigate(`/${id}/main`)
         if (location === 2) navigate(`/${id}/history`)
     }
-
-    socket.emit('connectFirst', id)
-    socket.on('connectData', (resData) => {
-        const { sentenceConnectData, counterConnectData } = resData
-        dispatch(serverToCounter(counterConnectData))
-        dispatch(serverToSentence(sentenceConnectData))
-        dispatch(socketGetLoadingTrue())
-    })
-    socket.on('Err404', (message) => {
-        navigate('/')
-    })
-
-
-
-    
     return <>
         <Nav navigateFc={navigateFc} />
         <Outlet />
@@ -84,7 +77,6 @@ function MainPage(): JSX.Element {
                             <div className='mainTabHeadNavi'
                                 onClick={() => {
                                     navigate('/')
-                                    socket.close();
                                 }}
                             >
                                 <h6>

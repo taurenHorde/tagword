@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { useMutation } from 'react-query'
 import { editSumbitPost, closeSumbitPost } from './../../function/Api'
 import { validationInputBookEdit, validationInputBookClose } from '../../function/validation';
+import { TitlePageBooKBoxWrapStyled } from '../../css/styled';
 
 function TitlePageBookBox(props: { bookData: SentenceCounterSliceType, makeBookCheckFc: MakeBookCheckFcType }): JSX.Element {
     const navigate = useNavigate();
@@ -81,7 +82,7 @@ function TitlePageBookBox(props: { bookData: SentenceCounterSliceType, makeBookC
     }
 
     return (
-        <div className='TitlePageBookBoxWarp flex column jc-start al-start'>
+        <TitlePageBooKBoxWrapStyled $pageClose={bookData.pageClose}>
             <div className='bookTitle flex row jc-start al-center'>
                 <h6>{bookData.books}. {bookData.title}</h6>
             </div>
@@ -149,7 +150,7 @@ function TitlePageBookBox(props: { bookData: SentenceCounterSliceType, makeBookC
                     <button onClick={() => editDataReset()}>취소</button>
                 </div>
             </div>
-        </div>
+        </TitlePageBooKBoxWrapStyled>
     )
 }
 

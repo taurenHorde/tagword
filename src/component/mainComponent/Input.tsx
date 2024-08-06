@@ -2,24 +2,15 @@ import './../../css/mainCss/Input.css'
 import moment from 'moment';
 import { useState } from 'react';
 import { useAppSelector, useAppDispatch } from './../../app/store';
-import { SentenceUserInputDataTotal, ReduxAllType, SentenceUserInputType, ValidationInputSentenceFucRetrunType } from './../../type/Type';
+import { SentenceUserInputDataTotal, ReduxAllType, SentenceUserInputType, ValidationInputSentenceFucRetrunType, addSentencePostSocketInputType } from './../../type/Type';
 import { validationInputSentence } from './../../function/validation'
-import { io, Socket } from 'socket.io-client'
-import { serverToCounter } from '../../app/action1/sentenceCounterSlice';
-import { serverToSentence } from '../../app/action1/sentenceStoreSlice';
 import { useParams } from 'react-router-dom';
-
-const socket: Socket = io()
+import { addSentenceSocket } from '../../function/SocketAction';
 
 
 function InputPage(): JSX.Element {
 
-    socket.on('addSentenceResult', (resData) => {
-        const { sentenceResData, counterResData } = resData
-        dispatch(serverToCounter(counterResData))
-        dispatch(serverToSentence(sentenceResData))
-    })
-    
+
     const dispatch = useAppDispatch()
     const { id } = useParams();
     const currentDate = moment(new Date()).format('YYYY-M-D HH:mm:ss')
@@ -63,7 +54,7 @@ function InputPage(): JSX.Element {
                     return alert(`반드시 ${lastWords} 중 한 글자로 시작하셔야합니다.`)
                 }
             }
-            socket.emit('addSentence', {
+            const sentenceData: addSentencePostSocketInputType = await {
                 ...afterValidationDate,
                 no: sentenceCounterSlice.sentenceCount + 1,
                 expression: [0, 0, 0, 0],
@@ -72,7 +63,8 @@ function InputPage(): JSX.Element {
                 paragraph: sentenceCounterSlice.paragraphCount,
                 changeParagraph: changeParagraph,
                 params: id
-            }) //
+            }
+            addSentenceSocket(dispatch, sentenceData)
             setInputSentece("")
             setInputFootNote("")
             setFootNoteCheckBox(false)

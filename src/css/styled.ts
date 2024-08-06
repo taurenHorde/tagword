@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { StorySentenceStyledType, ColorExtractorFcType, FontSizeExtractorFcType } from "../type/TypeStyled";
+import { StorySentenceStyledType, ColorExtractorFcType, FontSizeExtractorFcType, TitlePageBooKBoxWrapStyledType } from "../type/TypeStyled";
 
 
 
@@ -58,9 +58,126 @@ const FontSizeExtractor: FontSizeExtractorFcType = (expresstion) => {
     } else if (totalExpression >= maxValue) {
         returnValue = 2
         overMaxValue = true
-        console.log(totalExpression)
     }
 
     return `${returnValue}rem`
     // return `${returnValue}rem ${overMaxValue ? 'bold' : 'normal'}`
 }
+
+export const TitlePageBooKBoxWrapStyled = styled.div<TitlePageBooKBoxWrapStyledType>`
+    width: 100%;
+    background: ;
+    padding: 10px;
+    box-sizing: border-box;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1), -5px -5px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    background : ${props => props.$pageClose ? 'rgb(225, 216, 216)' : 'rgba(219, 219, 219, 0.075)'};
+
+
+    >div {
+        width: 100%;
+    }
+    
+    .bookTitle {
+        padding: 5px 0px;
+        border-bottom: 1px solid rgba(128, 128, 128, 0.247);
+    }
+    
+    .bookTopic,
+    .bookDirection,
+    .bookInfo,
+    .bookButton {
+        margin: 5px 0px;
+    }
+    
+    .bookTopic p,
+    .bookDirection p {
+        font-size: 0.9rem;
+    }
+    
+    .bookTopic input,
+    .bookDirection input {
+        width: 100%;
+        padding: 2px 5px;
+        box-sizing: border-box;
+        font-size: 0.9rem;
+        border: none;
+    }
+    
+    .bookInfo {
+    div{
+        padding: 5px 8px;
+        box-sizing: border-box;
+        border: none;
+        font-size: 0.8rem;
+        font-weight: bold;
+        color: rgb(0, 0, 0);
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.288);
+        cursor: pointer;
+        user-select: none;
+        margin-left: 5px;
+        background: rgb(200, 235, 135);
+      }
+    }
+    
+    .bookInfo>div p {
+        font-size: 0.8rem;
+    }
+    
+    .bookButton button {
+        padding: 5px 8px;
+        box-sizing: border-box;
+        border: none;
+        font-size: 0.8rem;
+        font-weight: bold;
+        color: rgb(0, 0, 0);
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.288);
+        cursor: pointer;
+        user-select: none;
+        margin-left: 5px;
+    }
+    
+    .bookButton button:nth-of-type(1) {
+        background: skyblue;
+    }
+    
+    .bookButton button:nth-of-type(2) {
+        background: rgb(255, 111, 111);
+    }
+    
+    
+    .bookAdmin {
+        margin-top: 10px;
+        padding: 10px 5px;
+        box-sizing: border-box;
+        background: rgb(238, 238, 238);
+        display: none;
+    }
+    
+    .bookAdminPassword input{
+        padding: 2px 5px;
+        box-sizing: border-box;
+        font-size: 0.9rem;
+        border: none;
+    }
+    
+    .bookAdminSelect button {
+        padding: 5px 8px;
+        box-sizing: border-box;
+        border: none;
+        font-size: 0.8rem;
+        font-weight: bold;
+        color: rgb(0, 0, 0);
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.288);
+        cursor: pointer;
+        user-select: none;
+        margin-left: 5px;
+    }
+    
+
+`
