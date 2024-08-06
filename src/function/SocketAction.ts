@@ -7,7 +7,7 @@ import { addSentencePostSocketInputType } from '../type/Type';
 import { NavigateFunction } from 'react-router-dom';
 
 
-const socket: Socket = io('')
+const socket: Socket = io(process.env.SOCKET_ADDRES!)
 
 
 
@@ -16,9 +16,7 @@ socket.on('disconnect', () => console.log('연결해제'))
 socket.on('reconnect_attempt', (attemptNumber) => console.log(`연결 재시도(${attemptNumber}번째)`))
 socket.on('reconnect_failed', (attemptNumber) => console.log(`연결 재시도 실패`)) // 일단 막으로 내보내야함.
 
-socket.on('test', (test) => {
-    console.log(test)
-})
+
 
 export const joinRoomSocket = (dispatch: AppDispatch, id: string, navigate: NavigateFunction) => {
     dispatch(socketGetLoadingFalse())
