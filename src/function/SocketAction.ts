@@ -7,8 +7,8 @@ import { addSentencePostSocketInputType } from '../type/Type';
 import { NavigateFunction } from 'react-router-dom';
 
 
-const socket: Socket = io(process.env.SOCKET_ADDRESS!)
-console.log(process.env.SOCKET_ADDRESS!) // 7070 port 
+const socket: Socket = io(process.env.REACT_APP_SOCKET_ADDRESS!)
+console.log(process.env.REACT_APP_SOCKET_ADDRESS!) // 7070 port 
 // const socket = io()
 // 0806 18h   io 주소 삭제 / socket 이름들 앞 슬래쉬 장착
 
