@@ -7,7 +7,7 @@ import { addSentencePostSocketInputType } from '../type/Type';
 import { NavigateFunction } from 'react-router-dom';
 
 
-const socket: Socket = io(`${process.env.SOCKET_ADDRES!}/api`)
+const socket: Socket = io()
 // const socket = io()
 
 // 0806 18h   io 주소 삭제 / socket 이름들 앞 슬래쉬 장착
@@ -24,11 +24,11 @@ export const joinRoomSocket = (dispatch: AppDispatch, id: string, navigate: Navi
     dispatch(socketGetLoadingFalse())
 
     //  데이터 전송
-    socket.emit('/joinRoom', id)
+    socket.emit('joinRoom', id)
 
     // 응답처리
     // 성공
-    socket.on('/joinRoomResultData', (resData: { sentenceConnectData: any; counterConnectData: any; }) => {
+    socket.on('joinRoomResultData', (resData: { sentenceConnectData: any; counterConnectData: any; }) => {
         const { sentenceConnectData, counterConnectData } = resData
         dispatch(serverToCounter(counterConnectData))
         dispatch(serverToSentence(sentenceConnectData))
@@ -36,7 +36,7 @@ export const joinRoomSocket = (dispatch: AppDispatch, id: string, navigate: Navi
     })
 
     //실패 
-    socket.on('/joinRoomErrorData', (message: string) => {
+    socket.on('joinRoomErrorData', (message: string) => {
         console.log(`${message}`) // 접속 막아야함~
         alert('잘못 된 접근입니다. 메인페이지로 이동됩니다.)')
         navigate('/')
