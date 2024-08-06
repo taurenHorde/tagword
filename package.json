@@ -52,8 +52,9 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:8080",
   "devDependencies": {
     "@types/socket.io-client": "^3.0.0"
   }
 }
+
+
